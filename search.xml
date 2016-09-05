@@ -1,0 +1,2010 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[把博客从 Jekyll 迁移到 Hexo]]></title>
+      <url>http://www.tonyrisk.top/2016/09/04/move-blog-from-jekyll-to-hexo/</url>
+      <content type="html"><![CDATA[<p>在上次的文章中（<a href="/2014/01/01/blog-github/">使用 Github 搭建个人博客</a>）介绍了怎么用 <code>Github</code> 默认支持的 Web 框架 <code>Jekyll</code> 来搭建博客。相对于曾经接触过的 <code>Wordpress</code> 是不知道要轻量级多少倍了。但是在使用过程中也发现几点问题：</p>
+<ol>
+<li>配置过于繁琐</li>
+<li>对 <code>markdown</code> 支持不是特别好</li>
+</ol>
+<p>近几年随着 <code>Hexo</code> 的发展，社区中不断对这个博客框架的贡献，使得 <code>Hexo</code> 日趋完善，并且涌现出几大优点：</p>
+<ol>
+<li>源于 <code>nodejs</code> 的超快渲染速度，可以把几百个 <code>md</code> 文档瞬间生成</li>
+<li>对 <code>markdown</code> 支持更好，并且还扩展 <code>Github</code> 的 <code>markdown</code> 语法</li>
+<li>一键部署</li>
+<li>丰富的插件和主题</li>
+</ol>
+<h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>安装 Hexo 非常简单：</p>
+<ul>
+<li>安装 Git</li>
+<li>安装 node（hexo 是基于 nodejs 的，建议用 nvm 来安装）</li>
+<li>安装 Hexo<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-cli -g</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="开始建站"><a href="#开始建站" class="headerlink" title="开始建站"></a>开始建站</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ hexo init your-project-folder</div><div class="line">$ <span class="built_in">cd</span> your-project-folder</div><div class="line">$ npm install</div><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>之后编辑文件夹下的 <code>_config.yml</code> 进行全站设置</p>
+<h2 id="把文章从-Jekyll-迁移到-Hexo"><a href="#把文章从-Jekyll-迁移到-Hexo" class="headerlink" title="把文章从 Jekyll 迁移到 Hexo"></a>把文章从 Jekyll 迁移到 Hexo</h2><p>从 Jekyll 迁移非常简单，把所有文章从 <code>_posts</code> 文件夹内的所有文件复制到 <code>source/_posts</code> 文件夹，并在 <code>_config.yml</code> 中修改 <code>new_post_name</code> 参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new_post_name: :year-:month-:day-:title.md</div></pre></td></tr></table></figure>
+<p>如果发现网站没发生变化，需要手动清除下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo serve</div></pre></td></tr></table></figure>
+<h2 id="部署设置"><a href="#部署设置" class="headerlink" title="部署设置"></a>部署设置</h2><p>支持 Github 和 HeroKu，我只用了 Github，所以就记录下 Github 设置</p>
+<ol>
+<li><p>安装插件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置 <code>_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">  type:</span> git</div><div class="line"><span class="attr">  repo:</span> &lt;repo url<span class="string">&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$ hexo new [layout] &lt;title&gt; <span class="comment"># 新建文章, layout 可在 _config.yml 中设置默认值</span></div><div class="line"></div><div class="line">$ hexo new draft &lt;title&gt; <span class="comment"># 新建草稿</span></div><div class="line"></div><div class="line">$ hexo --draft <span class="comment"># 查看草稿</span></div><div class="line"></div><div class="line">$ hexo publish [layout] &lt;title&gt; <span class="comment"># 发表草稿</span></div><div class="line"></div><div class="line">$ hexo serve --draft <span class="comment"># 启动服务器，参数 draft 可以预览草稿</span></div><div class="line"></div><div class="line">$ hexo generate --deploy <span class="comment"># 生成后自动部署网站</span></div><div class="line"></div><div class="line">$ hexo list <span class="comment"># 查看所有静态文件</span></div><div class="line"></div><div class="line">$ hexo clean</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>配置好后，一般的流程：</p>
+<p><strong>新建草稿 -&gt; 发布草稿 -&gt; 预览 -&gt; 生成并发布</strong></p>
+<p>参考：<br><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo 官方文档</a></p>
+<p>———- EOF ———-</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[js模块化二]]></title>
+      <url>http://www.tonyrisk.top/2014/12/29/js-function/</url>
+      <content type="html"><![CDATA[<h2 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="function"><span class="keyword">function</span>(<span class="params">p1, p2</span>)</span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line">a(xx, yy)</div></pre></td></tr></table></figure>
+<p>js 中函数可以是一个变量，调用函数，可以直接调用变量；所以立即执行函数，其实就是这样：</p>
+<!--break-->
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> result = (<span class="function"><span class="keyword">function</span>(<span class="params">p1, p2</span>)</span>&#123;</div><div class="line">    <span class="comment">//... </span></div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<h2 id="CommonJS-规范"><a href="#CommonJS-规范" class="headerlink" title="CommonJS 规范"></a>CommonJS 规范</h2><p>CommonJS 只是一种规范，NodeJs 是最著名的实现此规范的技术<br>有几个关键的特性：</p>
+<ol>
+<li>一个文件就是一个独立的模块，内部的变量和方法都不能被外部引用；除非返回了映射结果，或者是定义成 global 对象的属性</li>
+<li>使用 require 来加载模块</li>
+<li>通过 module.exports 对象作为模块对外的接口</li>
+</ol>
+<h2 id="AMD-规范"><a href="#AMD-规范" class="headerlink" title="AMD 规范"></a>AMD 规范</h2><p>AMD(异步模块定义) 也是一种规范。CommondJS 加载模块是同步，而 AMD 则是异步</p>
+<ol>
+<li>define([mod array], callback)</li>
+<li>AMD 兼容 CommondJS 规范</li>
+<li>比较流行的有 RequireJs</li>
+</ol>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[js的模块化]]></title>
+      <url>http://www.tonyrisk.top/2014/12/28/js-module/</url>
+      <content type="html"><![CDATA[<p>当网站开发越来越复杂，js 也会写的越来越多，维护性和扩展性的重要程度也就随即提升。</p>
+<p>在写 js 的过程中，一般会有以下几个阶段：</p>
+<h3 id="1-定义全局函数，并且按照功能归属分别不同文件"><a href="#1-定义全局函数，并且按照功能归属分别不同文件" class="headerlink" title="1. 定义全局函数，并且按照功能归属分别不同文件"></a>1. 定义全局函数，并且按照功能归属分别不同文件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">global_func</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.debug(<span class="string">"I am JS function"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>【缺点】</p>
+<ul>
+<li>污染全局变量</li>
+<li>容易重名</li>
+<li>每个函数相互之间的关系不容易看出来</li>
+</ul>
+<!--break-->
+<h3 id="2-对象封装"><a href="#2-对象封装" class="headerlink" title="2. 对象封装"></a>2. 对象封装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> module1 = <span class="keyword">new</span> <span class="built_in">Object</span>(&#123;</div><div class="line">    _count : <span class="number">0</span>,</div><div class="line">    m1 : <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;,</div><div class="line">    m2 : <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>使用的时候直接：<code>module1.m1()</code></p>
+<p>【缺点】</p>
+<ul>
+<li>暴露所有模块成员( module1._count 外部也可直接读写)</li>
+</ul>
+<h3 id="3-立即执行函数写法"><a href="#3-立即执行函数写法" class="headerlink" title="3. 立即执行函数写法"></a>3. 立即执行函数写法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> _count = <span class="number">0</span>;</div><div class="line">    <span class="keyword">var</span> m1 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">var</span> m2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        outer_name1 : m1,</div><div class="line">        outer_name2 : m2</div><div class="line">    &#125;;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>【优点】</p>
+<ul>
+<li>解决了方式2的缺点</li>
+</ul>
+<h3 id="4-加强版方式3"><a href="#4-加强版方式3" class="headerlink" title="4. 加强版方式3"></a>4. 加强版方式3</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span>(<span class="params">mod</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> mod.m3 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">return</span> mod;</div><div class="line">&#125;)(<span class="built_in">window</span>.module1 || &#123;&#125;);</div></pre></td></tr></table></figure>
+<p>【优点】</p>
+<ul>
+<li>可以分模块，也可以实现继承</li>
+<li>解决分段load模块，模块之间依赖关系</li>
+<li><p>通过传输全局参数更加独立</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span> (<span class="params">$, YAHOO</span>) </span>&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;)(jQuery, YAHOO);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[HTML 中 meta 标签的妙用]]></title>
+      <url>http://www.tonyrisk.top/2014/12/26/html-mata/</url>
+      <content type="html"><![CDATA[<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>HTML 中的 <meta> 标签被包含在 <head> 标签中，是不被用户可见的内容，主要描述了网页的一些元信息。</head></p>
+<p>meta 最常见的用法就是提供一些关键字和描述使得搜索引擎便于搜集。</p>
+<p>这些元信息都是以键值对的形式被定义，比如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"HTML,ASP,PHP,SQL"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>其中 name 就是‘键’，content 就是描述‘值’</p>
+<!--break-->
+<h1 id="2-‘键’"><a href="#2-‘键’" class="headerlink" title="2. ‘键’"></a>2. ‘键’</h1><p>meta 描述‘值’只能使用 content 属性，但是表示‘键’却有2个属性：http-equiv 和 name</p>
+<h3 id="2-1-属性：http-equiv"><a href="#2-1-属性：http-equiv" class="headerlink" title="2.1 属性：http-equiv"></a>2.1 属性：http-equiv</h3><p>Web 服务器会把这些由 http-equiv 描述的键值对添加到发送给浏览器的头部(我们最熟悉的头部键值对就是：’content-type: text/html’)</p>
+<p>例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"charset"</span> <span class="attr">content</span>=<span class="string">"utf-8"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>那么在浏览器头部至少会有以下信息：</p>
+<pre><code>content-type: text/html
+charset: utf8
+</code></pre><h4 id="取值"><a href="#取值" class="headerlink" title="取值"></a>取值</h4><ul>
+<li><p>content-type：通常都是 ‘text/html’ 告诉浏览器返回的类型是 html 页面</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=gb2312"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>content-Language：显示语言的设定</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Language"</span> <span class="attr">content</span>=<span class="string">"zh-cn"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>X-UA-Compatible: 设置IE浏览器兼容模式</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame</div><div class="line">// Chrome Frame可以让旧版IE浏览器使用Chrome的WebKit渲染引擎处理网页，</div><div class="line">// 因此旧版IE用户可以体验到包括HTML5在内的众多现代网页技术</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=Edge;chrome=1"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>expires：设定网页的到期时间。一旦网页过期，必须到服务器上重新传输</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"expires"</span> <span class="attr">content</span>=<span class="string">"Fri,12 Jan 2001 18:18:18 GMT"</span>/&gt;</span></div><div class="line">    ``` </div><div class="line"></div><div class="line">- refresh：刷新页面/重定向页面</div><div class="line"></div><div class="line">    ``` html</div><div class="line">    // 每五秒刷新页面</div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">'refresh'</span> <span class="attr">content</span>=<span class="string">'5'</span>/&gt;</span></div><div class="line">    </div><div class="line">    // 五秒后跳转到对应url</div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">'refresh'</span> <span class="attr">content</span>=<span class="string">'5; url=http://www.baidu.com'</span>/&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>set-cookie：cookie 设定（如果网页过期，那么设置的 cookie 也会无效）</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"set-cookie"</span> <span class="attr">content</span>=<span class="string">"cookievalue=xxx; expires=Friday,12-Jan-2001 18:18:18 GMT; path=/"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>cache-control(<a href="http://baike.baidu.com/view/9238254.htm" target="_blank" rel="external">各种情况下的详解</a>)<br>meta 的 content 常用取值：</p>
+<ul>
+<li>public: 可以 cache 在私有缓存中</li>
+<li>private: 只能 cache 在私有缓存中</li>
+<li>no-cache: 不允许 cache</li>
+<li>no-store: 可以被 cache 但是不存储</li>
+</ul>
+</li>
+<li><p>pragma</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 禁止浏览器从本地计算机的缓存中访问页面内容, 将无法脱机浏览</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Pragma"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-2-属性：name"><a href="#2-2-属性：name" class="headerlink" title="2.2 属性：name"></a>2.2 属性：name</h3><p>使用最多的属性，把 content 属性的内容连接到 name，一般搜索引擎就是搜集网页的这些信息，所以 SEO 优化也会在 name 属性上下工夫(如果要 seo <code>&lt;title&gt;</code>标签也很重要哦，常常被搜索引擎收录 title 信息)</p>
+<h4 id="取值-1"><a href="#取值-1" class="headerlink" title="取值"></a>取值</h4><ul>
+<li><p>author：网页的作者，如 <code>&lt;meta name=&#39;author&#39; content=&#39;tony&#39;/&gt;</code></p>
+</li>
+<li><p>description：网页描述，如 <code>&lt;meta name=&#39;description&#39; content=&#39;讲解关于 html 中 meta 标签的用法&#39;/&gt;</code></p>
+</li>
+<li><p>keywords：网页关键字，如 <code>&lt;meta name=&#39;keywords&#39; content=&#39;html meta name content http-equiv&#39;/&gt;</code></p>
+</li>
+<li><p>robots：告诉搜索机器人哪些页面需要索引，哪些页面不需要索引</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"robots"</span> <span class="attr">content</span>=<span class="string">"index,follow"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p><meta> content 取值为： </p>
+<ul>
+<li>all：文件将被检索，且页面上的链接可以被查询；(默认值)</li>
+<li>none：文件将不被检索，且页面上的链接不可以被查询；</li>
+<li>index：文件将被检索；</li>
+<li>follow：页面上的链接可以被查询；</li>
+<li>noindex：文件将不被检索，但页面上的链接可以被查询；</li>
+<li>nofollow：文件将不被检索，页面上的链接可以被查询。</li>
+</ul>
+</li>
+<li><p>generator: 说明网站的采用的什么软件制作</p>
+</li>
+<li><p>copyright: 网站版权信息</p>
+</li>
+</ul>
+<h1 id="3-补充属性-scheme"><a href="#3-补充属性-scheme" class="headerlink" title="3. 补充属性: scheme"></a>3. 补充属性: scheme</h1><p>定义用于翻译 content 属性值的格式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"revised"</span> <span class="attr">content</span>=<span class="string">"2006-11-03"</span> <span class="attr">scheme</span>=<span class="string">"YYYY-MM-DD"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="4-meta-更多用法"><a href="#4-meta-更多用法" class="headerlink" title="4. meta 更多用法"></a>4. meta 更多用法</h1><p>上文讲的都是基础的 meta 含义。近年来随着移动互联网的发展，伴随着响应式设计，移动网页浏览体验的优化，衍生出更多的 meta 用法</p>
+<h4 id="viewport"><a href="#viewport" class="headerlink" title="viewport"></a>viewport</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>width：宽度（数值 / device-width）（范围从200 到10,000，默认为980 像素）</li>
+<li>height：高度（数值 / device-height）（范围从223 到10,000）</li>
+<li>initial-scale：初始的缩放比例 （范围从&gt;0 到10）</li>
+<li>minimum-scale：允许用户缩放到的最小比例</li>
+<li>maximum-scale：允许用户缩放到的最大比例</li>
+<li><p>user-scalable：用户是否可以手动缩 (no,yes)</p>
+<p><strong>如果不是响应式网站，不要使用 initial-scale 或者禁用缩放</strong><br>【注】使用 initial-scale=1 到非响应式网站上，这会让网站以100%宽度渲染，用户需要手动移动页面或者缩放；如果和 initial-scale=1 同时使用 user-scalable=no 或 maximum-scale=1，则用户将不能放大/缩小网页来看到全部的内容</p>
+</li>
+</ul>
+<h4 id="email-telephone-支持"><a href="#email-telephone-支持" class="headerlink" title="email/telephone 支持"></a>email/telephone 支持</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"format-detection"</span> <span class="attr">content</span>=<span class="string">"telephone=yes"</span> /&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"format-detection"</span> <span class="attr">content</span>=<span class="string">"email=yes"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="ios-独有支持"><a href="#ios-独有支持" class="headerlink" title="ios 独有支持"></a>ios 独有支持</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 可以添加网页到桌面</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-capable"</span> <span class="attr">content</span>=<span class="string">"yes"</span> /&gt;</span></div><div class="line"></div><div class="line">// 只有在开启WebApp全屏模式时才生效。content的值为default | black | black-translucent</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-status-bar-style"</span> <span class="attr">content</span>=<span class="string">"black-translucent"</span> /&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-title"</span> <span class="attr">content</span>=<span class="string">"标题"</span>&gt;</span></div><div class="line"></div><div class="line">// 添加智能 App 广告条 Smart App Banner：告诉浏览器这个网站对应的app，并在页面上显示下载banner</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-itunes-app"</span> <span class="attr">content</span>=<span class="string">"app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="一些移动特定浏览器上的支持"><a href="#一些移动特定浏览器上的支持" class="headerlink" title="一些移动特定浏览器上的支持"></a>一些移动特定浏览器上的支持</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">// 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"HandheldFriendly"</span> <span class="attr">content</span>=<span class="string">"true"</span>&gt;</span></div><div class="line"></div><div class="line">// 微软的老式浏览器 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"MobileOptimized"</span> <span class="attr">content</span>=<span class="string">"320"</span>&gt;</span></div><div class="line"></div><div class="line">// uc强制竖屏 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"screen-orientation"</span> <span class="attr">content</span>=<span class="string">"portrait"</span>&gt;</span></div><div class="line"></div><div class="line">// QQ强制竖屏 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-orientation"</span> <span class="attr">content</span>=<span class="string">"portrait"</span>&gt;</span></div><div class="line"></div><div class="line">// UC强制全屏 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"full-screen"</span> <span class="attr">content</span>=<span class="string">"yes"</span>&gt;</span></div><div class="line"></div><div class="line">// QQ强制全屏 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-fullscreen"</span> <span class="attr">content</span>=<span class="string">"true"</span>&gt;</span></div><div class="line"></div><div class="line">// UC应用模式 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"browsermode"</span> <span class="attr">content</span>=<span class="string">"application"</span>&gt;</span></div><div class="line"></div><div class="line">// QQ应用模式 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-page-mode"</span> <span class="attr">content</span>=<span class="string">"app"</span>&gt;</span></div><div class="line"></div><div class="line">// windows phone 点击无高光 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-tap-highlight"</span> <span class="attr">content</span>=<span class="string">"no"</span>&gt;</span></div><div class="line"></div><div class="line">// Windows 8 磁贴颜色</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-TileColor"</span> <span class="attr">content</span>=<span class="string">"#000"</span>/&gt;</span></div><div class="line"></div><div class="line">// Windows 8 磁贴图标 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-TileImage"</span> <span class="attr">content</span>=<span class="string">"icon.png"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="浏览器内核控制"><a href="#浏览器内核控制" class="headerlink" title="浏览器内核控制"></a>浏览器内核控制</h4><p>国内浏览器很多都是双内核: <a href="http://se.360.cn/v6/help/meta.html" target="_blank" rel="external">介绍说明</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"renderer"</span> <span class="attr">content</span>=<span class="string">"webkit|ie-comp|ie-stand"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="转码申明"><a href="#转码申明" class="headerlink" title="转码申明:"></a>转码申明:</h4><p>用百度打开网页可能会对其进行转码（比如贴广告），避免转码可添加如下meta</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Cache-Control"</span> <span class="attr">content</span>=<span class="string">"no-siteapp"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="Open-Graph-Protocol"><a href="#Open-Graph-Protocol" class="headerlink" title="Open Graph Protocol"></a>Open Graph Protocol</h4><p>这种协议由 Facebook 在 F8 上提出。遵循这个协议的可以让网页成为一个“富媒体对象”，用了Meta Property=og标签，<br>就是你同意了网页内容可以被其他社会化网站引用等，目前这种协议被SNS网站如Fackbook、renren采用。<br>虽然有些内容和 meta 一些值重复，但是不能替代 meta，因为完全就是两个概念(<a href="http://ogp.me/" target="_blank" rel="external">点击查看</a>)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:type"</span> <span class="attr">content</span>=<span class="string">"website"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:site_name"</span> <span class="attr">content</span>=<span class="string">"xxxxx"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[谈谈 Restful Api]]></title>
+      <url>http://www.tonyrisk.top/2014/12/20/restfull-api/</url>
+      <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Representational State Transfer（REST，表现层资源状态转化），是Roy Thomas Fielding提出的互联网软件的架构原则。</p>
+<p>满足这个原则的架构，就被叫做 Restful 架构。</p>
+<ol>
+<li><p>在 http 中也存在着 CURD(create, update, read, delete) 的操作，那就是：get, post, put, delete</p>
+</li>
+<li><p>网络资源一般指上的一个实体，或者说网络上的一个具体信息，一般可以是一段文本，一张图片，一个音频等等</p>
+</li>
+<li><p>对外的网络服务中，资源一般是系统内部的对象，通常就是数据库中的’表’，数据的交流最好使用 json 格式</p>
+</li>
+</ol>
+<!--break-->
+<p>所以结合三点一般的 API 设计就是：</p>
+<ul>
+<li>get ‘/users’ ：获得用户列表</li>
+<li>post ‘/users’ ：创建一个用户</li>
+<li>get ‘/users/:id’ ：获得具体用户信息</li>
+<li>get ‘/users/:id/messages’ ：获得具体用户的消息列表</li>
+<li>get ‘/users/:id/messages/:mid’ ：获得具体用户具体消息内容</li>
+<li>put ‘/users/:id’ ：更新用户信息</li>
+<li>delete ‘/users/:id’ ：删除用户</li>
+</ul>
+<p>所有 URL 都是名词，动作都在 HTTP 方法中</p>
+<p>有时候会有排序等需求，就直接跟在 URL中，如<br>    get ‘/users?order=name&amp;page=1’</p>
+<h1 id="一些建议"><a href="#一些建议" class="headerlink" title="一些建议"></a>一些建议</h1><ol>
+<li>如果是对外的 Api 服务，尽量采用 https, 身份认证应该使用 OAuth 2.0 框架</li>
+<li>api.xxx.com 尽量把 api 作为专有域名，最次也要写成 www.xxx.com/api/</li>
+<li>版本可以跟在 url 中： api.xxx.com/v1/ 或 www.xxx.com/api/v1/</li>
+<li>所有资源名词都为复数</li>
+</ol>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[也谈 Web App]]></title>
+      <url>http://www.tonyrisk.top/2014/12/13/web-app/</url>
+      <content type="html"><![CDATA[<p>Web 前端开发也进行一个月了，PC 端网站也搭建了两三个了，于是终于轮到了移动端网站的展示了</p>
+<p>一开始就利用类似 bootstrap 的栅格系统和响应式工具，针对移动端的显示做一些优化即可</p>
+<p>但是，后来业务的发展，促使我们想要有个类似 App 的用户友好交互界面，即在浏览器展示一个移动应用的布局和操作</p>
+<p>经过一些的尝试，就先记录下来</p>
+<!--break-->
+<h2 id="单页"><a href="#单页" class="headerlink" title="单页"></a>单页</h2><p>Web App开发中，我们采用了单页技术（即不想 PC 端，用户的一些操作会重新打开一个网页，单页客户端只下载一个页面，其他所有交互看到的页面都是利用js或者css动态生成）</p>
+<p><strong>单页技术会有几个好处</strong>：</p>
+<ol>
+<li>用户体验非常接近 App</li>
+<li>除了第一次下载页面，其他的通讯都是单纯的数据通讯（如json），极大减少网络数据量</li>
+<li>由于可以动态生成内容视图，即使在移动网络不稳定的时候也不会产生白页</li>
+</ol>
+<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><p>和 App 一样，需要有一个状态栏固定在顶部，取个名字叫 m-header</p>
+<p>需要有一个导航按钮取固定在底部，取个名字叫 m-footer，其他内容都在 m-container中</p>
+<p>布局用到的就是 CSS 的 <code>position</code></p>
+<p>由于 m-header 和 m-footer 都是要<code>钉</code>在窗口的，所以就要使用 <code>fixed</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.m-header</span></div><div class="line">  <span class="selector-tag">position</span>: <span class="selector-tag">fixed</span></div><div class="line">  <span class="selector-tag">top</span>: 0</div><div class="line">  <span class="selector-tag">left</span>: 0</div><div class="line">  <span class="selector-tag">width</span>: 100%</div><div class="line"></div><div class="line"><span class="selector-class">.m-footer</span></div><div class="line">  <span class="selector-tag">position</span>: <span class="selector-tag">fixed</span></div><div class="line">  <span class="selector-tag">bottom</span>: 0</div><div class="line">  <span class="selector-tag">left</span>: 0</div><div class="line">  <span class="selector-tag">width</span>: 100%</div></pre></td></tr></table></figure>
+<p>但是这样会挡住内容区，所以(假设我们头部和底部都是高为 50px)：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.m-header</span>, <span class="selector-class">.m-footer</span></div><div class="line">  <span class="selector-tag">height</span>: 50<span class="selector-tag">px</span></div><div class="line">  </div><div class="line"><span class="selector-class">.m-container</span></div><div class="line">  <span class="selector-tag">margin-top</span>: 50<span class="selector-tag">px</span></div><div class="line">  <span class="selector-tag">margin-bottom</span>: 50<span class="selector-tag">px</span></div></pre></td></tr></table></figure>
+<h2 id="页面切换"><a href="#页面切换" class="headerlink" title="页面切换"></a>页面切换</h2><p>所有类似 app 应用那样的展示页面，类名为 <code>.single-app-view</code></p>
+<p>当前显示页为：<code>current-view</code></p>
+<p>切换的时候，只要保证当前显示的类名为 <code>current-view</code> 即可，相关 css 和 js：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.single-app-view</span></div><div class="line">  <span class="selector-tag">background-color</span>: <span class="selector-tag">white</span></div><div class="line">  <span class="selector-tag">display</span>: <span class="selector-tag">none</span></div><div class="line"></div><div class="line"><span class="selector-class">.current-view</span></div><div class="line">  <span class="selector-tag">display</span>: <span class="selector-tag">block</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">show_view</span>(<span class="params">target_view</span>)</span>&#123;</div><div class="line">  $(<span class="string">'.single-app-view'</span>).removeClass(<span class="string">'current-view'</span>);</div><div class="line">  $(target_view).addClass(<span class="string">'current-view'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>给几个页面，看看效果：</p>
+<p><img src="/assets/images/web-app-1.png" style="width:320px"><br><img src="/assets/images/web-app-2.png" style="width:320px"></p>
+<p><img src="/assets/images/web-app-3.png" style="width:320px"><br><img src="/assets/images/web-app-4.png" style="width:320px"></p>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[互联网协议基础笔记]]></title>
+      <url>http://www.tonyrisk.top/2014/12/11/http-basic-note/</url>
+      <content type="html"><![CDATA[<h2 id="网络系统结构"><a href="#网络系统结构" class="headerlink" title="网络系统结构"></a>网络系统结构</h2><p><strong>OSI七层结构</strong> 将网络通信功能分为7个层次</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">OSI层</th>
+<th style="text-align:center">功能</th>
+<th style="text-align:center">标准/协议/应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">应用层</td>
+<td style="text-align:center">文件传输，电子邮件，文件服务</td>
+<td style="text-align:center">HTTP，SNMP，FTP，SMTP，DNS，Telnet</td>
+</tr>
+<tr>
+<td style="text-align:center">表示层</td>
+<td style="text-align:center">数据表示法问题(如PC的ASCII和IBM的EBCDIC编码之间的转换)</td>
+<td style="text-align:center">数据的压缩和解压缩， 加密和解密等</td>
+</tr>
+<tr>
+<td style="text-align:center">会话层</td>
+<td style="text-align:center">建立和维持会话</td>
+<td style="text-align:center">如服务器验证用户登陆</td>
+</tr>
+<tr>
+<td style="text-align:center">传输层</td>
+<td style="text-align:center">提供端对端可靠的接口(到哪个端口去)</td>
+<td style="text-align:center">TCP,UDP</td>
+</tr>
+<tr>
+<td style="text-align:center">网络层</td>
+<td style="text-align:center">‘数据包’路由选择</td>
+<td style="text-align:center">IP,ARP等</td>
+</tr>
+<tr>
+<td style="text-align:center">数据链路层</td>
+<td style="text-align:center">确定0和1的分组（帧）,以及对帧顺序和错误的控制</td>
+<td style="text-align:center">ISO1745–1975等，网卡属于这一层</td>
+</tr>
+<tr>
+<td style="text-align:center">物理层</td>
+<td style="text-align:center">以二进制形式在物理媒介中传输数据</td>
+<td style="text-align:center">ISO2110等传输标准</td>
+</tr>
+</tbody>
+</table>
+<!--break-->
+<p>越靠近应用层就和用户越接近，相反物理层就和机器相关性更大</p>
+<p><code>物理层</code> 把二进制数据传给 <code>数据链路层</code>，<code>链路层</code>封装成帧后给<code>网络层</code>，<code>网络层</code>封装成数据包，经过路由选择，传给 <code>传输层</code>，<code>传输层</code>经过对报文解包，把数据传输给响应端口的服务应用，<code>会话层</code>以上就对这个数据包进行业务逻辑的处理</p>
+<p>一次简单的数据层面的传输就是这样</p>
+<h2 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h2><p>在<code>应用层</code>中的 Http 协议是 Web 开发的基础，主要需要知道：</p>
+<ol>
+<li>request / response 的结构</li>
+<li>浏览器缓存</li>
+<li>认识<a href="http://baike.baidu.com/link?url=VNa-zDXuWlgAIofZ3oigXOeYCYcPusYrfMzj_5IQKye_j0dul_H0mvPV8d60vmZ-_oJXL5M2rZJUkWRQTnV8c_" target="_blank" rel="external">状态码</a></li>
+<li>cookie</li>
+</ol>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[一步到位学好Web前端]]></title>
+      <url>http://www.tonyrisk.top/2014/12/03/web-front-roadmap/</url>
+      <content type="html"><![CDATA[<p>‘一步到位学好Web前端?’ 拉倒吧，我只是整理了想学好的思路和一些工具资料，真正要学精通没有几年的沉淀根本不可能。</p>
+<p>最近应项目需要，所以要转到网站开发当中来。仔细回忆了下，发现从来木有学过 Web 前端的技术，大学也没上过课啊。</p>
+<p>只有最基本的一些 HTML 语言的认知，而且还停留在很早的阶段。</p>
+<p>随着项目的不断推进，平时不断的泡论坛，查资料，像发现新大陆一样的感觉：原来 Web 前端知识和技能都很丰富啊！</p>
+<p>开发一个又好看又快兼容性又好 SEO 做的也到位的网站一点不比游戏服务器，或者游戏客户端需要钻研的时间少。</p>
+<p>所以，经过一段时间的沉淀，慢慢梳理一些我认为一些还不错的知识要点。</p>
+<!--break-->
+<h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><ul>
+<li>http 协议(<a href="http://www.cnblogs.com/TankXiao/archive/2012/02/13/2342672.html" target="_blank" rel="external">HTTP协议详解</a>,<a href="http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html" target="_blank" rel="external">互联网协议入门</a>)</li>
+<li>HTML(<a href="http://www.w3school.com.cn/html/index.asp" target="_blank" rel="external">教程</a>, <a href="http://www.w3school.com.cn/html5/index.asp" target="_blank" rel="external">HTML5</a>)</li>
+<li>CSS(<a href="http://www.w3school.com.cn/css/index.asp" target="_blank" rel="external">教程</a>, <a href="http://www.w3school.com.cn/css3/index.asp" target="_blank" rel="external">CSS3</a>)</li>
+<li>Javascript, ajax, json/xml (<a href="http://www.w3school.com.cn/b.asp" target="_blank" rel="external">教程</a>)</li>
+<li><a href="http://www.jianshu.com/p/8d291d823cc0" target="_blank" rel="external">web前端规范</a></li>
+</ul>
+<p><strong>给几个比较合适的学习资源：</strong></p>
+<ul>
+<li><a href="http://www.w3school.com.cn/index.html" target="_blank" rel="external">W3School</a>(w3c官方资料站点)</li>
+<li><a href="http://www.w3cschool.cc/" target="_blank" rel="external">W3CSchool菜鸟教程</a>(比官方站点类似，但是内容更丰富)</li>
+<li><a href="http://book.douban.com/subject/25752357/" target="_blank" rel="external">Head First HTML与CSS</a></li>
+<li><a href="http://book.douban.com/subject/10746113/" target="_blank" rel="external">HTTP权威指南</a></li>
+<li><a href="https://github.com/jakubroztocil/httpie" target="_blank" rel="external">可以替代curl的好工具</a></li>
+</ul>
+<p>http 协议呢，有些人可能觉得不了解没什么关系。确实，真正感觉用到的地方没有，但是就和编程一样，</p>
+<p>写代码的不了解计算机的组织管理结构也能编写，但是大师级，或者真正精通的程序员肯定知道底层技术。</p>
+<p>因为这在后期的优化，认知，甚至排错，预防安全方面都和最最基础的东西是分不开的。</p>
+<p>留个问题，检验下第一阶段：</p>
+<blockquote>
+<p>从输入一个url，到显示出页面这段过程中，具体发生了什么事？</p>
+</blockquote>
+<h1 id="基本上手"><a href="#基本上手" class="headerlink" title="基本上手"></a>基本上手</h1><ul>
+<li><a href="http://html5boilerplate.com/" target="_blank" rel="external">html5-boilerplate</a></li>
+<li><a href="http://jquery.com/" target="_blank" rel="external">jquery</a></li>
+<li><a href="http://getbootstrap.com/" target="_blank" rel="external">bootstrap</a>/<a href="http://getuikit.com/" target="_blank" rel="external">uikit</a>等一些主流UI框架</li>
+<li><a href="https://angularjs.org/" target="_blank" rel="external">AngularJs</a></li>
+<li>会使用一些 debug 工具，如 Firebug，chrome的开发者工具等</li>
+</ul>
+<p>知道一些基本原理和概念之后，就要站在巨人的肩膀上开始实战训练了</p>
+<p><code>html5-boilerplate</code> 是一个比较专业的前端模板，一开始可以参照它一步步了解大体框架</p>
+<p><code>jQuery</code> 是最好用的 Javascript 库，极大解放生产力，并且很多插件都是基于 jQuery 的</p>
+<p><code>bootstrap</code> 和 <code>uikit</code> 是比较不错的前端 UI 框架，已经封装了一系列效果和样式，可以快速开发出一个不难看的网站</p>
+<p><code>AngularJs</code> 让你可以把 Web 当成一个 Client 应用开发。基于 MVC 的开发理念，把页面视图和数据模型分离开来</p>
+<p><strong>给几个比较合适的学习资源：</strong></p>
+<ul>
+<li><a href="http://book.douban.com/subject/25966259/" target="_blank" rel="external">CSS高效开发实战</a></li>
+<li><a href="http://book.douban.com/subject/2175995/" target="_blank" rel="external">CSS网站布局实录</a></li>
+<li><a href="http://book.douban.com/subject/25733582/" target="_blank" rel="external">jQuery基础教程</a></li>
+<li><a href="http://book.douban.com/subject/3590768/" target="_blank" rel="external">JavaScript语言精粹</a></li>
+<li><a href="http://book.douban.com/subject/11506062/" target="_blank" rel="external">JavaScript模式</a></li>
+<li><a href="http://book.douban.com/subject/3687098/" target="_blank" rel="external">无懈可击的Web设计</a></li>
+<li><a href="http://book.douban.com/subject/4935289/" target="_blank" rel="external">无懈可击的Web设计II</a></li>
+</ul>
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><ul>
+<li>各个浏览器的兼容性和各自内核的差异（ie各个版本，firefox，chrome，safari等）</li>
+<li>响应式设计，兼容移动端显示(一些针对移动端的标签属性)</li>
+<li>优化页面，加快加载速度；运用面向对象，模块化思想，学会偷懒（重用）；学习怎么优化 SEO</li>
+<li>知道一些高级技巧，比如长连接，WebSocket等</li>
+<li>读一些杰出框架插件的源代码（如jQuery），向一些开源软件做贡献</li>
+</ul>
+<p><strong>给几个比较合适的学习资源：</strong></p>
+<ul>
+<li><a href="http://book.douban.com/subject/5402708/" target="_blank" rel="external">HTML5高级程序设计</a></li>
+<li><a href="http://book.douban.com/subject/2308234/" target="_blank" rel="external">CSS权威指南</a></li>
+<li><a href="http://book.douban.com/subject/4736167/" target="_blank" rel="external">精通CSS</a></li>
+<li><a href="http://book.douban.com/subject/2052176/" target="_blank" rel="external">CSS禅意花园</a></li>
+<li><a href="http://book.douban.com/subject/10549733/" target="_blank" rel="external">JavaScript权威指南</a></li>
+<li><a href="http://book.douban.com/subject/3022779/" target="_blank" rel="external">ppk谈JavaScript</a></li>
+<li><a href="http://book.douban.com/subject/5362856/" target="_blank" rel="external">高性能JavaScript</a></li>
+<li><a href="http://book.douban.com/subject/20451827/" target="_blank" rel="external">Web前端黑客技术揭秘</a></li>
+<li><a href="http://book.douban.com/subject/3132277/" target="_blank" rel="external">高性能网站建设指南</a></li>
+<li><p><a href="http://book.douban.com/subject/4719162/" target="_blank" rel="external">高性能网站建设进阶指南</a></p>
+<p>以上哪一本都能带来新的体会和视角，建议都当床头书</p>
+</li>
+</ul>
+<h1 id="入道"><a href="#入道" class="headerlink" title="入道"></a>入道</h1><ul>
+<li>不断重复修炼上面的3大步骤，形成自己的知识体系，有自己的积累，善于优化架构</li>
+<li>理解目标用户操作习惯和思维，知道他们需求</li>
+<li>提高审美水平</li>
+<li>提高 UI 交互设计</li>
+</ul>
+<h1 id="持续不断的学习"><a href="#持续不断的学习" class="headerlink" title="持续不断的学习"></a>持续不断的学习</h1><ul>
+<li>阅读各种书籍（深入原理的，巧妙技巧的，Web重构的，Web安全的）</li>
+<li>了解一些主流服务端技术：ruby，php，nodejs等</li>
+<li>混迹各种论坛博客，经常和同行交流</li>
+<li>欣赏其他好的网站作品</li>
+</ul>
+<h3 id="附上一些资料"><a href="#附上一些资料" class="headerlink" title="附上一些资料"></a>附上一些资料</h3><ul>
+<li><a href="https://github.com/JacksonTian/fks" target="_blank" rel="external">前端技能汇总</a>：配上一张思维导图，让你对整个 Web 前端架构有很好指导性，并且也搜集一些主要技能和工具</li>
+<li><a href="http://ecomfe.duapp.com/tag/animation-library" target="_blank" rel="external">前端知识体系</a>：搜集了很多工具，插件</li>
+<li><a href="https://github.com/foru17/front-end-collect" target="_blank" rel="external">前端开发相关网站博客</a></li>
+<li><a href="http://www.showslow.com/" target="_blank" rel="external">ShowSlow – 检测网站性能的站点</a></li>
+</ul>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[我的Mac配置]]></title>
+      <url>http://www.tonyrisk.top/2014/12/02/mac-setup/</url>
+      <content type="html"><![CDATA[<p>Github 上有个大神写了一本关于怎么设置 Mac 开发环境（各个语言）的书，<a href="https://github.com/sb2nov/mac-setup" target="_blank" rel="external">戳我</a></p>
+<p>于是 Github 上有个国人选取一些常用的进行翻译，<a href="https://github.com/Aaaaaashu/Mac-dev-setup" target="_blank" rel="external">再戳我</a></p>
+<p>最后我就有点郁闷加惊喜了，为啥类？</p>
+<p>因为我新 Mac 用了一年了，一开始用的是 Mac Mini（性价比高啊），后来整了一台 MBPR 把开发环境又整了一遍。</p>
+<p>有过早期 Linux 装机经验的都知道，鼓捣各种配置，安装各种软件都是非常浪费时间和折腾人的，有的时候因为机器不一样还不一定能快速搞定（虽然 Mac 到目前已经很顺了）</p>
+<p>看到这两位仁兄写的，妈蛋，多好啊！为人类做贡献啊，跟着走就是咯～</p>
+<p>但是，在这个个性化的时代，我还是有一些好用的<code>私货</code>的。</p>
+<h1 id="系统设置"><a href="#系统设置" class="headerlink" title="系统设置"></a>系统设置</h1><h3 id="更新操作系统和软件"><a href="#更新操作系统和软件" class="headerlink" title="更新操作系统和软件"></a>更新操作系统和软件</h3><ul>
+<li>app store 中查看是否有更新</li>
+</ul>
+<h3 id="触摸板设置"><a href="#触摸板设置" class="headerlink" title="触摸板设置"></a>触摸板设置</h3><ul>
+<li>比如轻拍点按，滚动方向，更多手势等等</li>
+</ul>
+<h3 id="Dock-位置和图标大小"><a href="#Dock-位置和图标大小" class="headerlink" title="Dock 位置和图标大小"></a>Dock 位置和图标大小</h3><ul>
+<li>我喜欢放在右边</li>
+<li><p>自动隐藏(节约空间)</p>
+<p>这样屏幕能显示的内容就多了一点</p>
+</li>
+</ul>
+<h3 id="设置-Finder"><a href="#设置-Finder" class="headerlink" title="设置 Finder"></a>设置 Finder</h3><ul>
+<li>添加常用文件夹（如工作目录，Home 目录等）到左边个人收藏栏</li>
+<li>偏好设置：如<code>在新标签页打开文件夹</code>，<code>显示文件扩展名</code>等</li>
+</ul>
+<h3 id="MenuBar（状态栏）"><a href="#MenuBar（状态栏）" class="headerlink" title="MenuBar（状态栏）"></a>MenuBar（状态栏）</h3><ul>
+<li>时间格式（我都要精确到秒），显示星期，显示日期</li>
+<li>电池显示百分比（强力控制欲）</li>
+<li>输入法只显示图标</li>
+</ul>
+<h1 id="基本开发库和工具"><a href="#基本开发库和工具" class="headerlink" title="基本开发库和工具"></a>基本开发库和工具</h1><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><p>这个就不解释了，必备。顺便安利一款客户端软件：SourceTree</p>
+<h3 id="xcode"><a href="#xcode" class="headerlink" title="xcode"></a>xcode</h3><ul>
+<li>xcode 软件（如果不开发 IOS 和 Mac 软件可不装）</li>
+<li><p>xcode command line tools</p>
+<pre><code>$ xcode-select --install
+</code></pre><p>强烈建议安装此工具，安装之后 cpp，git，makr，gcc 等基础命令都已有了</p>
+</li>
+</ul>
+<h3 id="brew"><a href="#brew" class="headerlink" title="brew"></a>brew</h3><ul>
+<li><p>类似 ubuntu 的 apt-get 包安装工具：homebrew</p>
+<pre><code>$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre></li>
+<li><p>homebrew 会把通过它安装的软件放在 <code>/usr/local/bin</code>(<code>/user/local</code>是 homebrew 默认的项目文件夹) 下，所以把这个路径加到系统路径中:</p>
+<pre><code>$ echo &apos;export PATH=&quot;/usr/local/bin:$PATH&quot;&apos; &gt;&gt; ~/.bash_profile
+</code></pre></li>
+<li><p>常用命令：</p>
+<pre><code># 检测 brew 是否运行正常（一般在第一次运行时坚持下）
+$ brew doctor
+
+# 更新 brew
+$ brew update
+
+# 安装包
+$ brew install &lt;formula-name&gt;
+
+# 删除包
+$ brew uninstall &lt;formula-name&gt;
+
+# 查找包
+$ brew search &lt;formula-name&gt;
+
+# 查看哪些包有更新信息
+$ brew outdated
+
+# 更新包，不跟 formula-name 就会更新所有
+$ brew upgrade &lt;formula-name&gt;
+
+# 清除旧版本的安装包
+$ brew cleanup
+
+# 查看当前已经安装的包
+$ brew list --versions
+</code></pre></li>
+</ul>
+<h3 id="brew-cask"><a href="#brew-cask" class="headerlink" title="brew cask"></a>brew cask</h3><ul>
+<li><p>homebrew 是安装命令行工具的包管理，brew cask 则是安装图形化的管理工具（cask 本身是 brew 的一个扩展）</p>
+<pre><code>$ brew install cask
+</code></pre></li>
+<li><p>常用命令基本和<code>brew</code>用法一致，例如：</p>
+<pre><code># 安装 chrome 浏览器
+$ brew cask install google-chrome
+
+# 一些扩展插件，可以让 mac 预览更强大，比如语法高亮，markdown，json
+$ brew cask install qlcolorcode
+$ brew cask install qlmarkdown
+$ brew cask install quicklook-json
+$ brew cask install quicklook-csv
+$ brew cask install betterzipql
+$ brew cask install suspicious-package
+
+# 可以查看由 brew 安装的服务，可在系统偏好设置中找到
+$ brew cask install launchrocket
+</code></pre></li>
+<li><p>安装后的包都在<code>/opt/homebrew-cask/Caskroom</code></p>
+</li>
+</ul>
+<h1 id="进阶开发配置"><a href="#进阶开发配置" class="headerlink" title="进阶开发配置"></a>进阶开发配置</h1><h3 id="Zsh"><a href="#Zsh" class="headerlink" title="Zsh"></a>Zsh</h3><p>  替代自带的Shell，其拓展功能和主题将由 oh-my-zsh 提供</p>
+<ol>
+<li><p>安装 zsh 和 zsh-completions（自动补全）</p>
+<p>   brew install zsh zsh-completions</p>
+</li>
+<li><p>安装 oh-my-zsh 让 zsh 获得拓展功能和主题</p>
+<p>   curl -L <a href="https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh" target="_blank" rel="external">https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh</a> | sh</p>
+</li>
+<li><p>编辑 ~/.zshrc</p>
+<p>   ZSH_THEME=pygmalion<br>   plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting ruby)</p>
+<p><a href="https://github.com/robbyrussell/oh-my-zsh/wiki/themes" target="_blank" rel="external">zsh主题集</a></p>
+</li>
+</ol>
+<h2 id="开发小工具"><a href="#开发小工具" class="headerlink" title="开发小工具"></a>开发小工具</h2><ul>
+<li>TexturePaker: 图片打包压缩管理工具，做游戏的，特别是移动游戏应该都知道</li>
+<li>SpriteBuilder: Cocos2d官方推荐制作游戏工具</li>
+<li>Robomongo: mongodb 图形化客户端</li>
+<li>Sequel Pro: mysql 图形化客户端</li>
+<li>CocoaRestClient：可以模拟Http请求，包括put,get,delete等，算是curl的补充吧</li>
+<li>Genymotion：非常好用的 android 模拟器</li>
+</ul>
+<h1 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h1><p>  安装顺序通常是：brew cask -&gt; app store / 官网 -&gt; 发现收费，立马转战寻找破解版 :)</p>
+<p>  顺便修改软件安装隐私设置：系统设置 -&gt; 安全性和隐私 -&gt; 通用 -&gt; 允许从以下位置下载的应用程序 -&gt; 任何来源</p>
+<p>  如果对自己下载的软件不放心，觉得有可能导致被黑或者系统崩溃，那么可以选择 ‘Mac App Stroe和被认可的开发者’</p>
+<h3 id="Parallels"><a href="#Parallels" class="headerlink" title="Parallels"></a>Parallels</h3><p>可以在 mac 上运行 windows 软件</p>
+<h3 id="QQ输入法"><a href="#QQ输入法" class="headerlink" title="QQ输入法"></a>QQ输入法</h3><p>  另外可以在<code>系统-&gt;键盘-&gt;输入源</code>中勾选<code>自动切换到文稿的输入源</code>，可以使得不同的软件用不同的输入源</p>
+<h3 id="农历"><a href="#农历" class="headerlink" title="农历:"></a>农历:</h3><p>  以下两款都是<code>国人</code>开发的<code>开源</code>软件，可以在<code>状态栏</code>显示，修复不能在状态栏显示日历的不爽</p>
+<ol>
+<li><p>Chinese Lunar Calendar for Mac<br>官网地址：<a href="http://calendar.zfdang.com/" target="_blank" rel="external">戳我</a></p>
+</li>
+<li><p>个人不是特别喜欢第一款，除了图标还不错，符合10.10的配色，主界面着实有点<code>略丑</code><br>所以还有另外一款：<a href="http://appinn.me/d/408/" target="_blank" rel="external">依然戳我</a></p>
+</li>
+</ol>
+<h3 id="Alfred"><a href="#Alfred" class="headerlink" title="Alfred"></a>Alfred</h3><p>  效率神器，可以作为一切操作的入口，包括打开软件，查找文件，计算器等等</p>
+<p>  附上池建强老师的一篇博文<a href="http://www.cnblogs.com/chijianqiang/p/alfred.html" target="_blank" rel="external">戳我</a></p>
+<p>  Alfred有收费和免费版本，当然可以自行google搜索破解版，不过免费版本，基本也够用</p>
+<h3 id="Moom"><a href="#Moom" class="headerlink" title="Moom"></a>Moom</h3><p>  又一款神器,可以很方便的缩放窗口，app stroe <a href="https://itunes.apple.com/us/app/moom/id419330170" target="_blank" rel="external">入口</a></p>
+<p>  不过9.9刀，个人觉得还是很值的，当然还是有’破解版’</p>
+<h3 id="GoAgentX"><a href="#GoAgentX" class="headerlink" title="GoAgentX"></a>GoAgentX</h3><p>  是一个在 Mac OS X 下使用代理服务的图形界面控制软件，方便一般用户在 Mac OS X 上配置和使用 goagent、west-chamber-season-3、SSH、stunnel 及 shadowsocks</p>
+<p>  非常好用，我自己有一个 vps 所以可以做 ssh 代理，当然 goagent 这种翻墙神器也可以在这个软件中设置</p>
+<h3 id="通讯工具"><a href="#通讯工具" class="headerlink" title="通讯工具"></a>通讯工具</h3><ul>
+<li>QQ</li>
+<li>阿里旺旺</li>
+<li>微信</li>
+</ul>
+<h3 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h3><ul>
+<li>chrome</li>
+<li>firefox</li>
+<li>QQ浏览器</li>
+<li>微信Web开发者工具</li>
+</ul>
+<h3 id="压缩软件"><a href="#压缩软件" class="headerlink" title="压缩软件"></a>压缩软件</h3><p>  The Unarchiver</p>
+<h3 id="Dash"><a href="#Dash" class="headerlink" title="Dash"></a>Dash</h3><p>  程序员文档好助手！包含很多语言和技术的API</p>
+<h3 id="Office"><a href="#Office" class="headerlink" title="Office"></a>Office</h3><ul>
+<li>微软的 Office 套件 Word, Excel, PPT, Outlook</li>
+<li>Mac 的 Pages, Numbers, Keynote</li>
+</ul>
+<h3 id="开发IDE"><a href="#开发IDE" class="headerlink" title="开发IDE"></a>开发IDE</h3><ul>
+<li>Flash Builder （flash 开发）</li>
+<li>Unity (Unity 开发)</li>
+<li>Eclipse (Java 开发，安装之前要去<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="external">官网</a>下载 java)</li>
+<li>Android Studio</li>
+</ul>
+<h3 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h3><ul>
+<li>Emacs 神器不解释</li>
+<li>Mou 最好用的 Markdown 编辑器，打字的时候还会有声音(不过现在都用 Macdown 因为支持代码高亮)</li>
+</ul>
+<h3 id="云存储"><a href="#云存储" class="headerlink" title="云存储"></a>云存储</h3><ul>
+<li>Evernote</li>
+<li>微云（本来使用 dropbox，但是中国墙的厉害）</li>
+</ul>
+<h3 id="播放器"><a href="#播放器" class="headerlink" title="播放器"></a>播放器</h3><ul>
+<li>虾米播放器：有态度的中国音乐平台（喜欢程度和网易播放器一致）</li>
+<li>VOX：无损音乐播放神器</li>
+<li>MplayerX: 最好用的视频播放器</li>
+</ul>
+<h3 id="设计工具"><a href="#设计工具" class="headerlink" title="设计工具"></a>设计工具</h3><ul>
+<li>Photoshop</li>
+<li><p>Xmind：思维导图</p>
+<p>虽然是程序员，但是行走江湖这些基本技巧还是要有的</p>
+</li>
+</ul>
+<h3 id="Omni-四件套"><a href="#Omni-四件套" class="headerlink" title="Omni 四件套"></a>Omni 四件套</h3><ul>
+<li>OmniGraffle</li>
+<li>OmniFocus</li>
+<li>OmniPlan</li>
+<li>OmniOutline</li>
+</ul>
+<h3 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h3><ul>
+<li>Virtual Box：虚拟机，可以安装其他操作系统，比如Windows</li>
+<li>valgrant</li>
+<li>docker</li>
+</ul>
+<h3 id="其他小工具"><a href="#其他小工具" class="headerlink" title="其他小工具"></a>其他小工具</h3><ul>
+<li>timing：记录 mac 上软件使用时间</li>
+<li>pomotodo: 番茄计时器（结合了简单的 TODO List）</li>
+<li>Thunder：下载必备</li>
+<li>FileZilla：FTP传输好工具</li>
+<li>Foxmail：非常好用的邮件客户端</li>
+<li>f.lux：让你的屏幕颜色随着当前时间变化而变化，比如晚上暖色调（保护视力啊）</li>
+<li>cheetsheet: 长按 <code>command</code> 查看当前软件的快捷键</li>
+<li>有道词典</li>
+</ul>
+<h3 id="Magican"><a href="#Magican" class="headerlink" title="Magican"></a>Magican</h3><p>  最后推荐这个：就是Mac下的优化大师啊！而且还可以在 menubar 上出现系统信息监控条。</p>
+<p>  当然iStat还是更强大一点，但是太多了，Magican已经够用了，而且还能安装卸载软件，清除缓存和无用文件</p>
+<p>  Magican = 轻量级的(istat + appcleaner)</p>
+<p>———— EOF ————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[div做蒙板，遮罩]]></title>
+      <url>http://www.tonyrisk.top/2014/11/10/div-mask/</url>
+      <content type="html"><![CDATA[<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>在网站开发过程中，经常有层与层之间叠加的需求，比如假如用户没有登陆，则加一层蒙板显示“登陆后才可发表”：</p>
+<p><img src="/assets/images/div-mask-1.png"></p>
+<!--break-->
+<h1 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h1><p>假设 id=’content’ 是我们的内容层， id=’mask’ 是半透明叠加层</p>
+<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'content'</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">textarea</span>&gt;</span> 加入讨论，帮助完善方案 <span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span> 发 送 <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'mask'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">'hint'</span>&gt;</span>登陆<span class="tag">&lt;/<span class="name">a</span>&gt;</span>后才能发表</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="css"><a href="#css" class="headerlink" title="css"></a>css</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#content</span> &#123;</div><div class="line">     <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#mask</span> &#123;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">1000</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(58, 58, 58, 0.2);</div><div class="line">    <span class="attribute">text-align</span>: center;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="selector-id">#mask</span> <span class="selector-id">#hint</span> &#123;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-50%, -50%);</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">translate</span>(-50%, -50%);</div><div class="line">    <span class="attribute">-moz-transform</span>: <span class="built_in">translate</span>(-50%, -50%);</div><div class="line">    <span class="attribute">-ms-transform</span>: <span class="built_in">translate</span>(-50%, -50%);</div><div class="line">    <span class="attribute">-o-transform</span>: <span class="built_in">translate</span>(-50%, -50%);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>主要是 #content 和 #mask 的样式设置，#hint的设置主要为了居中显示</p>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[谈谈用户密码存储]]></title>
+      <url>http://www.tonyrisk.top/2014/11/05/ruby-bcrypt/</url>
+      <content type="html"><![CDATA[<h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>以前在开发游戏的时候，玩家的密码经常被我们明文保存在数据库中:)，但是想到在其他游戏内或者网站中，他们也如此对待我的密码，思之极恐啊 :( 。因为大部分人一个密码走天下，如果在一个地方密码泄露了，那么你的微博，微信，qq，邮箱等等全部沦陷。</p>
+<p>而最近我正好在搭建电商网站，于是就涉及到相关问题，今天就好好来理理这个问题。</p>
+<!--break-->
+<p>对密码处理呢，一般处于三种考虑</p>
+<ol>
+<li>保证用户数据安全，比如一些网银，密码太重要了！一个不小心就是经济损失</li>
+<li>我们是正经人，是君子，虽然我们能看到你的密码，但是我们绝对不看，所以我们经过一定算法产生无意义的字符串后存储。</li>
+<li>万一我们技不如人，或者被竞争对手攻击导致资料外泄，那么别人拿到的密码，也猜不出用户的原码，所以对用户还是安全的。有木有很负责啊！</li>
+</ol>
+<p>先看下业务模型：</p>
+<ul>
+<li><p>a. 用户注册时在网页上输入密码（此时常常显示<em>**，其实只是安慰用户，实际上只是显示为</em>而已，只是显示）</p>
+</li>
+<li><p>b. 用户点击确定，前端就通过post方法将密码发送到服务器（众多周知用get会在地址栏中看到明文密码。但是post报文中只要用一些能查看http request的工具还是能看到，比如chrome自带的开发者工具）</p>
+</li>
+<li><p>c. 服务器收到密码后存储（有良心的，对密码加密下，否则只要有数据库权限的人都能看到每个用户的密码，甚至如果数据库被黑了，泄漏了，那就使得所有用户的密码红果果地暴露在光天化日之下啊）</p>
+</li>
+</ul>
+<p>所以针对上面的流程，安全的做法应该是：</p>
+<ul>
+<li><p>a. 使用浏览器密码控件，保证输入安全</p>
+</li>
+<li><p>b. 有别于http协议（http协议是明文）使用https协议，保证网络传输安全</p>
+</li>
+<li><p>c. 对密码加密后存储</p>
+</li>
+</ul>
+<p>浏览器插件和https协议此文不详细展开，这里主要看看怎么加密。</p>
+<p>现在比较流行的是md5，sha-1或者两者结合，再安全一点就配合salt一起。</p>
+<p>md5，sha1，salt都是啥啊？嗯，其实我也不太清楚，最近看到过这些字母是在微信开发api中，所以我特意去了解了下。</p>
+<p>严格来说md5，sha1都不是加密技术，只是哈希算法，具体解释请继续阅读：</p>
+<h1 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h1><p>MD5，全称Message Digest Algorithm 5（中文叫消息摘要算法第五版，所以有md2，md3，md4各个历史版本）。<br><code>基础原理是将数据（比如一段文字）运算后变为一固定长度（128位）的值。</code><br>经过md5算法的过程是不可逆的，即知道结果字符串和md5的算法也不能倒推出原来的数据是什么。<br>两个不一样的数据经过md5算法后产生的结果如果一致，那么就是’哈希冲突’。<br>在2004年之前（后文会说明这个时间点），一致认为md5产生的值是唯一的，可当作‘数字签名’(数字指纹)。</p>
+<p><strong>用法一：</strong>用来确保资料在传输过程中的完整性。比如服务器预先提供一个MD5校验和，用户下载完文件以后，用MD5算法计算下载文件的MD5校验和，然后通过检查这两个校验和是否一致，就能判断下载的文件是否出错。</p>
+<p><strong>用法二：</strong>广泛用于操作系统的登陆认证上。如在Unix系统中用户的密码是以MD5（或其它类似的算法）经Hash运算后存储在文件系统中。当用户登录的时候，系统把用户输入的密码进行MD5 Hash运算，然后再去和保存在文件系统中的MD5值进行比较，进而确定输入的密码是否正确。通过这样的步骤，系统在并不知道用户密码的明码的情况下就可以确定用户登录系统的合法性。</p>
+<p>值得骄傲的是2004年，我国的王小云教授和她的团队公布了MD系列算法的哈希冲突，即不同的数据能够产生相同的Hash值，也就是说，可以找到两份具有相同数字手印的不同电子文件。从理论上说明md5的不安全性，但是实际中md5产生相同的概率极低。</p>
+<h1 id="SHA-1"><a href="#SHA-1" class="headerlink" title="SHA-1"></a>SHA-1</h1><p>SHA，全称Secure Hash Algorithm（安全哈希算法），对于长度小于2^64位的消息，SHA1会产生一个160位的消息摘要。用法和原理与MD5类似，也是不可逆的，都是用于数字签名，判断数据完整性。SHA1曾被视为是MD5的后继者，不过王小云教授还是证明虽然较为困难，但是还是出现了哈希碰撞的发生。<br>但是目前还没有SHA2（SHA-224, SHA-256, SHA-384和SHA-512，它们生成的摘要密文分别就是224,256,384,512位）SHA2的破解新闻。</p>
+<h1 id="MD5和SHA1"><a href="#MD5和SHA1" class="headerlink" title="MD5和SHA1"></a>MD5和SHA1</h1><p>md5和sha1被证明不同的数据能产生同一个值的影响是什么呢？最直接的就是签名的不安全，比如有人可以伪造我的密码登陆系统。在实际应用过程中，其实没有太多意义，你想啊，这和猜你的密码有啥区别，还不如试着破解你的密码来的高效，应该大部分人的密码都是有规律的，什么姓名生日等的组合。</p>
+<p>现在通行的破解做法是穷举字典暴力破解法，通过把字典中罗列的密码经过md5算法处理后得到的字符串和目标对比倒推出原文。进阶一点的把常用密码的常见组合进行单向哈希，得到一个摘要组合来对比，这个组合就是俗称的彩虹表。</p>
+<p>md5，sha1，sha2因为结果位数越来越长，安全性也越来越高，当然消耗的计算量也是越来越大，所以一般的密码使用md5已经是够了。</p>
+<p>综上，还算安全的做法是产生一个固定较长的随机数salt1，和随机salt2（比如主键），和用户密码一起，经过md5的计算。比如密码是123456，salt1是x1y1z1，sal2是234355，组成字符串’123456x1y1z1234355’，再经过个几次（apache迭代了1000次）md5运算基本就已经算是安全了，当然也要确保salt避免被泄漏。当然还要加强应用安全，如输错三次就暂时锁定等。<br>目前大部分的网站都是用此种方式，而知乎用的是bcrypt。</p>
+<p>#bcrypt</p>
+<p>bcrypt是专门为密码存储而设计的算法，基于Blowfish加密算法变形而来，由Niels Provos和David Mazières发表于1999年的USENIX。<br>bcrypt最大的好处是有一个参数（work factor)，可用于调整计算强度，而且work factor是包括在输出的摘要中的。随着攻击者计算能力的提高，使用者可以逐步增大work factor，而且不会影响已有用户的登陆。<br>bcrypt经过了很多安全专家的仔细分析，使用在以安全著称的OpenBSD中，一般认为它比PBKDF2更能承受随着计算能力加强而带来的风险。bcrypt也有广泛的函数库支持，因此我们建议使用这种方式存储密码。</p>
+<p>但是！bcrypt比md5和sha1的消耗都要大，如果用默认的work factor＝10，计算一次将消耗0.3秒。</p>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[CSS 学习笔记]]></title>
+      <url>http://www.tonyrisk.top/2014/10/20/learn-css/</url>
+      <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>HTML语言定义了一个网页需要展示的内容，而CSS则定义了这些元素的展示样式；比如，大小，颜色，布局等等。<br>所以CSS内容主要就围绕怎么对样式进行操作：</p>
+<pre><code>selector {
+    property1: value1;
+    property2: value2;
+    ...
+    propertyN: valueN;
+}
+
+selector: 选择器
+property: 属性
+value: 属性值
+</code></pre><ol>
+<li><p>选择元素：选择要操作的HTML元素</p>
+<ul>
+<li>需要改变样式的HTML元素，如 <code>h1</code> 等</li>
+<li>也可以分组，每个元素之间用逗号分割，如 <code>h1,h2,h3</code>；</li>
+<li>子元素默认继承父元素的样式</li>
+</ul>
+</li>
+<li><p>各种属性：比如边框，字体，高度，大小</p>
+<ul>
+<li>想要设置的样式，如 <code>color</code>，<code>font-size</code> 等</li>
+</ul>
+</li>
+<li><p>各种属性值：颜色值，solid（边框样式）等</p>
+<ul>
+<li>如<code>red</code>，<code>#f00</code>, <code>&quot;sans serif&quot;</code>等</li>
+<li>如果值为若干单词，则要给值加<strong>引号</strong></li>
+</ul>
+</li>
+</ol>
+<h1 id="生效优先级"><a href="#生效优先级" class="headerlink" title="生效优先级"></a>生效优先级</h1><p>当同一个 HTML 元素被不止一个样式定义时，会按下面优先顺序执行（4优先级最高）</p>
+<ol>
+<li>浏览器缺省设置</li>
+<li>外部样式表</li>
+<li>内部样式表（位于 <head> 标签内部）</head></li>
+<li>内联样式（在 HTML 元素内部）</li>
+</ol>
+<!--break-->
+<h1 id="选择器分类"><a href="#选择器分类" class="headerlink" title="选择器分类"></a>选择器分类</h1><p><a href="http://www.w3school.com.cn/cssref/css_selectors.asp" target="_blank" rel="external">查看更多</a></p>
+<ul>
+<li>通用选择器：<code>*</code> 对所有元素都生效</li>
+<li>派生选择器：如 <code>li strong</code> 当 li 下有 strong 元素则生效</li>
+<li>id选择器: 如<code>#test</code> 对 id=’test’ 的元素生效</li>
+<li>id选择器-派生选择器: 如<code>#test strong</code> 对 id=’test’ 下的 strong 元素生效</li>
+<li>派生选择器-id选择器: 如<code>div#test</code> 对 div 中 id=’test’ 的元素生效</li>
+<li>类选择器: 如<code>.test</code> 对 class=’test’ 的元素生效（<strong>类名的第一个字符不能使用数字</strong>）</li>
+<li>类选择器-派生选择器: 如<code>.test strong</code> 对 class=’test’ 下的 strong 元素生效</li>
+<li>派生选择器-类选择器: 如<code>div.test</code> 对 div 中 class=’test’ 的元素生效</li>
+<li>属性选择器: 不仅仅局限于 id 和 class 属性而选择（只有在规定了 !DOCTYPE 时，IE7 和 IE8 才支持属性选择器）,<a href="http://www.w3school.com.cn/css/css_syntax_attribute_selector.asp" target="_blank" rel="external">更多介绍</a></li>
+</ul>
+<h1 id="CSS属性note"><a href="#CSS属性note" class="headerlink" title="CSS属性note"></a>CSS属性note</h1><p><a href="http://www.w3school.com.cn/cssref/index.asp" target="_blank" rel="external">查看更多</a></p>
+<ul>
+<li>font-family 属性应该使用若干种字体名称作为回退系统，以确保最大兼容性，<a href="http://www.w3school.com.cn/cssref/css_websafe_fonts.asp" target="_blank" rel="external">常用字体</a></li>
+<li>CSS中的单位参考 <a href="http://www.w3school.com.cn/cssref/css_units.asp" target="_blank" rel="external">点击查看</a></li>
+<li>背景设置相关：如背景颜色，背景图片，背景位置等 <a href="http://www.w3school.com.cn/css/css_background.asp" target="_blank" rel="external">参考</a></li>
+<li>文本设置相关：如文本的颜色、字符间距，对齐，装饰文本，对文本进行缩进等 <a href="http://www.w3school.com.cn/css/css_text.asp" target="_blank" rel="external">参考</a></li>
+<li>字体设置相关：如字体、大小，风格等 <a href="http://www.w3school.com.cn/css/css_font.asp" target="_blank" rel="external">参考</a>, <a href="http://www.w3school.com.cn/cssref/css_websafe_fonts.asp" target="_blank" rel="external">网络安全字体组合</a>，CSS3还能提供自定义字体功能（下文会提到）</li>
+<li>链接设置相关：除了常规设置外，还可以根据链接不同时候的状态进行设置 <a href="http://www.w3school.com.cn/css/css_link.asp" target="_blank" rel="external">参考</a></li>
+<li>列表设置相关：<a href="http://www.w3school.com.cn/css/css_list.asp" target="_blank" rel="external">参考</a></li>
+<li>表格设置相关：<a href="http://www.w3school.com.cn/css/css_table.asp" target="_blank" rel="external">参考</a></li>
+<li>轮廓设置相关：<a href="http://www.w3school.com.cn/css/css_outline.asp" target="_blank" rel="external">参考</a></li>
+</ul>
+<h1 id="框模型（Box-Model）"><a href="#框模型（Box-Model）" class="headerlink" title="框模型（Box Model）"></a>框模型（Box Model）</h1><p>规定了元素框处理元素内容、内边距、边框 和 外边距 的方式</p>
+<p><img src="http://www.w3school.com.cn/i/ct_boxmodel.gif"></p>
+<ul>
+<li><code>内边距</code> 直接包围内容，内边距呈现了元素的背景</li>
+<li>内边距的边缘是<code>边框</code></li>
+<li>边框以外是<code>外边距</code>，外边距默认是透明的，因此不会遮挡其后的任何元素，外边距可以是负值</li>
+<li><code>背景</code>应用于由内容和内边距、边框组成的区域</li>
+<li><code>内边距</code>、<code>边框</code>和<code>外边距</code>可以应用于一个元素的所有边，也可以应用于单独的边</li>
+<li><p>默认按照<code>上、右、下、左</code>的顺序来设置框模型，如：</p>
+<pre><code>h1 {padding: 10px 0.25em 2ex 20%;}
+</code></pre></li>
+<li><p>外边距合并：当两个垂直外边距相遇时，它们将形成一个外边距。合并后的外边距的高度等于两个发生合并的外边距的高度中的较大者。</p>
+<p>  <img src="http://www.w3school.com.cn/i/ct_css_margin_collapsing_example_1.gif"></p>
+<p>  <strong>只有普通文档流中块框的垂直外边距才会发生外边距合并。行内框、浮动框或绝对定位之间的外边距不会合并</strong></p>
+</li>
+</ul>
+<h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p>定位是很重要的功能，操作页面元素的布局，决定一个元素是在左边还是右边，是叠加在另一个元素上，还是被其他元素覆盖。</p>
+<p>甚至能决定是相对定位（比如在父元素居中），或者是绝对定位（比如在页面的三分之一处）。</p>
+<h2 id="块"><a href="#块" class="headerlink" title="块"></a>块</h2><p>说起定位，我们还不得不提<code>块</code>的概念。像<code>&lt;div&gt;</code>,<code>&lt;p&gt;</code>,<code>&lt;h1&gt;</code>等，这些叫<code>块级内容</code>，有这些属性的一定会和其他元素换行显示。而<code>&lt;span&gt;</code>,<code>&lt;b&gt;</code>称为<code>行内块</code>，可以和同是行内块的元素显示在一行中。</p>
+<p>控制这一行为的是<code>display</code>属性，常用取值为：<code>inline</code>(行内块)、<code>block</code>(块级内容)、<code>none</code>(不显示元素)。</p>
+<p>块级内容，一行接着一行显示，之间的垂直距离由框的<code>外边距</code>计算而得。</p>
+<p>行内块，一行中水平布局，框模型中的水平取值都能生效，但是垂直属性不会影响行内块。当前行所在的快元素的高度默认是足以容纳所有元素，但是也可以手动设置来获得更佳的高度。</p>
+<p>比如 <div style="display:inline"> ，这个div本来默认表现是块级内容，但是现在改成行内块的行为。</div></p>
+<h2 id="主要属性"><a href="#主要属性" class="headerlink" title="主要属性"></a>主要属性</h2><p><a href="http://www.w3school.com.cn/css/css_positioning.asp" target="_blank" rel="external">查看更多</a></p>
+<ul>
+<li>position：relative，absolute（相对网页文档），fixed（相对视窗），static</li>
+<li>top/bottom/right/left：元素外边框和其父快的偏移</li>
+<li>overflow：定义溢出内容的呈现方式，默认会出现滚动条</li>
+<li>z-index：叠加关系</li>
+<li>vertical-align：垂直对其方式</li>
+<li>clip：剪影显示</li>
+<li>float：元素浮动，<a href="http://www.w3school.com.cn/css/css_positioning_floating.asp" target="_blank" rel="external">详情</a></li>
+</ul>
+<h1 id="CSS3-新增属性"><a href="#CSS3-新增属性" class="headerlink" title="CSS3 新增属性"></a>CSS3 新增属性</h1><ul>
+<li>边框：border-radius(圆角边框), box-shadow(添加投影), borde-image(使用图片绘制边框) 等, <a href="http://www.w3school.com.cn/css3/css3_border.asp" target="_blank" rel="external">更多</a></li>
+<li>背景：background-size(背景图片尺寸), background-origin(规定背景图片的定位区域，放在框模型三个box中的哪一个) 等, <a href="http://www.w3school.com.cn/css3/css3_background.asp" target="_blank" rel="external">更多</a></li>
+<li>文本：text-shadow(给文字添加阴影), word-wrap(文字自动换行，会拆开单词) 等, <a href="http://www.w3school.com.cn/css3/css3_text_effect.asp" target="_blank" rel="external">更多</a></li>
+<li>字体：可以自定义字体，然后把字体放在服务器上，浏览器会自动下载 <a href="http://www.w3school.com.cn/css3/css3_font.asp" target="_blank" rel="external">更多</a></li>
+<li>更多2D, 3D操作：<a href="http://www.w3school.com.cn/css3/css3_2dtransform.asp" target="_blank" rel="external">2D</a>，<a href="http://www.w3school.com.cn/css3/css3_3dtransform.asp" target="_blank" rel="external">3D</a></li>
+<li>过渡：使元素从一个样式过渡到另一个样式，可以做出很炫的动画，<a href="http://www.w3school.com.cn/css3/css3_transition.asp" target="_blank" rel="external">更多</a></li>
+<li>动画：animation和@keyframes，来创建动画效果，<a href="http://www.w3school.com.cn/css3/css3_animation.asp" target="_blank" rel="external">更多</a></li>
+<li>多列：CSS3中可以操作div对象就像table一样，按照我们的要求来排版，<a href="http://www.w3school.com.cn/css3/css3_multiple_columns.asp" target="_blank" rel="external">更多</a></li>
+<li>用户界面：CSS3提供更多的属性才改变框模型，<a href="http://www.w3school.com.cn/css3/css3_user_interface.asp" target="_blank" rel="external">更多</a></li>
+</ul>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[个人技术Path]]></title>
+      <url>http://www.tonyrisk.top/2014/10/19/update-tech-path/</url>
+      <content type="html"><![CDATA[<p>常年累月，你总要知道时间献给了哪些技术</p>
+<!--break-->
+<h1 id="2009-07-大三开始实习到毕业后工作（当然在同一家公司）"><a href="#2009-07-大三开始实习到毕业后工作（当然在同一家公司）" class="headerlink" title="2009.07 大三开始实习到毕业后工作（当然在同一家公司）"></a>2009.07 大三开始实习到毕业后工作（当然在同一家公司）</h1><h2 id="阶段1–没经验的小菜鸟"><a href="#阶段1–没经验的小菜鸟" class="headerlink" title="阶段1–没经验的小菜鸟"></a>阶段1–没经验的小菜鸟</h2><ul>
+<li>emacs</li>
+<li>C/C++</li>
+<li>lua</li>
+<li>ruby</li>
+<li>makefile</li>
+<li>gdb</li>
+<li>valgrind</li>
+<li>linux命令和bash脚本</li>
+</ul>
+<h2 id="阶段2–开始搞前端"><a href="#阶段2–开始搞前端" class="headerlink" title="阶段2–开始搞前端"></a>阶段2–开始搞前端</h2><ul>
+<li>flash as3</li>
+</ul>
+<h1 id="2012-04-换了一家公司"><a href="#2012-04-换了一家公司" class="headerlink" title="2012.04 换了一家公司"></a>2012.04 换了一家公司</h1><h2 id="阶段1–维护老游戏"><a href="#阶段1–维护老游戏" class="headerlink" title="阶段1–维护老游戏"></a>阶段1–维护老游戏</h2><ul>
+<li>flex</li>
+<li>php</li>
+<li>java</li>
+</ul>
+<h2 id="阶段2–开发新游戏"><a href="#阶段2–开发新游戏" class="headerlink" title="阶段2–开发新游戏"></a>阶段2–开发新游戏</h2><ul>
+<li>c++</li>
+<li>as3</li>
+</ul>
+<h2 id="阶段3–开发新手游"><a href="#阶段3–开发新手游" class="headerlink" title="阶段3–开发新手游"></a>阶段3–开发新手游</h2><ul>
+<li>cocos2dx</li>
+<li>js</li>
+<li>c++</li>
+</ul>
+<h1 id="2014-07-01辞职创业"><a href="#2014-07-01辞职创业" class="headerlink" title="2014.07.01辞职创业"></a>2014.07.01辞职创业</h1><h2 id="阶段1–技术调研阶段"><a href="#阶段1–技术调研阶段" class="headerlink" title="阶段1–技术调研阶段"></a>阶段1–技术调研阶段</h2><ul>
+<li><p>使用git管理项目</p>
+</li>
+<li><p>使用U3D技术</p>
+<ul>
+<li>U3D和iOS UIKit结合</li>
+<li>U3D的ui库: NGUI</li>
+<li>TexturePaker的使用</li>
+</ul>
+</li>
+<li><p>cocos2d</p>
+<ul>
+<li>cocos2d和box2d</li>
+<li>cocos2d和iOS UIKit</li>
+<li>TexturePaker的使用</li>
+</ul>
+</li>
+</ul>
+<h2 id="阶段2–开发IOS-app"><a href="#阶段2–开发IOS-app" class="headerlink" title="阶段2–开发IOS app"></a>阶段2–开发IOS app</h2><ul>
+<li>dash</li>
+<li>objective-c</li>
+<li>swift</li>
+<li>storyboard</li>
+<li>ppi/dpi</li>
+</ul>
+<h2 id="阶段3–开发web服务器"><a href="#阶段3–开发web服务器" class="headerlink" title="阶段3–开发web服务器"></a>阶段3–开发web服务器</h2><ul>
+<li>restfull设计</li>
+<li>cookie、session了解</li>
+<li>ruby,rum,gems,bundle,rackup,rake</li>
+<li>sinatra</li>
+<li>mongodb</li>
+<li>mongoid（autoid）</li>
+<li>carriewave-mongoid</li>
+<li>redist</li>
+<li>curl 简单模拟web访问</li>
+<li>nginx</li>
+<li>压力测试<ul>
+<li>ab</li>
+<li>http_load</li>
+</ul>
+</li>
+</ul>
+<h2 id="阶段4–开发产品后台管理系统"><a href="#阶段4–开发产品后台管理系统" class="headerlink" title="阶段4–开发产品后台管理系统"></a>阶段4–开发产品后台管理系统</h2><ul>
+<li>html/css/js/jquery/ajax</li>
+<li>haml</li>
+<li>coffeescript</li>
+</ul>
+<h2 id="阶段5–集成各个第三方平台"><a href="#阶段5–集成各个第三方平台" class="headerlink" title="阶段5–集成各个第三方平台"></a>阶段5–集成各个第三方平台</h2><ul>
+<li>auth2.0</li>
+<li>wxpay</li>
+<li>alipay</li>
+<li>云通讯sdk</li>
+<li>数据分析</li>
+<li>百度统计</li>
+<li>flurry</li>
+</ul>
+<h2 id="阶段6–搭建电商、重筹网站"><a href="#阶段6–搭建电商、重筹网站" class="headerlink" title="阶段6–搭建电商、重筹网站"></a>阶段6–搭建电商、重筹网站</h2><ul>
+<li>bootstrap</li>
+<li>ruby on rails</li>
+</ul>
+<h2 id="阶段7–-Idea问答社区"><a href="#阶段7–-Idea问答社区" class="headerlink" title="阶段7– Idea问答社区"></a>阶段7– Idea问答社区</h2><ul>
+<li>uikit (一个和bootstrap一样的前端框架)</li>
+</ul>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[HTML的学习笔记(三)]]></title>
+      <url>http://www.tonyrisk.top/2014/10/12/learn-html-3/</url>
+      <content type="html"><![CDATA[<h1 id="知识点分类"><a href="#知识点分类" class="headerlink" title="知识点分类"></a>知识点分类</h1><ol>
+<li><p>标签（<a href="http://www.w3school.com.cn/tags/html_ref_byfunc.asp" target="_blank" rel="external">完整标签手册</a>）</p>
+<pre><code>HTML有众多标签，如文档类的 &lt;h1&gt;，显示连接的 &lt;a&gt; ，图片 &lt;img&gt; 等；
+</code></pre></li>
+<li><p>标签属性（<a href="http://www.w3school.com.cn/tags/html_ref_standardattributes.asp" target="_blank" rel="external">完整的属性手册</a>）</p>
+<pre><code>每个标签有不同的属性，比较常用有：表示样式表中类名的class，标识唯一的id，html5新出来的用来存储私有定制数据的data-*
+</code></pre></li>
+<li><p>HTML事件（<a href="http://www.w3school.com.cn/tags/html_ref_eventattributes.asp" target="_blank" rel="external">完整的事件手册</a>）</p>
+<pre><code>页面中的元素和用户发生交互后，会产生一系列的事件，比如鼠标事件，键盘时间，表单事件等等，而升级到HTML5则增加了很多多媒体事件
+</code></pre></li>
+<li><p>实体符号（<a href="http://www.w3school.com.cn/tags/html_ref_entities.html" target="_blank" rel="external">完整的实体符号</a>）</p>
+<pre><code>还有一些符号，需要做转义，不能直接出现在HTML代码中，这些被称作 HTML 实体，写成 &apos;&amp;entity_name;&apos; 或者 &apos;&amp;#entity_number;&apos;
+
+注意最后有 &apos;;&apos; ， entity_name  容易记,但是浏览器兼容性不太好， entity_number 正好相反
+
+比如 &apos;&lt;&apos; ，会被HTML当作是标签开头，而应该用 &apos;&amp;lt;&apos; 或者 &apos;&amp;#60;&apos;
+</code></pre></li>
+</ol>
+<!--break-->
+<h1 id="常用标签"><a href="#常用标签" class="headerlink" title="常用标签"></a>常用标签</h1><p>W3C官网上做了一些常用标签的示例：<a href="http://www.w3school.com.cn/html/html_quick.asp" target="_blank" rel="external">这里</a></p>
+<ul>
+<li><p><code>&lt;!-- comment content --&gt;</code> 这是HTML的注释</p>
+</li>
+<li><p><code>&lt;br/&gt;</code> 是用来折行，但最好不要用来排版，而是单纯用来段落中换行</p>
+</li>
+<li><p><code>&lt;address&gt;&lt;/address&gt;</code> 地址标签用来写地址</p>
+</li>
+<li><p><code>&lt;bdo&gt;&lt;/bdo&gt;</code> 可覆盖默认的文本方向</p>
+</li>
+<li><p><code>&lt;abbr&gt;&lt;/abbr&gt;</code> 通过对缩写进行标记，能够为浏览器、拼写检查和搜索引擎提供有用的信息</p>
+</li>
+<li><p><code>&lt;blockquote&gt;&lt;/blockquote&gt;</code> 是长引用，会额外插入换行和外边框</p>
+</li>
+<li><p><code>&lt;q&gt;&lt;/q&gt;</code> 是短引用，一般表现和引用号类似</p>
+</li>
+<li><p>除了用<code>&lt;link/&gt;</code>标签引用外部css样式表外，也可以直接用<code>&lt;style&gt;</code>，如：</p>
+<pre><code>&lt;style type=&quot;text/css&quot;&gt;
+    body {background-color: red}
+    p {margin-left: 20px}
+&lt;/style&gt;
+</code></pre><p>  也可以直接使用标签元素的style属性，如：</p>
+<pre><code>&lt;p style=&quot;color: red; margin-left: 20px&quot;&gt;
+    This is a paragraph
+&lt;/p&gt;
+</code></pre><p>  当然上面两种都不推荐，最好的就是直接引用外部链接</p>
+</li>
+<li><p>和CSS一样，JS脚本除了链接，也可以直接在标签中写</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    document.write(&quot;Hello World!&quot;)
+&lt;/script&gt;
+&lt;noscript&gt;Your browser does not support JavaScript!&lt;/noscript&gt;
+</code></pre><p>  <code>&lt;noscript&gt;</code> 标签提供无法使用脚本时的替代内容</p>
+</li>
+<li><p><code>&lt;div&gt;&lt;/div&gt;</code> 定义文档中的节或区域（块级）</p>
+</li>
+<li><p><code>&lt;span&gt;&lt;/span&gt;</code> 定义文档中的行内的小块或区域</p>
+</li>
+<li><p><code>&lt;a name=&#39;section-one&#39;&gt;&lt;/a&gt;</code> 链接比较实用的一个属性就是name，可以定位到页面中的元素，相当于书签</p>
+<pre><code>&lt;a name=&quot;tips&quot;&gt;基本的注意事项 - 有用的提示&lt;/a&gt;
+
+// 直接跳到tips
+&lt;a href=&quot;#tips&quot;&gt;有用的提示&lt;/a&gt;
+
+// 也可以调到其他页面
+&lt;a href=&quot;http://www.example.com/another_page.html#tips&quot;&gt;有用的提示&lt;/a&gt;
+</code></pre></li>
+<li><p><code>&lt;img/&gt;</code>有两个辅助标签 <code>&lt;map&gt;&lt;/map&gt;</code> 和 <code>&lt;area/&gt;</code>，可以定义图片中可点击的区域</p>
+</li>
+<li><p>表格是最常用的功能了，可以整理组织显示内容，也可以用来布局网页元素</p>
+<pre><code>&lt;table&gt;
+    &lt;caption&gt;此标签用于表格标题&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;th定义表头&lt;/th&gt;
+            &lt;th&gt;th可替代td位置&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;tr用于定义一行&lt;/td&gt;
+            &lt;td&gt;td用于定义一个单元格&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;td&gt;thead,tbody,tfoot&lt;/td&gt;
+            &lt;td&gt;这三者应该结合起来用&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+&lt;/table&gt;
+</code></pre></li>
+<li><p>列表：</p>
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;无序列表&lt;/li&gt;
+    &lt;li&gt;Coffee&lt;/li&gt;
+    &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;有序列表&lt;/li&gt;
+    &lt;li&gt;Coffee&lt;/li&gt;
+    &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;dl&gt;
+    &lt;dt&gt;自定义列表&lt;/dt&gt;
+    &lt;dd&gt;自定义列表是项目及其注释的组合&lt;/dd&gt;
+    &lt;dt&gt;Coffee&lt;/dt&gt;
+    &lt;dd&gt;Black hot drink&lt;/dd&gt;
+    &lt;dt&gt;Milk&lt;/dt&gt;
+    &lt;dd&gt;White cold drink&lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre></li>
+<li><p><code>&lt;form&gt;</code>表单实在是太重要了，用于把用户的输入数据传输到服务器上，包含一系列<code>&lt;input&gt;</code>,<code>textarea</code>,<code>label</code>等元素</p>
+<p>  了解更多Form表单：<a href="http://www.w3school.com.cn/html/html_forms.asp" target="_blank" rel="external">W3C中Form的介绍</a></p>
+</li>
+<li><p>框架（<code>&lt;frame&gt;</code> <code>&lt;frameset&gt;</code> <code>&lt;iframe&gt;</code>）可以允许在一个浏览器窗口中显示多个页面，不过越来越不太用了</p>
+</li>
+<li><p><code>object</code>和<code>embed</code></p>
+<pre><code>`object` 几乎被所有主流浏览器都支持。用于包含对象，比如图像、音频、视频、Java applets、ActiveX、各种插件、PDF 以及 Flash
+可以用于向HTML页面定义一个嵌入的多媒体对象，并且可以规定插入 HTML 文档中的对象的数据和参数
+如果未显示 object 元素，就会执行位于 &lt;object&gt; 和 &lt;/object&gt; 之间的代码。通过这种方式，我们能够嵌套多个 object 元素（每个对应一个浏览器）
+
+`embed` 是HTML5的新标签。定义嵌入的内容，比如插件，flash等
+</code></pre></li>
+<li><p>HTML5 三个新的标签: <code>audio</code>, <code>video</code>, <code>canvas</code></p>
+</li>
+</ul>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[HTML的学习笔记(二)]]></title>
+      <url>http://www.tonyrisk.top/2014/10/11/learn-html-2/</url>
+      <content type="html"><![CDATA[<h1 id="HTML-Javascript-CSS"><a href="#HTML-Javascript-CSS" class="headerlink" title="HTML, Javascript, CSS"></a>HTML, Javascript, CSS</h1><p>在开发Web过程中，不可避免的还要接触其他两样技术：javascript和css。</p>
+<p>javascript是世界上最流行的脚本语言，增加网页间的交互性，可以动态改变网页元素。由此展开还有Html Dom知识，JQuery（最好用的js库），Ajax概念。</p>
+<p>CSS全称为Cascading Style Sheets（层叠样式表），定义如何显示 HTML 元素，实现内容和表现分离。</p>
+<p>总得来说</p>
+<ul>
+<li>HTML 规定网页上有什么，比如有文字，有图片；</li>
+<li>JS定义这些元素交互方式和响应方式，比如点击按钮会做什么事；</li>
+<li>CSS定义应该怎么表现这些元素，比如字体，背景颜色，布局方式；</li>
+</ul>
+<p>网页显示是按顺序来加载内容，所以根据三者的功能现在流行的方式是把CSS样式放在<head>元素中，把js内容放到</head><body>的最后面（因为js操作html元素，必须先的有页面元素）</body></p>
+<!--break-->
+<p>#先看一段标准Html5网页模板</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;网站名称 - 网页描述&lt;/title&gt;
+
+    &lt;meta http-equiv=&quot;Content-Type&quot; Content=&quot;text/html; Charset=utf-8&quot; /&gt;
+    &lt;meta name=&quot;keywords&quot; contect=&quot;html,学习&quot; /&gt;
+    &lt;meta name=&quot;description&quot; contect=&quot;学习html的相关笔记&quot; /&gt;
+    &lt;meta name=&quot;author&quot; contect=&quot;tonyrisk&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;example.css&quot; /&gt;
+
+    &lt;link rel=&quot;shortcut icon&quot; href=&quot;favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;
+
+    &lt;link rel=&quot;alternate&quot; type=&quot;application/atom+xml&quot; title=&quot;Atom&quot; href=&quot;&quot;/&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;header&gt;&lt;/header&gt;
+    &lt;footer&gt;&lt;/footer&gt;
+    &lt;script src=&quot;example.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><ol>
+<li><p><code>&lt;!DOCTYPE&gt;</code></p>
+<ul>
+<li>&lt;!DOCTYPE&gt;必须是 HTML 文档的第一行，位于 <html> 标签之前</html></li>
+<li>&lt;!DOCTYPE&gt; 声明不是 HTML 标签；它是指示 web 浏览器关于页面使用哪个 HTML 版本进行编写的指令</li>
+<li>其他版本写法：<a href="http://www.w3school.com.cn/tags/tag_doctype.asp" target="_blank" rel="external">点此</a></li>
+</ul>
+</li>
+<li><p><code>&lt;head&gt;</code></p>
+<ul>
+<li>用于定义文档的头部, 描述了文档的各种属性和信息</li>
+<li>绝大多数文档头部包含的数据都不会真正作为内容显示给读者</li>
+</ul>
+</li>
+<li><p><code>&lt;title&gt;</code></p>
+<ul>
+<li>title是<head>中唯一必须要有的元素</head></li>
+<li>最好写成<code>网站名称 - 网页描述</code>的形式，便于搜索引擎收录</li>
+</ul>
+</li>
+<li><p><code>&lt;meta&gt;</code></p>
+<ul>
+<li>meta大部分都用来给搜索引擎提供信息，以便搜索引擎更好收录</li>
+<li>http-equiv用来注定当前页面内容信息，比如编码是utf-8</li>
+<li>viewport被用在移动浏览器中，提供移动设备信息</li>
+</ul>
+</li>
+<li><p><code>&lt;link&gt;</code></p>
+<ul>
+<li>链接外部资源</li>
+<li>stylesheet链接css文件</li>
+<li>icon链接后显示网页的图标</li>
+<li>alternate加入网页的feed</li>
+</ul>
+</li>
+<li><p>不常用的标签<code>&lt;base&gt;</code></p>
+<ul>
+<li>属于<code>&lt;head&gt;</code>内标签</li>
+<li><p>为页面上的所有链接规定默认地址或默认目标</p>
+<pre><code>&lt;base href=&quot;http://www.w3school.com.cn/i/&quot; /&gt;
+&lt;base target=&quot;_blank&quot; /&gt;
+</code></pre></li>
+</ul>
+</li>
+<li><p><code>&lt;body&gt;</code></p>
+<ul>
+<li>定义文档的主体</li>
+<li>包含文档的所有内容（比如文本、超链接、图像、表格和列表等等。）</li>
+</ul>
+</li>
+<li><p><code>&lt;header&gt;</code></p>
+<ul>
+<li>是 HTML 5 中的<code>新标签</code></li>
+<li>标签定义文档的页眉（介绍信息）</li>
+</ul>
+</li>
+<li><p><code>&lt;footer&gt;</code></p>
+<ul>
+<li>是 HTML 5 中的<code>新标签</code></li>
+<li>定义文档或节的页脚</li>
+<li>页脚通常包含文档的作者、版权信息、使用条款链接、联系信息等等</li>
+<li>您可以在一个文档中使用多个 <footer> 元素</footer></li>
+</ul>
+</li>
+</ol>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[HTML的学习笔记(一)]]></title>
+      <url>http://www.tonyrisk.top/2014/10/10/learn-html-1/</url>
+      <content type="html"><![CDATA[<h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><p>HTML全称为Hyper Text Markup Language(超文本标记语言)，作为编写网页的语言，虽然简单但是作用确实相当的大，有必要好好学习一番，并且学好学精也不容易。</p>
+<p>作为‘标记’语言，由很多标签，如<html>,<head>,</head><body>等组成。浏览器就是读取由一堆标签组成的网页文件，并且通过标签定义，按顺序显示相关内容。</body></html></p>
+<p>到目前（2014年）为止HTML已经发展到了HTML5(html -&gt; html 2.0 -&gt; html3.2 -&gt; html 4.0 -&gt; html 4.0.1)，其中HTML4是目前互联网上最广泛的标准。</p>
+<p>html5草案的前身名为Web Applications 1.0，所以从命名中可以推测，html5的目的是用来构建web应用的，事实也确实如此。</p>
+<p>所以多了很多的标签，如audio，vidio，canvas等。Canvas的出现，让开发者可以操作更丰富的画面表现，从此真正的复杂网页游戏不是梦（而不是网页Flash游戏）。</p>
+<h1 id="XHTML"><a href="#XHTML" class="headerlink" title="XHTML"></a>XHTML</h1><p>因为历史原因，html语言的标准通常都是浏览器先实现，然后再制定标准，所以据说99%的网页都还有HTML错误。</p>
+<p>W3C组织觉察到这种现象不对，于是基于html和xml语言基础上，创建比html语法更严格的XHTML（可以看作是html（4.0.1）的标签和xml的语法）。</p>
+<p>最大的不同几下几点：</p>
+<ul>
+<li>XHTML 元素必须被正确地嵌套。</li>
+<li>XHTML 元素必须被关闭。</li>
+<li>标签名必须用小写字母。</li>
+<li>XHTML 文档必须拥有根元素。</li>
+</ul>
+<!--break-->
+<h1 id="HTML5和XHTML"><a href="#HTML5和XHTML" class="headerlink" title="HTML5和XHTML"></a>HTML5和XHTML</h1><p><strong>HTML5 是各大浏览器商的标准，而XHTML是w3c的标准</strong></p>
+<p>随着互联网的发展，开发者发现HTML5能创造出更丰富的网页应用，所以逐渐从HTML4迁移过来（不是说把以前的网页用html5在开发一遍，而是使用HTML5的人越来越多）。</p>
+<p>所以各大浏览器也都支持HTML5的显示规则（微软这个奇葩一直捏着IE平台不放，不过IE9开始对HTML5的支持也越来越好了）。</p>
+<p>而W3C国际标准组织一直叫喊XHTML，由于功能和HTML4差不多，只是语法更严格，逐渐不被开发者们待见……</p>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[SSH简单使用介绍]]></title>
+      <url>http://www.tonyrisk.top/2014/06/01/ssh-quick-start/</url>
+      <content type="html"><![CDATA[<p>如果接触过服务器开发，如果自己有过服务器，那么ssh登陆这个功能就非认识不可（并且之后就会知道实在是非常方便好用）。</p>
+<p>严格来说，SSH只是一种网络协议，而我们常用的使用软件是OpenSSH。</p>
+<p>ssh是linux和MacOS操作系统的标配命令，而windows可以使用轻量级软件putty。</p>
+<h2 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h2><pre><code># 用户名为 user 通过服务器上端口 2222 ，登陆到host主机（可以是ip或域名）
+$ssh -p 2222 user@host
+
+# 用户名为 user 通过服务器上默认端口 22 ，登陆到host主机（可以是ip或域名）
+$ssh user@host
+
+# 用户名为 当前本地用户名 通过服务器上默认端口 22，登陆到host主机（可以是ip或域名）
+$ssh host
+</code></pre><!--break-->
+<p>如果本地机器第一次登陆 host，那么输入命令后会出现：</p>
+<pre><code>$ ssh user@host
+The authenticity of host &apos;host (12.18.429.21)&apos; can&apos;t be established.
+RSA key fingerprint is 98:2e:d7:e0:de:9f:ac:67:28:c2:42:2d:37:16:58:4d.
+Are you sure you want to continue connecting (yes/no)?
+</code></pre><p>表示现在有一台主机响应你的 ssh 请求，其公钥指纹为<code>98:2e:d7:e0:de:9f:ac:67:28:c2:42:2d:37:16:58:4d</code>，是否确定连接。</p>
+<p>为什么要这个提示呢？因为有可能ssh请求会被其他人拦截，然后伪造成你要访问的主机，劫持你以后的输入，所以让你确定主机信息。</p>
+<p>一般只能把发来的公钥指纹和真正主机上的公钥指纹进行比较，如果匹配上那么就是真实的主机。</p>
+<h3 id="使用密码登陆"><a href="#使用密码登陆" class="headerlink" title="- 使用密码登陆"></a>- 使用密码登陆</h3><p>默认，当确定主机后，输入主机上用户<code>user</code>的登陆密码，就可以以用户<code>user</code>的身份登陆到远程主机了。</p>
+<h3 id="使用公钥登陆"><a href="#使用公钥登陆" class="headerlink" title="- 使用公钥登陆"></a>- 使用公钥登陆</h3><p>使用密码登陆，会每次连接都要输入密码，比较麻烦，所以也可以使用公钥登陆。</p>
+<p>主机收到ssh请求后会 <strong>随机发送一字符串</strong> 给用户，用户用 <strong>本地私钥</strong> 加密后发送给主机，主机用 <strong>用户放在主机上的公钥</strong> 解密，匹配成功则ssh登陆成功。</p>
+<ol>
+<li><p>生成公钥</p>
+<pre><code>$ssh-keygen -t rsa -C &quot;your_email@example.com&quot;
+</code></pre><p> 这个命令会在 HOME/.ssh/ 文件夹下生成 <strong>id_rsa.pub</strong> 和 <strong>id_rsa</strong>。前者是你的公钥，后者是你的私钥。</p>
+</li>
+<li><p>把公钥放到主机上</p>
+<pre><code># 在本地执行
+$ssh user@host &apos;mkdir -p .ssh &amp;&amp; cat &gt;&gt; .ssh/authorized_keys&apos; &lt; ~/.ssh/id_rsa.pub
+</code></pre></li>
+</ol>
+<p>好了，从此你再登录，就不需要输入密码了。</p>
+<p>如果还是不行，就打开远程主机的<code>/etc/ssh/sshd_config</code>这个文件，检查下面几行前面”#”注释是否取掉。</p>
+<pre><code>RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+</code></pre><p>改了config之后需要重启ssh服务，比如ubuntu系统：</p>
+<pre><code>$sudo service ssh restart
+</code></pre><h3 id="使用用户配置文件"><a href="#使用用户配置文件" class="headerlink" title="- 使用用户配置文件"></a>- 使用用户配置文件</h3><p>如果有多个主机，并且每个主机用户名、端口等其他配置可能都不一样；<br>每次输入都很麻烦，记忆也不方面，所以ssh提供<code>~/.ssh/config</code>（没有就创建一个）文件来帮助管理各个ssh会话。</p>
+<p>一个会话的配置，基本如下：</p>
+<pre><code>Host            myvps             # 别名
+    HostName        10.0.0.1      # 主机名
+    Port            2222          # 端口
+    User            tonyrisk      # 用户名
+    IdentityFile    ~/.ssh/id_rsa #密钥文件的路径
+</code></pre><p>以上设置后可以直接执行下面的命令来建立ssh回话了：</p>
+<pre><code>ssh myvps
+</code></pre><h2 id="使用SSH代理"><a href="#使用SSH代理" class="headerlink" title="使用SSH代理"></a>使用SSH代理</h2><pre><code>ssh -qTfnNC user@host -p 22 -D localhost:8088
+</code></pre><ul>
+<li><code>-q</code> 安静模式，忽略一切对话和错误提示。</li>
+<li><code>-T</code> Disable pseudo-tty allocation. 不占用 shell 了。</li>
+<li><code>-f</code> Requests ssh to go to background just before command execution. 后台运行，并推荐加上 -n 参数。</li>
+<li><code>-n</code> Redirects stdin from /dev/null (actually, prevents reading from stdin).</li>
+<li><code>-N</code> 不执行远程命令</li>
+<li><code>-C</code> 压缩</li>
+<li><code>-D</code> 绑定本地地址和端口</li>
+</ul>
+<h2 id="交换远程文件"><a href="#交换远程文件" class="headerlink" title="交换远程文件"></a>交换远程文件</h2><pre><code># 把 本地文件 拷贝到远程主机，remote_location可以是文件名，也可以是路径
+scp local_file user@host:remote_location
+
+# 把 本地文件夹 拷贝到远程主机
+scp -r local_folder user@host:remote_location
+
+# 把 远程文件 拷贝到本地
+scp user@host:remote_file local_location
+
+# 把 远程文件夹 拷贝到本地
+scp -r user@host:remote_folder local_location
+</code></pre><p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[一个健康App想法]]></title>
+      <url>http://www.tonyrisk.top/2014/05/01/start-insanity-app/</url>
+      <content type="html"><![CDATA[<p>最近看到国外盛行民间塑身操：insanity，于是就想做一个健康App，记录下想法。</p>
+<h2 id="1-基本资料收集"><a href="#1-基本资料收集" class="headerlink" title="1. 基本资料收集"></a>1. 基本资料收集</h2><ul>
+<li>insanity概念</li>
+<li>具体内容有什么</li>
+<li>主要难点，或者用户痛点在什么地方（了解线下，线上现在是怎么做的）</li>
+<li>成功案例（微博，豆瓣上有晒帖）</li>
+</ul>
+<!--break-->
+<h2 id="2-需求整理（功能）"><a href="#2-需求整理（功能）" class="headerlink" title="2. 需求整理（功能）"></a>2. 需求整理（功能）</h2><ul>
+<li>教她做运动<ul>
+<li>怎么把内容，系统的，循序渐进的介绍展示（图示，视频）</li>
+<li>搭配饮食</li>
+<li>内容必须对每个人是定制化（把App做成私人教练）</li>
+</ul>
+</li>
+<li>叫她坚持做运动<ul>
+<li>记录每天变化</li>
+</ul>
+</li>
+<li>社交功能<ul>
+<li>榜样，成功案例</li>
+<li>互相鼓励，互相pk（炫耀）</li>
+<li>每天记录，比较大的变化（自动生成对比图）可以分享朋友圈等</li>
+</ul>
+</li>
+<li>离线功能（wifi下载资料，或者wifi上传UGC数据等）</li>
+<li>功能加法，减法得讨论清楚</li>
+</ul>
+<p><strong>目标：必须把产品做成好玩，不痛苦的运动App</strong></p>
+<h2 id="3-排项目计划"><a href="#3-排项目计划" class="headerlink" title="3. 排项目计划"></a>3. 排项目计划</h2><ul>
+<li>争取开发周期4周（从0到app可以上架的程度）</li>
+</ul>
+<h2 id="4-UI"><a href="#4-UI" class="headerlink" title="4. UI"></a>4. UI</h2><ul>
+<li>相关健康运动App界面（android，iPhone，ipad等）</li>
+</ul>
+<h2 id="5-名称，Logo"><a href="#5-名称，Logo" class="headerlink" title="5. 名称，Logo"></a>5. 名称，Logo</h2><h2 id="6-开发"><a href="#6-开发" class="headerlink" title="6. 开发"></a>6. 开发</h2><ul>
+<li>就做IOS版本（app账号等）</li>
+</ul>
+<h2 id="7-推广运营"><a href="#7-推广运营" class="headerlink" title="7. 推广运营"></a>7. 推广运营</h2><ul>
+<li>各大社交板块，相关话题小组，贴吧等宣传</li>
+<li>不定期线下组织教学，交流</li>
+<li>淘宝买视频会员，曝光App等</li>
+<li>下App，送流量包</li>
+</ul>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[学习新语言的基本流程]]></title>
+      <url>http://www.tonyrisk.top/2014/04/01/quick-learn-new-program-language/</url>
+      <content type="html"><![CDATA[<p>作为程序猿，语言是最常接触的<strong>工具</strong>了，而且新语言，新技术层出不穷，手中没掌握个7，8门语言都不好和其他程序猿打招呼。</p>
+<p>当然那些苦心钻研一门，直至精通的也是很佩服的。但是语言说到底是‘工具’，是帮助我们解决实际问题，每门语言都有自己的局限性，或者说是性价比低的地方（可以实现某种功能，但是花费时间超长）。</p>
+<p>所以介于每门语言都有适用性和适合场景，身为程序猿，要时刻做好准备快速学习一门新语言。但是单纯看书，或者在网上按照教程学习，实在是太慢了，而且容易陷入 <strong>学习语言</strong> 而非 <strong>掌握语言使得为我所用</strong> 的怪圈中。</p>
+<p>所以自己总结了一些掌握语言一般的知识点，那么在看教程，或者看书过程中可以带着疑问，有针对性，目的性的学习，避免忙于陷进去。</p>
+<!--break-->
+<ol>
+<li><p>了解这门语言适用场景</p>
+<pre><code>知道基本历史，作者是为了什么目的创造出来的？  
+现在基本上都用来做哪些开发？为了解决哪些问题？
+其他可以用来解决问题的语言和技术都有哪些？
+这门语言相比其他优势在哪？
+
+这些问题一开始可能不能全部回答上，但是在掌握完的时候必须都了解。
+</code></pre></li>
+<li><p>基本数据类型都有哪些？取值范围？</p>
+<pre><code>延伸到非基本类型，但是一些常用的数据结构，如数组，列表，哈希表；
+以及他们的常用方法：如插入，获取，修改，排序等。
+</code></pre></li>
+<li><p>字符串的常用操作（相信我，大部分开发时间我们都不可能绕过它）</p>
+<pre><code>替换，查找，获取字串等等
+</code></pre></li>
+<li><p>控制结构</p>
+<pre><code>if语句，循环结构（while，for，each等），switch-case语句等
+</code></pre></li>
+<li><p>方法定义和调用</p>
+</li>
+<li><p>类定义的使用</p>
+<pre><code>包括抽象类，接口定义，访问控制（public，private，protected）
+</code></pre></li>
+<li><p>基本IO，文件操作</p>
+</li>
+<li><p>异常处理</p>
+</li>
+<li><p>调试方法</p>
+</li>
+<li><p>插件使用，第三方库</p>
+<pre><code>常用的都有哪些？
+最好自己也写一个，心中知道此语言开发自己的库是个怎么回事。
+</code></pre></li>
+<li><p>了解这个语言的特性：比如ruby的block使用等</p>
+</li>
+<li><p>找到组织：这个语言的一个社区，或者论坛</p>
+</li>
+<li><p>最重要，语言的实现本质</p>
+<pre><code>内存管理是怎么样的？
+对象管理是怎么样的？
+方法堆栈呢？方法调用原理
+</code></pre></li>
+<li><p>打开自己熟悉的编辑器，开始编写！一些技术细节，只能是在编写中熟悉掌握。</p>
+</li>
+</ol>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[markdown cheatsheet]]></title>
+      <url>http://www.tonyrisk.top/2014/03/01/markdown-cheatsheet/</url>
+      <content type="html"><![CDATA[<p>参考：</p>
+<ol>
+<li><a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">markdown</a></li>
+<li><a href="https://help.github.com/categories/writing-on-github/" target="_blank" rel="external">Github 风格 Markdown</a></li>
+</ol>
+<p>说明：</p>
+<ul>
+<li>markdown 块元素之间用空行来识别</li>
+<li>基本上 markdown 语法互相之间都能嵌套，更多玩法自己 <code>try it out</code></li>
+<li>markdown 在不同解释器上表现可能不一致（特别是扩展语法，如表格等）</li>
+<li>反斜杠 <code>\</code> 用来转义</li>
+</ul>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>example</th>
+<th>效果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>#</code></td>
+<td><code># 我是第一标题</code></td>
+<td><h1>我是第一标题</h1></td>
+</tr>
+<tr>
+<td><code>##</code></td>
+<td><code>## 我是第二标题</code></td>
+<td><h2>我是第二标题</h2></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td><code>######</code></td>
+<td><code>###### 我是第六标题</code></td>
+<td><h6>我是第六标题</h6></td>
+</tr>
+</tbody>
+</table>
+<h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>example</th>
+<th>效果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--</code>/<code>---</code>/<code>***</code></td>
+<td><code>--</code></td>
+<td><hr></td>
+</tr>
+</tbody>
+</table>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>example</th>
+<th>效果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-</code> / <code>+</code> / <code>*</code></td>
+<td><code>- xxxxx</code> <br> <code>- yyyyy</code></td>
+<td><ul><li>xxxxx</li><li>yyyyy</li></ul></td>
+<td>可以自我嵌套</td>
+</tr>
+<tr>
+<td><code>1.</code> / <code>2.</code> / <code>3.</code></td>
+<td><code>1. 111</code> <br> <code>2. 222</code> <br> <code>3. 333</code></td>
+<td><ol><li>111</li><li>222</li><li>333</li></ol></td>
+<td>可以自我嵌套</td>
+</tr>
+</tbody>
+</table>
+<p><strong>【注】</strong></p>
+<ul>
+<li><em>无序列表和有序列表可以互相嵌套</em></li>
+<li><em>列表的项目如果加了空行则在解析时项目中的内容会被 <code>&lt;p&gt;</code> 标签包起来</em></li>
+<li><em>行首出现<code>数字-句点-空白</code>组合，要避免被解析，你可以在句点前面加上反斜杠 <code>\</code>, 如： <code>1993\. dddd</code></em></li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>example</th>
+<th>效果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&gt;</code></td>
+<td><code>&gt; 文字</code></td>
+<td>见下面</td>
+<td>引用之间还可以嵌套</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>文字</p>
+<blockquote>
+<p>嵌套1</p>
+<blockquote>
+<p>嵌套2</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>example</th>
+<th>效果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[TAB]</code></td>
+<td><code>[TAB] 代码块</code></td>
+<td>如下</td>
+<td>如果在和其他元素嵌套的时候要多响应 <code>[TAB]</code></td>
+</tr>
+<tr>
+<td><figure class="highlight plain"><figcaption><span>```（语言）`````` |  `````` ``` ruby 代码块2 `````` | 如下 |  |</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">| ``两个 `（语言）`` | ```行内代码``` | `行内代码` |  |</div><div class="line"></div><div class="line">	代码快1</div><div class="line"></div><div class="line">``` ruby</div><div class="line">require &apos;activerecord&apos;</div><div class="line"></div><div class="line">代码块2</div></pre></td></tr></table></figure></td>
+</tr>
+</tbody>
+</table>
+<h2 id="块内元素"><a href="#块内元素" class="headerlink" title="块内元素"></a>块内元素</h2><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>example</th>
+<th>效果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_</code></td>
+<td><code>_文字_</code></td>
+<td><em>文字</em></td>
+<td>下划线</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td><code>*文字*</code></td>
+<td><em>文字</em></td>
+<td>斜体</td>
+</tr>
+<tr>
+<td><code>**</code> / <code>__</code></td>
+<td><code>**文字**</code></td>
+<td><strong>文字</strong></td>
+<td>粗体</td>
+</tr>
+<tr>
+<td><code>~~</code></td>
+<td><code>~~文字~~</code></td>
+<td><del>文字</del></td>
+<td>删除线</td>
+</tr>
+</tbody>
+</table>
+<p><strong>【注】</strong></p>
+<ul>
+<li><em>以上语法都可以互相嵌套</em></li>
+</ul>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>example</th>
+<th>效果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[文字](url &quot;title&quot;)</code></td>
+<td><code>[百度](https://www.baidu.com &quot;首页&quot;)</code></td>
+<td><a href="https://www.baidu.com" title="首页" target="_blank" rel="external">百度</a></td>
+<td>链接</td>
+</tr>
+<tr>
+<td><code>![Alt text](/path/to/img.jpg &quot;Optional title&quot;)</code></td>
+<td><code>![示例图片](http://y0.ifengimg.com/dbcc8e45854c158f/2014/0114/rdn_52d4f3b6cbbc9.jpg &quot;示例标题&quot;)</code></td>
+<td><img src="http://y0.ifengimg.com/dbcc8e45854c158f/2014/0114/rdn_52d4f3b6cbbc9.jpg" alt="示例图片" title="示例标题"></td>
+<td>图片</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Github-Style-语法"><a href="#Github-Style-语法" class="headerlink" title="Github Style 语法"></a>Github Style 语法</h1><h2 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h2><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>example</th>
+<th>效果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>- [] task text</code></td>
+<td><code>- [] 任务</code></td>
+<td>如下</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>[ ] 任务1</li>
+<li>[x] 任务2</li>
+</ul>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">左对齐 Title</th>
+<th style="text-align:center">居中对齐</th>
+<th style="text-align:right">右对齐 Title</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">左对齐</td>
+<td style="text-align:center">居中</td>
+<td style="text-align:right">右对齐</td>
+</tr>
+</tbody>
+</table>
+<p>———— EOF ————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Git 常用操作]]></title>
+      <url>http://www.tonyrisk.top/2014/02/02/git-flow/</url>
+      <content type="html"><![CDATA[<p>gitflow 工作流</p>
+<h2 id="master"><a href="#master" class="headerlink" title="master"></a>master</h2><p>－ 主发布分支，不直接在这个分支修改代码<br>－ 每次的更新都需要打 tag</p>
+<h2 id="develop"><a href="#develop" class="headerlink" title="develop"></a>develop</h2><p>－ 主开发分支</p>
+<h2 id="feature"><a href="#feature" class="headerlink" title="feature"></a>feature</h2><ul>
+<li>为即将发布的版本开发新功能特性。</li>
+<li>这通常只存在开发者的库中。</li>
+</ul>
+<h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><ul>
+<li>新特性的开发是基于 ‘develop’ 分支的<h3 id="结束开发"><a href="#结束开发" class="headerlink" title="结束开发"></a>结束开发</h3></li>
+<li>合并 MYFEATURE 分支到 ‘develop’</li>
+<li>删除这个新特性分支</li>
+</ul>
+<h2 id="release"><a href="#release" class="headerlink" title="release"></a>release</h2><ul>
+<li>支持一个新的用于生产环境的发布版本。</li>
+<li>允许修正小问题，并为发布版本准备元数据。</li>
+</ul>
+<h3 id="新建-1"><a href="#新建-1" class="headerlink" title="新建"></a>新建</h3><ul>
+<li>它从 ‘develop’ 分支开始创建一个 release 分支。<h3 id="结束开发-1"><a href="#结束开发-1" class="headerlink" title="结束开发"></a>结束开发</h3></li>
+<li>归并 release 分支到 ‘master’ 分支</li>
+<li>用 release 分支名打 Tag</li>
+<li>归并 release 分支到 ‘develop’</li>
+<li>移除 release 分支</li>
+</ul>
+<h2 id="hotfix"><a href="#hotfix" class="headerlink" title="hotfix"></a>hotfix</h2><ul>
+<li>紧急修复来自这样的需求：生产环境的版本处于一个不预期状态，需要立即修正。</li>
+<li>有可能是需要修正 master 分支上某个 TAG 标记的生产版本</li>
+</ul>
+<h3 id="新建-2"><a href="#新建-2" class="headerlink" title="新建"></a>新建</h3><ul>
+<li>它从 master 分支开始创建一个分支。<h3 id="结束开发-2"><a href="#结束开发-2" class="headerlink" title="结束开发"></a>结束开发</h3></li>
+<li>当完成紧急修复分支，代码归并回 develop 和 master 分支</li>
+<li>相应地，master 分支打上修正版本的 TAG。</li>
+</ul>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Git 常用操作]]></title>
+      <url>http://www.tonyrisk.top/2014/02/01/git-general-operations/</url>
+      <content type="html"><![CDATA[<p>git 是一个<strong>分布式</strong>的版本控制工具，每个开发人员从git版本库check out的时候会在自己的机器上也克隆一个版本库。在没网络的情况下，也能提交文件，查看log，查看历史版本，创建分支等。</p>
+<p>Git主分支的名字，默认叫做Master。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。</p>
+<h3 id="不同于svn，git在本地的状态有三个："><a href="#不同于svn，git在本地的状态有三个：" class="headerlink" title="不同于svn，git在本地的状态有三个："></a>不同于svn，git在本地的状态有三个：</h3><ul>
+<li>工作目录(working dir): 持有的实际文件</li>
+<li>暂存区(index): 通过add命令，临时保存的改动</li>
+<li>Head: 指向最后一次提交(commit)的结果</li>
+</ul>
+<!--break-->
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Mac下直接下面命令（Mac用户强烈建议安装<a href="http://brew.sh/" target="_blank" rel="external">homebrew</a>和<a href="http://caskroom.io/" target="_blank" rel="external">brew cask</a>）</p>
+<pre><code>brew install git
+</code></pre><p>安装完后，可以用<code>git help</code>查看用法帮助</p>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="1-git配置有三大块："><a href="#1-git配置有三大块：" class="headerlink" title="1. git配置有三大块："></a>1. git配置有三大块：</h3><ol>
+<li>系统级别：/etc/gitconfig(<code>git config --system</code>设置或者读取时用system参数)</li>
+<li>全局级别：~/.gitconfig(<code>git config --global</code>设置或者读取时用global参数)</li>
+<li>项目级别：myproject/.git/config (<code>git config</code>)</li>
+</ol>
+<p><em>优先级：</em> 3&gt;2&gt;1(如，3的设置会覆盖2的)</p>
+<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><ul>
+<li>设置：<code>git config --global user.name &#39;xxx&#39;</code></li>
+<li>查看：<code>git config --global user.name</code></li>
+<li>查看当前生效所有设置：<code>git config --list</code></li>
+<li>也可以直接编辑上面所提到的<code>gitconfig</code>文件</li>
+</ul>
+<p><em>一般会先用global设置用户层面的配置，再在项目层面设置针对项目的设置</em></p>
+<h3 id="3-常用配置"><a href="#3-常用配置" class="headerlink" title="3. 常用配置"></a>3. 常用配置</h3><pre><code>[user]        
+    name = xxxx
+    email = xxx@xxx.com
+[color]
+    #开启着色功能
+    ui＝ true
+    status = auto
+    diff = auto
+    branch = auto
+    interactive = auto
+[merge]
+    #默认 merge 都加上 --no-ff
+    ff = false
+[alias]
+    #别名
+    st = status
+    ci = &quot;commit -m&quot;
+    br = branch
+    co = checkout
+    cia = &quot;commit -am&quot;
+    df = diff
+    dt = difftool
+    mg = merge
+    mt = mergetool
+    ll = &quot;log --oneline&quot;
+    last = &quot;log -1 HEAD&quot;
+</code></pre><h2 id="新建版本库"><a href="#新建版本库" class="headerlink" title="新建版本库"></a>新建版本库</h2><p>从零建立git版本库：</p>
+<pre><code>mkdir myproject
+touch README.md LICENSE .gitignore
+git init                                # 会在目录下建立.git文件夹
+git add *                                # 把所有文件都放入本地缓存区
+git commit -m ‘first commit’            # 将更改记录成快照
+
+# 还没有克隆现有仓库，并欲将本地仓库连接到某个远程服务器
+git remote add origin https://github.com/xxxx/test.git
+
+# 把本地改动更新到远程仓库的master分支上去
+git push -u origin master
+</code></pre><h2 id="复制版本库"><a href="#复制版本库" class="headerlink" title="复制版本库"></a>复制版本库</h2><pre><code># 常用clone：
+git clone http[s]://example.com/path/to/repo.git/
+git clone [user@]example.com:path/to/repo.git/
+
+# 只clone某一个分支
+git clone -b branch-name git@github.com:user/myproject.git 
+</code></pre><h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h2><pre><code># 查看本地分支
+git branch
+
+# 查看远程分支
+git branch -r
+
+# 建立分支
+git branch branch-name
+
+# 建立无父节点的分支    
+git checkout --orphan branch-name
+
+# 建立并切换分支
+git checkout -b branch-name [from_branch]
+
+# 建立/提交 远程分支(注意和下面删除远程分支区别)
+git push [远程主机名] [分支名]
+
+# 删除分支
+git branch -d branch-name
+
+# 删除远程分支
+git push [远程主机名] :[分支名]
+
+# 切换分支
+git checkout branch-name
+
+# 查看已经和当前分支合并的分支
+git branch --merged 
+
+# 查看尚未和当前分支合并的分支
+git branch --no-merged
+
+# 在本地分支上合并远程分支
+git merge --no-ff origin/master
+</code></pre><h3 id="分支使用场景实例"><a href="#分支使用场景实例" class="headerlink" title="分支使用场景实例"></a>分支使用场景实例</h3><pre><code>#创建一个功能分支：
+git checkout -b feature-x develop
+
+#开发完成后，将功能分支合并到develop分支：
+git checkout develop
+git merge –no-ff feature-x
+
+#删除feature分支：
+git branch -d feature-x
+</code></pre><h2 id="推送本地更新到服务器"><a href="#推送本地更新到服务器" class="headerlink" title="推送本地更新到服务器"></a>推送本地更新到服务器</h2><pre><code>git push [远程主机名] [本地分支名]:[远程分支名]
+</code></pre><h2 id="更新远程主机的内容到本地"><a href="#更新远程主机的内容到本地" class="headerlink" title="更新远程主机的内容到本地"></a>更新远程主机的内容到本地</h2><pre><code>git pull [远程主机名] [远程分支名]:[本地分支名]
+</code></pre><h2 id="撤销回滚"><a href="#撤销回滚" class="headerlink" title="撤销回滚"></a>撤销回滚</h2><pre><code># reset 命令是把当前分支指向另一个位置
+# 把add的文件，撤销
+git reset -- &lt;filename&gt;
+git reset # 撤销所有add的文件
+
+# 会用HEAD中最新的内容替换掉工作目录中的内容，回滚到最后一个commit
+git checkout -- &lt;filename&gt;
+
+# 想丢弃你在本地的所有改动与提交，可以到服务器上获取最新的版本历史，
+# 并将你本地主分支指向它：
+git fetch origin
+git reset --hard origin/master
+
+# 检出某个文件的历史版本： 
+git checkout &lt;commit&gt; &lt;paths&gt;
+
+# 检出某个文件的历史版本到其他文件名： 
+git show &lt;commit&gt;:&lt;file&gt; new_name 
+例：git show d06b1cf09d2:text.txt &gt; test1.txt
+</code></pre><h2 id="Diff"><a href="#Diff" class="headerlink" title="Diff"></a>Diff</h2><pre><code># 查看两个版本之间的区别
+git diff version1 version2
+
+# 查看当前缓存区（就是add后）和最新commit版本的区别
+git diff --cached
+
+# 查看当前工作目录和最新commit之间的区别
+git diff HEAD
+
+# 当前工作目录和其他分支之间的区别
+git diff branch-name
+
+# 查看缓存区和工作目录之间的区别
+git diff
+</code></pre><h2 id="存储-保存当前工作内容到git栈，然后回复到最新commit状态"><a href="#存储-保存当前工作内容到git栈，然后回复到最新commit状态" class="headerlink" title="存储: 保存当前工作内容到git栈，然后回复到最新commit状态"></a>存储: 保存当前工作内容到git栈，然后回复到最新commit状态</h2><pre><code># 存储
+git stash
+
+# 恢复最新一次存储
+git stash pop
+
+# 查看现有所有存储的列表
+git stash list
+</code></pre><h2 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h2><pre><code># 查看本地库状态
+git status [-s]
+
+# 添加文件到暂存区
+git add [-A]
+
+# 提交暂存区文件到本地库
+git commit -m &quot;msg&quot;    
+# 等价于add，加commit操作：
+git commit -am &quot;msg&quot;
+
+# 从缓存区中删除
+git rm file_name
+# 如果要在工作目录中留着该文件，可以使用
+git rm --cached file_name
+
+# 移动或者重命名缓存区中的文件
+git mv old_file new_file
+
+# 显示一个分支中提交的更改记录
+git log
+</code></pre><h2 id="扩展和参考"><a href="#扩展和参考" class="headerlink" title="扩展和参考"></a>扩展和参考</h2><p>技术光是看书，如果没有实战完全不能深入理解的，最好的学习还是赶紧建立一个git库，然后在实战中学习吧。<br>另外看其他人总结的经验和知识点也能少走不少弯路：</p>
+<ul>
+<li><p>github的员工所著，豆瓣评分9.1的神书：<a href="http://iissnan.com/progit/" target="_blank" rel="external">pro git</a></p>
+</li>
+<li><p>pro git作者另一本，可看作pro git的补充版: <a href="http://gitbook.liuhui998.com/" target="_blank" rel="external">Git Community Book 中文版</a></p>
+</li>
+<li><p>《Git权威指南》:  <a href="http://www.worldhello.net/gotgit/" target="_blank" rel="external">中文官网</a></p>
+</li>
+<li><p>《Git权威指南》作者蒋鑫有一本好作，讲关于git和github的: <a href="http://www.worldhello.net/gotgithub/" target="_blank" rel="external">GotGitHub</a></p>
+</li>
+<li><p>个人觉得最简单易懂介绍git的：<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰讲git</a></p>
+</li>
+<li><p>快速明白git内部构造：<a href="http://youngsterxyf.github.io/2013/09/28/learning-git-internals-by-example/" target="_blank" rel="external">中文版</a></p>
+</li>
+<li><p>在公司内，怎么使用好git: <a href="http://www.nczonline.net/blog/2013/05/21/github-workflows-inside-of-a-company/" target="_blank" rel="external">英文版</a></p>
+</li>
+<li><p>在线学习git的环境：</p>
+<p>  <a href="http://pcottle.github.io/learnGitBranching/" target="_blank" rel="external">branch教程</a></p>
+<p>  <a href="https://try.github.io/levels/1/challenges/1" target="_blank" rel="external">code school和github联合推出的学习平台</a></p>
+</li>
+<li><p>git官方命令不够？没关系，牛人已经封装了更多git实用命令，总有一款适合你：<a href="https://github.com/visionmedia/git-extras" target="_blank" rel="external">去看看</a></p>
+</li>
+<li><p>一张图让你上手git：<a href="http://sfault-image.b0.upaiyun.com/37/92/37923f2478edc5709b36562b26c9e008" target="_blank" rel="external">点击查看大图</a></p>
+</li>
+<li><p>阳志平老师教你如何玩溜github: <a href="http://www.yangzhiping.com/tech/github.html" target="_blank" rel="external">开始玩</a></p>
+</li>
+<li><p>GitHub和Git一些使用技巧：<a href="http://snowdream86.gitbooks.io/github-cheat-sheet/content/zh/index.html" target="_blank" rel="external">在这</a></p>
+</li>
+<li><p>Gitflow：<a href="http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html" target="_blank" rel="external">在这</a></p>
+</li>
+</ul>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[使用Github搭建个人博客]]></title>
+      <url>http://www.tonyrisk.top/2014/01/01/blog-github/</url>
+      <content type="html"><![CDATA[<h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p>在github上创建一个项目，会有一个默认的项目首页（一般就是显示文件列表和一个简单的README文件内容）。</p>
+<p>此外github也允许你自定义项目主页，所以有了<a href="https://pages.github.com/" target="_blank" rel="external">github pages</a>，它维护一些简单的静态页面。</p>
+<p><a href="http://www.thinkful.com/learn/a-guide-to-using-github-pages/start/" target="_blank" rel="external">戳这里查看一个快速学习使用git pages的网站</a></p>
+<p>Pages允许用户可以使用github提供的<a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator" target="_blank" rel="external">模板</a>，也允许用户自己编写html页面后上传。github pages使用jekyll程序来搭建，上传后会由jekyll程序来处理生成页面。</p>
+<p><a href="http://jekyllrb.com/" target="_blank" rel="external">jekyll</a>是一个静态站点生成器，根据网页源码生成静态文件，提供变量，模板，插件等功能。</p>
+<p>所以整个步骤就是：</p>
+<pre><code>1. 写好符合jekyll规范网站源码
+2. 上传到github
+3. 由github生成并托管整个网站
+</code></pre><!--break-->
+<h2 id="具体流程："><a href="#具体流程：" class="headerlink" title="具体流程："></a>具体流程：</h2><ol>
+<li><p>建立一个博客项目</p>
+<pre><code>$mkdir blog
+$cd blog
+$git init
+</code></pre></li>
+<li><p>创建一个无父节点分支: <code>gh-pages</code>（github只有对该分支的页面，才能生成网页）</p>
+<pre><code>git checkout --orphan gh-pages
+</code></pre></li>
+<li><p>创建配置文件 _config.yml，并配置，如</p>
+<pre><code># 博客地址是 username.github.com/blog/
+baseurl: /blog
+
+# 域名
+url: http://www.tonyrisk.info
+
+# 把 markdown 解释器设置为 redcarpet，并做一些扩展配置
+# gem install redcarpet 来安装 redcarpet
+markdown: redcarpet
+redcarpet:
+    extensions: [&quot;with_toc_data&quot;, &quot;strikethrough&quot;, &quot;fenced_code_blocks&quot;, &quot;highlight&quot;, &quot;underline&quot;, &quot;smart&quot;, &quot;tables&quot;, &quot;no_intra_emphasis&quot;, &quot;autolink&quot;]
+</code></pre><p> 更多配置：<a href="http://jekyllrb.com/docs/configuration/" target="_blank" rel="external">查看这里</a></p>
+</li>
+<li><p>创建一个_layouts目录，用于存放模板文件</p>
+<pre><code>mkdir _layouts
+</code></pre></li>
+<li><p>在_layouts下创建default.html文件，作为Blog的默认模板，内容如下：</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"content-type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>&#123;&#123;"&#123;&#123; page.title "&#125;&#125;&#125;&#125;<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  &#123;&#123;"&#123;&#123; content "&#125;&#125;&#125;&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p> <code>{{content}}</code> 表示文章内容，jekyll采用liquid模板语言</p>
+<p> 更多变量：<a href="http://jekyllrb.com/docs/variables/" target="_blank" rel="external">查看这里</a></p>
+</li>
+<li><p>在项目根目录，创建一个_posts目录，用于存放博客文章</p>
+<pre><code>mkdir _posts
+</code></pre></li>
+<li><p>在_posts下创建文章，如<code>2014-08-20-first.md</code>，文件名必须为：</p>
+<pre><code>YEAR-MONTH-DAY-title.MARKUP
+</code></pre><p> <code>MARKUP</code>可以是<code>md</code>(如果用markdown编写)，<code>html</code>(如果是html)，<code>textile</code>(如果是textile)</p>
+<p> 下面是一偏文章示例:</p>
+<pre><code>--- 
+layout: default
+title: 你好，世界
+---
+&lt;h2&gt;{{ page.title }}&lt;/h2&gt;
+&lt;p&gt;我的第一篇文章&lt;/p&gt;
+&lt;p&gt;{{ page.date | date_to_string }}&lt;/p&gt;
+</code></pre><p> 两条<code>---</code>中间的是yaml头，用来设置参数等。</p>
+<p> 注意，三根短划线前面，是<strong>不能有空格的!!</strong></p>
+<p> <code>layout</code>用来指明使用_layout文件夹下的哪个模板</p>
+<p> <code>title</code>如果不设置默认用文件名的title</p>
+<p> 更多参数：<a href="http://jekyllrb.com/docs/frontmatter/" target="_blank" rel="external">查看这里</a></p>
+</li>
+<li><p>在根目录下创建首页：index.html(下面代码简单列出所有文章，你也可以自己编辑文件)</p>
+<pre><code>---
+layout: default
+title: 我的Blog
+---
+&lt;h2&gt;{{ page.title }}&lt;/h2&gt;
+&lt;p&gt;最新文章&lt;/p&gt;
+&lt;ul&gt;
+    {{"<!--￼1-->
+			<li>{{"{{ post.date | date_to_string "}}}} &lt;a href=&quot;{{"{{ site.baseurl "}}}}{{"{{ post.url "}}}}&quot;&gt;{{"{{ post.title "}}}}&lt;/a&gt;&lt;/li&gt;
+    {{&quot;{% endfor "}}%}
+&lt;/ul&gt;
+</li></code></pre></li>
+<li><p>提交发布（提交到github后，一般十分钟后，页面生效）</p>
+<pre><code>$git add -A
+$git commit -m &quot;first post&quot;
+
+# blog是在github上创建的项目
+$git remote add origin https://github.com/username/blog.git
+
+# 把本地gh-pages分支推送到origin主机的gh-pages分支上
+$git push -u origin gh-pages
+</code></pre><p> <a href="http://username.github.com/blog/" target="_blank" rel="external">http://username.github.com/blog/</a> (如果步骤3设置中<code>base_url=/blog</code>)这个地址就是博客地址</p>
+</li>
+</ol>
+<h2 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h2><p>基本blog就搭建完成了，如果需要把站点域名换成自己的域名，也非常简单：</p>
+<ol>
+<li><p>项目根目录下面，新建一个名为CNAME的文本文件，里面写入你要绑定的域名，如：<br>example.com 或者 xxx.example.com</p>
+</li>
+<li><p>在你的域名商那添加一条cname记录指向username.github.com，如果是顶级域名得是A记录</p>
+</li>
+<li><p>并把_config.yml中的baseurl改成‘/’指向username.github.com</p>
+</li>
+</ol>
+<h2 id="jeklly主题"><a href="#jeklly主题" class="headerlink" title="jeklly主题"></a>jeklly主题</h2><p>以上是从零开始搭建，但是很多页面美化等都没有，现在有一个快速搭建功能齐全的工具<a href="http://jekyllbootstrap.com/" target="_blank" rel="external">JekyllBootstrap</a></p>
+<ol>
+<li>在github上创建一个新的项目，比如：blog</li>
+<li><p>安装Jekyll Bootstrap</p>
+<pre><code>git clone https://github.com/plusjade/jekyll-bootstrap.git blog
+cd blog
+rm -rf .git
+git init
+git checkout --orphan gh-pages
+git add -A
+git commit -m &apos;first commit&apos;
+git remote add origin https://github.com/username/blog.git
+git push -u origin gh-pages
+</code></pre></li>
+<li><p>安装jekyll，以便在本地查看博客</p>
+<pre><code>gem install jekyll
+cd blog
+jekyll serve（localhost:4000 上可以访问博客了）
+</code></pre></li>
+<li><p>新建一个文章：</p>
+<pre><code>$ rake post title=&quot;Hello World&quot;
+</code></pre></li>
+<li><p>安装一个主题：</p>
+<pre><code># 可以在github上自行寻找jeklly的主题
+rake theme:install git=&quot;git://github.com/jekyllbootstrap/theme-mark-reid.git&quot;
+</code></pre></li>
+</ol>
+<p>———– EOF —————</p>
+]]></content>
+    </entry>
+    
+  
+  
+</search>
