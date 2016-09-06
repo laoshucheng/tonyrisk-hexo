@@ -31,12 +31,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new_post_name: :year-:month-:day-:title.md</div></pre></td></tr></table></figure>
 <p>如果发现网站没发生变化，需要手动清除下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo serve</div></pre></td></tr></table></figure>
+<h2 id="增加其他页面"><a href="#增加其他页面" class="headerlink" title="增加其他页面"></a>增加其他页面</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo new page about <span class="comment"># 关于</span></div><div class="line">$ hexo new page tags <span class="comment"># 标签</span></div><div class="line">$ hexo new page categories <span class="comment"># 分类</span></div></pre></td></tr></table></figure>
 <h2 id="部署设置"><a href="#部署设置" class="headerlink" title="部署设置"></a>部署设置</h2><p>支持 Github 和 HeroKu，我只用了 Github，所以就记录下 Github 设置</p>
 <ol>
 <li><p>安装插件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
 </li>
-<li><p>配置 <code>_config.yml</code></p>
+<li><p>配置 <code>_config.yml</code>(默认传到<code>gh-pages</code>分支)</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">  type:</span> git</div><div class="line"><span class="attr">  repo:</span> &lt;repo url<span class="string">&gt;</span></div></pre></td></tr></table></figure>
 </li>
 </ol>

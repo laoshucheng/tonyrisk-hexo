@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="个人博客, 技术" />
 
 
 
@@ -100,7 +100,7 @@ $ssh -">
 ssh是linux和MacOS操作系统的标配命令，而windows可以使用轻量级软件putty。
 登陆# 用户名为 user 通过服务器上端口 2222 ，登陆到host主机（可以是ip或域名）
 $ssh -">
-<meta property="og:updated_time" content="2016-09-04T16:29:16.000Z">
+<meta property="og:updated_time" content="2016-09-06T09:52:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH简单使用介绍">
 <meta name="twitter:description" content="如果接触过服务器开发，如果自己有过服务器，那么ssh登陆这个功能就非认识不可（并且之后就会知道实在是非常方便好用）。
@@ -115,7 +115,7 @@ $ssh -">
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"hide"},
+    sidebar: {"position":"right","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -161,7 +161,7 @@ $ssh -">
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -203,6 +203,16 @@ $ssh -">
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
@@ -219,16 +229,6 @@ $ssh -">
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
           </a>
         </li>
       
@@ -324,25 +324,23 @@ $ssh -">
 
           
             
-          
-
-          
-
-          
-          
-             <span id="/2014/06/01/ssh-quick-start/" class="leancloud_visitors" data-flag-title="SSH简单使用介绍">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/06/01/ssh-quick-start/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/06/01/ssh-quick-start/" itemprop="commentsCount"></span>
+                </a>
               </span>
+            
+          
+
+          
+
+          
           
 
           
               &nbsp; | &nbsp;
-              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="page-pv"><i class="fa fa-file-o"></i> 本文总阅读量
               <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
               </span>
           
@@ -443,7 +441,7 @@ scp -r user@host:remote_folder local_location
       
         
   <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>如果对你有帮助</div>
+    <div>如果觉得对你有帮助</div>
     <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
       <span>赏</span>
     </button>
@@ -533,11 +531,16 @@ scp -r user@host:remote_folder local_location
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
   <div class="comments" id="comments">
     
-      <div id="uyan_frame"></div>
+      <div class="ds-thread" data-thread-key="2014/06/01/ssh-quick-start/"
+           data-title="SSH简单使用介绍" data-url="http://www.tonyrisk.top/2014/06/01/ssh-quick-start/">
+      </div>
     
   </div>
 
@@ -612,11 +615,11 @@ scp -r user@host:remote_folder local_location
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/laoshucheng" target="_blank" title="GitHub">
+                <a href="https://github.com/laoshucheng" target="_blank" title="Github">
                   
-                    <i class="fa fa-fw fa-github"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
-                  GitHub
+                  Github
                 </a>
               </span>
             
@@ -639,20 +642,11 @@ scp -r user@host:remote_folder local_location
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/1889677851" target="_blank" title="微博">
+                <a href="http://www.weibo.com/niuniucomeback" target="_blank" title="微博">
                   
                     <i class="fa fa-fw fa-weibo"></i>
                   
                   微博
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://www.douban.com/people/tonyrisk" target="_blank" title="豆瓣">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  豆瓣
                 </a>
               </span>
             
@@ -665,10 +659,25 @@ scp -r user@host:remote_folder local_location
                 </a>
               </span>
             
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/tonyrisk" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
           
         </div>
 
         
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
         
 
         
@@ -676,9 +685,17 @@ scp -r user@host:remote_folder local_location
           <div class="links-of-blogroll motion-element links-of-blogroll-block">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              推荐博客
+              优秀推荐
             </div>
             <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
+                </li>
               
                 <li class="links-of-blogroll-item">
                   <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
@@ -689,11 +706,11 @@ scp -r user@host:remote_folder local_location
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
+                  <a href="http://www.williamlong.info/" title="月光博客" target="_blank">月光博客</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.williamlong.info/" title="月光博客" target="_blank">月光博客</a>
+                  <a href="http://gold.xitu.io" title="稀土掘金" target="_blank">稀土掘金</a>
                 </li>
               
             </ul>
@@ -753,11 +770,11 @@ scp -r user@host:remote_folder local_location
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+    <span class="site-uv"><i class="fa fa-user"></i>本站访问次数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+    <span class="site-pv"><i class="fa fa-eye"></i>本站总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
   
   
 </div>
@@ -839,14 +856,31 @@ scp -r user@host:remote_folder local_location
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tonyrisk"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
-
-  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1985118"></script>
 
 
 
@@ -987,113 +1021,9 @@ scp -r user@host:remote_folder local_location
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("Yz7S8S2RQpyGR1KTtFJ89HNC-gzGzoHsz", "bKsTy5DfdL39yd7aYNcV8JiA");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
 
 </body>
 </html>

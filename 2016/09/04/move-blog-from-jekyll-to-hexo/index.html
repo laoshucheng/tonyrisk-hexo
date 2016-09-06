@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="个人博客, 技术" />
 
 
 
@@ -106,7 +106,7 @@
 近几年随着 Hexo 的发展，社区中不断对这个博客框架的贡献，使得 Hexo 日趋完善，并且涌现出几大优点：
 
 源">
-<meta property="og:updated_time" content="2016-09-05T14:04:50.000Z">
+<meta property="og:updated_time" content="2016-09-06T09:52:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="把博客从 Jekyll 迁移到 Hexo">
 <meta name="twitter:description" content="在上次的文章中（使用 Github 搭建个人博客）介绍了怎么用 Github 默认支持的 Web 框架 Jekyll 来搭建博客。相对于曾经接触过的 Wordpress 是不知道要轻量级多少倍了。但是在使用过程中也发现几点问题：
@@ -124,7 +124,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"hide"},
+    sidebar: {"position":"right","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -170,7 +170,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -212,6 +212,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
@@ -228,16 +238,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
           </a>
         </li>
       
@@ -352,25 +352,23 @@
 
           
             
-          
-
-          
-
-          
-          
-             <span id="/2016/09/04/move-blog-from-jekyll-to-hexo/" class="leancloud_visitors" data-flag-title="把博客从 Jekyll 迁移到 Hexo">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/04/move-blog-from-jekyll-to-hexo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/04/move-blog-from-jekyll-to-hexo/" itemprop="commentsCount"></span>
+                </a>
               </span>
+            
+          
+
+          
+
+          
           
 
           
               &nbsp; | &nbsp;
-              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="page-pv"><i class="fa fa-file-o"></i> 本文总阅读量
               <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
               </span>
           
@@ -410,12 +408,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new_post_name: :year-:month-:day-:title.md</div></pre></td></tr></table></figure>
 <p>如果发现网站没发生变化，需要手动清除下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo serve</div></pre></td></tr></table></figure>
+<h2 id="增加其他页面"><a href="#增加其他页面" class="headerlink" title="增加其他页面"></a>增加其他页面</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo new page about <span class="comment"># 关于</span></div><div class="line">$ hexo new page tags <span class="comment"># 标签</span></div><div class="line">$ hexo new page categories <span class="comment"># 分类</span></div></pre></td></tr></table></figure>
 <h2 id="部署设置"><a href="#部署设置" class="headerlink" title="部署设置"></a>部署设置</h2><p>支持 Github 和 HeroKu，我只用了 Github，所以就记录下 Github 设置</p>
 <ol>
 <li><p>安装插件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
 </li>
-<li><p>配置 <code>_config.yml</code></p>
+<li><p>配置 <code>_config.yml</code>(默认传到<code>gh-pages</code>分支)</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">  type:</span> git</div><div class="line"><span class="attr">  repo:</span> &lt;repo url<span class="string">&gt;</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -439,7 +438,7 @@
       
         
   <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>如果对你有帮助</div>
+    <div>如果觉得对你有帮助</div>
     <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
       <span>赏</span>
     </button>
@@ -525,11 +524,16 @@
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
   <div class="comments" id="comments">
     
-      <div id="uyan_frame"></div>
+      <div class="ds-thread" data-thread-key="2016/09/04/move-blog-from-jekyll-to-hexo/"
+           data-title="把博客从 Jekyll 迁移到 Hexo" data-url="http://www.tonyrisk.top/2016/09/04/move-blog-from-jekyll-to-hexo/">
+      </div>
     
   </div>
 
@@ -604,11 +608,11 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/laoshucheng" target="_blank" title="GitHub">
+                <a href="https://github.com/laoshucheng" target="_blank" title="Github">
                   
-                    <i class="fa fa-fw fa-github"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
-                  GitHub
+                  Github
                 </a>
               </span>
             
@@ -631,20 +635,11 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/1889677851" target="_blank" title="微博">
+                <a href="http://www.weibo.com/niuniucomeback" target="_blank" title="微博">
                   
                     <i class="fa fa-fw fa-weibo"></i>
                   
                   微博
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://www.douban.com/people/tonyrisk" target="_blank" title="豆瓣">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  豆瓣
                 </a>
               </span>
             
@@ -657,10 +652,25 @@
                 </a>
               </span>
             
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/tonyrisk" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
           
         </div>
 
         
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
         
 
         
@@ -668,9 +678,17 @@
           <div class="links-of-blogroll motion-element links-of-blogroll-block">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              推荐博客
+              优秀推荐
             </div>
             <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
+                </li>
               
                 <li class="links-of-blogroll-item">
                   <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
@@ -681,11 +699,11 @@
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
+                  <a href="http://www.williamlong.info/" title="月光博客" target="_blank">月光博客</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.williamlong.info/" title="月光博客" target="_blank">月光博客</a>
+                  <a href="http://gold.xitu.io" title="稀土掘金" target="_blank">稀土掘金</a>
                 </li>
               
             </ul>
@@ -701,7 +719,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Hexo"><span class="nav-number">1.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始建站"><span class="nav-number">2.</span> <span class="nav-text">开始建站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把文章从-Jekyll-迁移到-Hexo"><span class="nav-number">3.</span> <span class="nav-text">把文章从 Jekyll 迁移到 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署设置"><span class="nav-number">4.</span> <span class="nav-text">部署设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">5.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Hexo"><span class="nav-number">1.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始建站"><span class="nav-number">2.</span> <span class="nav-text">开始建站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把文章从-Jekyll-迁移到-Hexo"><span class="nav-number">3.</span> <span class="nav-text">把文章从 Jekyll 迁移到 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加其他页面"><span class="nav-number">4.</span> <span class="nav-text">增加其他页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署设置"><span class="nav-number">5.</span> <span class="nav-text">部署设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">6.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
@@ -745,11 +763,11 @@
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+    <span class="site-uv"><i class="fa fa-user"></i>本站访问次数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+    <span class="site-pv"><i class="fa fa-eye"></i>本站总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
   
   
 </div>
@@ -831,14 +849,31 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tonyrisk"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
-
-  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1985118"></script>
 
 
 
@@ -979,113 +1014,9 @@
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("Yz7S8S2RQpyGR1KTtFJ89HNC-gzGzoHsz", "bKsTy5DfdL39yd7aYNcV8JiA");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
 
 </body>
 </html>
