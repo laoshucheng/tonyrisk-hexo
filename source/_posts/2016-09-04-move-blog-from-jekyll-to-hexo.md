@@ -45,6 +45,13 @@ $ hexo clean
 $ hexo serve
 ```
 
+## 增加其他页面
+``` bash
+$ hexo new page about # 关于
+$ hexo new page tags # 标签
+$ hexo new page categories # 分类
+```
+
 ## 部署设置
 支持 Github 和 HeroKu，我只用了 Github，所以就记录下 Github 设置
 
