@@ -53,7 +53,7 @@ $ hexo serve
 $ npm install hexo-deployer-git --save
 ```
 
-2. 配置 `_config.yml`
+2. 配置 `_config.yml`(默认传到`gh-pages`分支)
 ``` yml
 deploy:
   type: git
