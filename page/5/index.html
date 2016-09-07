@@ -192,16 +192,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
@@ -218,6 +208,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -293,8 +293,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/02/02/git-flow/" itemprop="url">
-                  Git 常用操作
+                <a class="post-title-link" href="/2014/02/18/quick-learn-new-program-language/" itemprop="url">
+                  学习新语言的基本流程
                 </a>
               
             
@@ -307,8 +307,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-02-02T00:00:00+08:00" content="2014-02-02">
-              2014-02-02
+            <time itemprop="dateCreated" datetime="2014-02-18T00:00:00+08:00" content="2014-02-18">
+              2014-02-18
             </time>
           </span>
 
@@ -318,8 +318,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/02/02/git-flow/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/02/02/git-flow/" itemprop="commentsCount"></span>
+                <a href="/2014/02/18/quick-learn-new-program-language/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/02/18/quick-learn-new-program-language/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -343,42 +343,15 @@
 
       
         
-          
-            <p>gitflow 工作流</p>
-<h2 id="master"><a href="#master" class="headerlink" title="master"></a>master</h2><p>－ 主发布分支，不直接在这个分支修改代码<br>－ 每次的更新都需要打 tag</p>
-<h2 id="develop"><a href="#develop" class="headerlink" title="develop"></a>develop</h2><p>－ 主开发分支</p>
-<h2 id="feature"><a href="#feature" class="headerlink" title="feature"></a>feature</h2><ul>
-<li>为即将发布的版本开发新功能特性。</li>
-<li>这通常只存在开发者的库中。</li>
-</ul>
-<h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><ul>
-<li>新特性的开发是基于 ‘develop’ 分支的<h3 id="结束开发"><a href="#结束开发" class="headerlink" title="结束开发"></a>结束开发</h3></li>
-<li>合并 MYFEATURE 分支到 ‘develop’</li>
-<li>删除这个新特性分支</li>
-</ul>
-<h2 id="release"><a href="#release" class="headerlink" title="release"></a>release</h2><ul>
-<li>支持一个新的用于生产环境的发布版本。</li>
-<li>允许修正小问题，并为发布版本准备元数据。</li>
-</ul>
-<h3 id="新建-1"><a href="#新建-1" class="headerlink" title="新建"></a>新建</h3><ul>
-<li>它从 ‘develop’ 分支开始创建一个 release 分支。<h3 id="结束开发-1"><a href="#结束开发-1" class="headerlink" title="结束开发"></a>结束开发</h3></li>
-<li>归并 release 分支到 ‘master’ 分支</li>
-<li>用 release 分支名打 Tag</li>
-<li>归并 release 分支到 ‘develop’</li>
-<li>移除 release 分支</li>
-</ul>
-<h2 id="hotfix"><a href="#hotfix" class="headerlink" title="hotfix"></a>hotfix</h2><ul>
-<li>紧急修复来自这样的需求：生产环境的版本处于一个不预期状态，需要立即修正。</li>
-<li>有可能是需要修正 master 分支上某个 TAG 标记的生产版本</li>
-</ul>
-<h3 id="新建-2"><a href="#新建-2" class="headerlink" title="新建"></a>新建</h3><ul>
-<li>它从 master 分支开始创建一个分支。<h3 id="结束开发-2"><a href="#结束开发-2" class="headerlink" title="结束开发"></a>结束开发</h3></li>
-<li>当完成紧急修复分支，代码归并回 develop 和 master 分支</li>
-<li>相应地，master 分支打上修正版本的 TAG。</li>
-</ul>
-<p>———– EOF —————</p>
-
-          
+          <p>作为程序猿，语言是最常接触的<strong>工具</strong>了，而且新语言，新技术层出不穷，手中没掌握个7，8门语言都不好和其他程序猿打招呼。语言说到底是<code>工具</code>，是帮助我们解决实际问题，每门语言都有自己的局限性，或者说是性价比低的地方（可以实现某种功能，但是花费时间超长）。</p>
+<p>所以介于每门语言都有适用性和适合场景，身为程序猿，要时刻做好准备快速学习一门新语言。但是单纯看书，或者在网上按照教程学习，实在是太慢了，而且容易陷入 <strong>学习语言</strong> 而非 <strong>掌握语言使得为我所用</strong> 的怪圈中。</p>
+<p>所以自己总结了一些掌握语言一般的知识点，那么在看教程，或者看书过程中可以带着疑问，有针对性，目的性的学习，避免忙于陷进去。</p>
+<p>另外多提一点：<strong>不要乱买书！</strong> 也不要乱看网上的教程贴。官方文档和推荐的书永远是最近的途径。很少有第三方的人士比官方还懂这门语言。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/02/18/quick-learn-new-program-language/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -426,8 +399,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/02/01/git-general-operations/" itemprop="url">
-                  Git 常用操作
+                <a class="post-title-link" href="/2014/02/03/markdown-cheatsheet/" itemprop="url">
+                  Markdown Cheatsheet
                 </a>
               
             
@@ -440,8 +413,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-02-01T00:00:00+08:00" content="2014-02-01">
-              2014-02-01
+            <time itemprop="dateCreated" datetime="2014-02-03T00:00:00+08:00" content="2014-02-03">
+              2014-02-03
             </time>
           </span>
 
@@ -451,8 +424,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/02/01/git-general-operations/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/02/01/git-general-operations/" itemprop="commentsCount"></span>
+                <a href="/2014/02/03/markdown-cheatsheet/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/02/03/markdown-cheatsheet/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -476,217 +449,255 @@
 
       
         
-          
-            <p>git 是一个<strong>分布式</strong>的版本控制工具，每个开发人员从git版本库check out的时候会在自己的机器上也克隆一个版本库。在没网络的情况下，也能提交文件，查看log，查看历史版本，创建分支等。</p>
-<p>Git主分支的名字，默认叫做Master。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。</p>
-<h3 id="不同于svn，git在本地的状态有三个："><a href="#不同于svn，git在本地的状态有三个：" class="headerlink" title="不同于svn，git在本地的状态有三个："></a>不同于svn，git在本地的状态有三个：</h3><ul>
-<li>工作目录(working dir): 持有的实际文件</li>
-<li>暂存区(index): 通过add命令，临时保存的改动</li>
-<li>Head: 指向最后一次提交(commit)的结果</li>
-</ul>
-<!--break-->
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Mac下直接下面命令（Mac用户强烈建议安装<a href="http://brew.sh/" target="_blank" rel="external">homebrew</a>和<a href="http://caskroom.io/" target="_blank" rel="external">brew cask</a>）</p>
-<pre><code>brew install git
-</code></pre><p>安装完后，可以用<code>git help</code>查看用法帮助</p>
-<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="1-git配置有三大块："><a href="#1-git配置有三大块：" class="headerlink" title="1. git配置有三大块："></a>1. git配置有三大块：</h3><ol>
-<li>系统级别：/etc/gitconfig(<code>git config --system</code>设置或者读取时用system参数)</li>
-<li>全局级别：~/.gitconfig(<code>git config --global</code>设置或者读取时用global参数)</li>
-<li>项目级别：myproject/.git/config (<code>git config</code>)</li>
+          <p>参考：</p>
+<ol>
+<li><a href="http://daringfireball.net/projects/markdown/">markdown</a></li>
+<li><a href="https://help.github.com/categories/writing-on-github/">Github 风格 Markdown</a></li>
 </ol>
-<p><em>优先级：</em> 3&gt;2&gt;1(如，3的设置会覆盖2的)</p>
-<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><ul>
-<li>设置：<code>git config --global user.name &#39;xxx&#39;</code></li>
-<li>查看：<code>git config --global user.name</code></li>
-<li>查看当前生效所有设置：<code>git config --list</code></li>
-<li>也可以直接编辑上面所提到的<code>gitconfig</code>文件</li>
-</ul>
-<p><em>一般会先用global设置用户层面的配置，再在项目层面设置针对项目的设置</em></p>
-<h3 id="3-常用配置"><a href="#3-常用配置" class="headerlink" title="3. 常用配置"></a>3. 常用配置</h3><pre><code>[user]        
-    name = xxxx
-    email = xxx@xxx.com
-[color]
-    #开启着色功能
-    ui＝ true
-    status = auto
-    diff = auto
-    branch = auto
-    interactive = auto
-[merge]
-    #默认 merge 都加上 --no-ff
-    ff = false
-[alias]
-    #别名
-    st = status
-    ci = &quot;commit -m&quot;
-    br = branch
-    co = checkout
-    cia = &quot;commit -am&quot;
-    df = diff
-    dt = difftool
-    mg = merge
-    mt = mergetool
-    ll = &quot;log --oneline&quot;
-    last = &quot;log -1 HEAD&quot;
-</code></pre><h2 id="新建版本库"><a href="#新建版本库" class="headerlink" title="新建版本库"></a>新建版本库</h2><p>从零建立git版本库：</p>
-<pre><code>mkdir myproject
-touch README.md LICENSE .gitignore
-git init                                # 会在目录下建立.git文件夹
-git add *                                # 把所有文件都放入本地缓存区
-git commit -m ‘first commit’            # 将更改记录成快照
-
-# 还没有克隆现有仓库，并欲将本地仓库连接到某个远程服务器
-git remote add origin https://github.com/xxxx/test.git
-
-# 把本地改动更新到远程仓库的master分支上去
-git push -u origin master
-</code></pre><h2 id="复制版本库"><a href="#复制版本库" class="headerlink" title="复制版本库"></a>复制版本库</h2><pre><code># 常用clone：
-git clone http[s]://example.com/path/to/repo.git/
-git clone [user@]example.com:path/to/repo.git/
-
-# 只clone某一个分支
-git clone -b branch-name git@github.com:user/myproject.git 
-</code></pre><h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h2><pre><code># 查看本地分支
-git branch
-
-# 查看远程分支
-git branch -r
-
-# 建立分支
-git branch branch-name
-
-# 建立无父节点的分支    
-git checkout --orphan branch-name
-
-# 建立并切换分支
-git checkout -b branch-name [from_branch]
-
-# 建立/提交 远程分支(注意和下面删除远程分支区别)
-git push [远程主机名] [分支名]
-
-# 删除分支
-git branch -d branch-name
-
-# 删除远程分支
-git push [远程主机名] :[分支名]
-
-# 切换分支
-git checkout branch-name
-
-# 查看已经和当前分支合并的分支
-git branch --merged 
-
-# 查看尚未和当前分支合并的分支
-git branch --no-merged
-
-# 在本地分支上合并远程分支
-git merge --no-ff origin/master
-</code></pre><h3 id="分支使用场景实例"><a href="#分支使用场景实例" class="headerlink" title="分支使用场景实例"></a>分支使用场景实例</h3><pre><code>#创建一个功能分支：
-git checkout -b feature-x develop
-
-#开发完成后，将功能分支合并到develop分支：
-git checkout develop
-git merge –no-ff feature-x
-
-#删除feature分支：
-git branch -d feature-x
-</code></pre><h2 id="推送本地更新到服务器"><a href="#推送本地更新到服务器" class="headerlink" title="推送本地更新到服务器"></a>推送本地更新到服务器</h2><pre><code>git push [远程主机名] [本地分支名]:[远程分支名]
-</code></pre><h2 id="更新远程主机的内容到本地"><a href="#更新远程主机的内容到本地" class="headerlink" title="更新远程主机的内容到本地"></a>更新远程主机的内容到本地</h2><pre><code>git pull [远程主机名] [远程分支名]:[本地分支名]
-</code></pre><h2 id="撤销回滚"><a href="#撤销回滚" class="headerlink" title="撤销回滚"></a>撤销回滚</h2><pre><code># reset 命令是把当前分支指向另一个位置
-# 把add的文件，撤销
-git reset -- &lt;filename&gt;
-git reset # 撤销所有add的文件
-
-# 会用HEAD中最新的内容替换掉工作目录中的内容，回滚到最后一个commit
-git checkout -- &lt;filename&gt;
-
-# 想丢弃你在本地的所有改动与提交，可以到服务器上获取最新的版本历史，
-# 并将你本地主分支指向它：
-git fetch origin
-git reset --hard origin/master
-
-# 检出某个文件的历史版本： 
-git checkout &lt;commit&gt; &lt;paths&gt;
-
-# 检出某个文件的历史版本到其他文件名： 
-git show &lt;commit&gt;:&lt;file&gt; new_name 
-例：git show d06b1cf09d2:text.txt &gt; test1.txt
-</code></pre><h2 id="Diff"><a href="#Diff" class="headerlink" title="Diff"></a>Diff</h2><pre><code># 查看两个版本之间的区别
-git diff version1 version2
-
-# 查看当前缓存区（就是add后）和最新commit版本的区别
-git diff --cached
-
-# 查看当前工作目录和最新commit之间的区别
-git diff HEAD
-
-# 当前工作目录和其他分支之间的区别
-git diff branch-name
-
-# 查看缓存区和工作目录之间的区别
-git diff
-</code></pre><h2 id="存储-保存当前工作内容到git栈，然后回复到最新commit状态"><a href="#存储-保存当前工作内容到git栈，然后回复到最新commit状态" class="headerlink" title="存储: 保存当前工作内容到git栈，然后回复到最新commit状态"></a>存储: 保存当前工作内容到git栈，然后回复到最新commit状态</h2><pre><code># 存储
-git stash
-
-# 恢复最新一次存储
-git stash pop
-
-# 查看现有所有存储的列表
-git stash list
-</code></pre><h2 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h2><pre><code># 查看本地库状态
-git status [-s]
-
-# 添加文件到暂存区
-git add [-A]
-
-# 提交暂存区文件到本地库
-git commit -m &quot;msg&quot;    
-# 等价于add，加commit操作：
-git commit -am &quot;msg&quot;
-
-# 从缓存区中删除
-git rm file_name
-# 如果要在工作目录中留着该文件，可以使用
-git rm --cached file_name
-
-# 移动或者重命名缓存区中的文件
-git mv old_file new_file
-
-# 显示一个分支中提交的更改记录
-git log
-</code></pre><h2 id="扩展和参考"><a href="#扩展和参考" class="headerlink" title="扩展和参考"></a>扩展和参考</h2><p>技术光是看书，如果没有实战完全不能深入理解的，最好的学习还是赶紧建立一个git库，然后在实战中学习吧。<br>另外看其他人总结的经验和知识点也能少走不少弯路：</p>
+<p>说明：</p>
 <ul>
-<li><p>github的员工所著，豆瓣评分9.1的神书：<a href="http://iissnan.com/progit/" target="_blank" rel="external">pro git</a></p>
-</li>
-<li><p>pro git作者另一本，可看作pro git的补充版: <a href="http://gitbook.liuhui998.com/" target="_blank" rel="external">Git Community Book 中文版</a></p>
-</li>
-<li><p>《Git权威指南》:  <a href="http://www.worldhello.net/gotgit/" target="_blank" rel="external">中文官网</a></p>
-</li>
-<li><p>《Git权威指南》作者蒋鑫有一本好作，讲关于git和github的: <a href="http://www.worldhello.net/gotgithub/" target="_blank" rel="external">GotGitHub</a></p>
-</li>
-<li><p>个人觉得最简单易懂介绍git的：<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰讲git</a></p>
-</li>
-<li><p>快速明白git内部构造：<a href="http://youngsterxyf.github.io/2013/09/28/learning-git-internals-by-example/" target="_blank" rel="external">中文版</a></p>
-</li>
-<li><p>在公司内，怎么使用好git: <a href="http://www.nczonline.net/blog/2013/05/21/github-workflows-inside-of-a-company/" target="_blank" rel="external">英文版</a></p>
-</li>
-<li><p>在线学习git的环境：</p>
-<p>  <a href="http://pcottle.github.io/learnGitBranching/" target="_blank" rel="external">branch教程</a></p>
-<p>  <a href="https://try.github.io/levels/1/challenges/1" target="_blank" rel="external">code school和github联合推出的学习平台</a></p>
-</li>
-<li><p>git官方命令不够？没关系，牛人已经封装了更多git实用命令，总有一款适合你：<a href="https://github.com/visionmedia/git-extras" target="_blank" rel="external">去看看</a></p>
-</li>
-<li><p>一张图让你上手git：<a href="http://sfault-image.b0.upaiyun.com/37/92/37923f2478edc5709b36562b26c9e008" target="_blank" rel="external">点击查看大图</a></p>
-</li>
-<li><p>阳志平老师教你如何玩溜github: <a href="http://www.yangzhiping.com/tech/github.html" target="_blank" rel="external">开始玩</a></p>
-</li>
-<li><p>GitHub和Git一些使用技巧：<a href="http://snowdream86.gitbooks.io/github-cheat-sheet/content/zh/index.html" target="_blank" rel="external">在这</a></p>
-</li>
-<li><p>Gitflow：<a href="http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html" target="_blank" rel="external">在这</a></p>
-</li>
+<li>markdown 块元素之间用空行来识别</li>
+<li>基本上 markdown 语法互相之间都能嵌套，更多玩法自己 <code>try it out</code></li>
+<li>markdown 在不同解释器上表现可能不一致（特别是扩展语法，如表格等）</li>
+<li>反斜杠 <code>\</code> 用来转义</li>
 </ul>
-<p>———– EOF —————</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/02/03/markdown-cheatsheet/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/01/22/git-flow/" itemprop="url">
+                  Git 工作流
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-01-22T00:00:00+08:00" content="2014-01-22">
+              2014-01-22
+            </time>
+          </span>
 
           
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/01/22/git-flow/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/01/22/git-flow/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>参考： <a href="http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html">Gitflow</a></p>
+<h2 id="master"><a href="#master" class="headerlink" title="master"></a>master</h2><ul>
+<li>主发布分支，不直接在这个分支修改代码</li>
+<li>每次的更新都需要打 tag</li>
+</ul>
+<h2 id="develop"><a href="#develop" class="headerlink" title="develop"></a>develop</h2><ul>
+<li>主开发分支</li>
+</ul>
+<h2 id="feature"><a href="#feature" class="headerlink" title="feature"></a>feature</h2><ul>
+<li>为即将发布的版本开发新功能特性</li>
+<li><p>这通常只存在开发者的本地库中（如果是合作的则 push 到远程）</p>
+<h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><ul>
+<li>新特性的开发是基于 <code>develop</code> 分支的</li>
+</ul>
+<h3 id="结束开发"><a href="#结束开发" class="headerlink" title="结束开发"></a>结束开发</h3><ul>
+<li>合并 <code>my feature</code> 分支到 <code>develop</code></li>
+<li>删除这个新特性分支</li>
+</ul>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/01/22/git-flow/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/01/11/git-general-operations/" itemprop="url">
+                  Git 常用操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-01-11T00:00:00+08:00" content="2014-01-11">
+              2014-01-11
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/01/11/git-general-operations/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/01/11/git-general-operations/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Git 是一个<strong>分布式</strong>的版本控制工具，每个开发人员从 git 版本库 checkout 的时候会在自己的机器上也克隆一个版本库。在没网络的情况下，也能提交文件，查看 log，查看历史版本，创建分支等。</p>
+<p>Git 主分支的名字，默认叫做 <code>master</code> 。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。</p>
+<p>不同于 svn，git 在本地的状态有三个：</p>
+<ul>
+<li>工作目录(<code>working dir</code>): 持有的实际文件</li>
+<li>暂存区(<code>index</code>): 通过 <code>add</code> 命令，临时保存的改动</li>
+<li><code>head</code>: 指向最后一次提交(<code>commit</code>)的结果</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/01/11/git-general-operations/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -735,7 +746,7 @@ git log
               
                 
                 <a class="post-title-link" href="/2014/01/01/blog-github/" itemprop="url">
-                  使用Github搭建个人博客
+                  使用 Github 搭建个人博客
                 </a>
               
             
@@ -784,132 +795,22 @@ git log
 
       
         
-          
-            <h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p>在github上创建一个项目，会有一个默认的项目首页（一般就是显示文件列表和一个简单的README文件内容）。</p>
-<p>此外github也允许你自定义项目主页，所以有了<a href="https://pages.github.com/" target="_blank" rel="external">github pages</a>，它维护一些简单的静态页面。</p>
-<p><a href="http://www.thinkful.com/learn/a-guide-to-using-github-pages/start/" target="_blank" rel="external">戳这里查看一个快速学习使用git pages的网站</a></p>
-<p>Pages允许用户可以使用github提供的<a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator" target="_blank" rel="external">模板</a>，也允许用户自己编写html页面后上传。github pages使用jekyll程序来搭建，上传后会由jekyll程序来处理生成页面。</p>
-<p><a href="http://jekyllrb.com/" target="_blank" rel="external">jekyll</a>是一个静态站点生成器，根据网页源码生成静态文件，提供变量，模板，插件等功能。</p>
+          <p>在 <code>github</code> 上创建一个项目，会有一个默认的项目首页（一般就是显示文件列表和一个简单的 <code>README</code> 文件内容）。</p>
+<p>此外 <code>github</code> 也允许你自定义项目主页，所以有了<a href="https://pages.github.com/">github pages</a>，它维护一些简单的静态页面。</p>
+<p><a href="http://www.thinkful.com/learn/a-guide-to-using-github-pages/start/">戳这里查看一个快速学习使用 git pages 的网站</a></p>
+<p>Pages 允许用户可以使用 github 提供的<a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator">模板</a>，也允许用户自己编写 html 页面后上传。github pages 支持使用 <code>jekyll</code> 程序来搭建，上传后会由 jekyll 程序来处理生成页面。</p>
+<p><a href="http://jekyllrb.com/">jekyll</a> 是一个静态站点生成器，根据网页源码生成静态文件，提供变量，模板，插件等功能。</p>
 <p>所以整个步骤就是：</p>
-<pre><code>1. 写好符合jekyll规范网站源码
-2. 上传到github
-3. 由github生成并托管整个网站
-</code></pre><!--break-->
-<h2 id="具体流程："><a href="#具体流程：" class="headerlink" title="具体流程："></a>具体流程：</h2><ol>
-<li><p>建立一个博客项目</p>
-<pre><code>$mkdir blog
-$cd blog
-$git init
-</code></pre></li>
-<li><p>创建一个无父节点分支: <code>gh-pages</code>（github只有对该分支的页面，才能生成网页）</p>
-<pre><code>git checkout --orphan gh-pages
-</code></pre></li>
-<li><p>创建配置文件 _config.yml，并配置，如</p>
-<pre><code># 博客地址是 username.github.com/blog/
-baseurl: /blog
-
-# 域名
-url: http://www.tonyrisk.info
-
-# 把 markdown 解释器设置为 redcarpet，并做一些扩展配置
-# gem install redcarpet 来安装 redcarpet
-markdown: redcarpet
-redcarpet:
-    extensions: [&quot;with_toc_data&quot;, &quot;strikethrough&quot;, &quot;fenced_code_blocks&quot;, &quot;highlight&quot;, &quot;underline&quot;, &quot;smart&quot;, &quot;tables&quot;, &quot;no_intra_emphasis&quot;, &quot;autolink&quot;]
-</code></pre><p> 更多配置：<a href="http://jekyllrb.com/docs/configuration/" target="_blank" rel="external">查看这里</a></p>
-</li>
-<li><p>创建一个_layouts目录，用于存放模板文件</p>
-<pre><code>mkdir _layouts
-</code></pre></li>
-<li><p>在_layouts下创建default.html文件，作为Blog的默认模板，内容如下：</p>
- <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"content-type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>&#123;&#123;"&#123;&#123; page.title "&#125;&#125;&#125;&#125;<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  &#123;&#123;"&#123;&#123; content "&#125;&#125;&#125;&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p> <code>{{content}}</code> 表示文章内容，jekyll采用liquid模板语言</p>
-<p> 更多变量：<a href="http://jekyllrb.com/docs/variables/" target="_blank" rel="external">查看这里</a></p>
-</li>
-<li><p>在项目根目录，创建一个_posts目录，用于存放博客文章</p>
-<pre><code>mkdir _posts
-</code></pre></li>
-<li><p>在_posts下创建文章，如<code>2014-08-20-first.md</code>，文件名必须为：</p>
-<pre><code>YEAR-MONTH-DAY-title.MARKUP
-</code></pre><p> <code>MARKUP</code>可以是<code>md</code>(如果用markdown编写)，<code>html</code>(如果是html)，<code>textile</code>(如果是textile)</p>
-<p> 下面是一偏文章示例:</p>
-<pre><code>--- 
-layout: default
-title: 你好，世界
----
-&lt;h2&gt;{{ page.title }}&lt;/h2&gt;
-&lt;p&gt;我的第一篇文章&lt;/p&gt;
-&lt;p&gt;{{ page.date | date_to_string }}&lt;/p&gt;
-</code></pre><p> 两条<code>---</code>中间的是yaml头，用来设置参数等。</p>
-<p> 注意，三根短划线前面，是<strong>不能有空格的!!</strong></p>
-<p> <code>layout</code>用来指明使用_layout文件夹下的哪个模板</p>
-<p> <code>title</code>如果不设置默认用文件名的title</p>
-<p> 更多参数：<a href="http://jekyllrb.com/docs/frontmatter/" target="_blank" rel="external">查看这里</a></p>
-</li>
-<li><p>在根目录下创建首页：index.html(下面代码简单列出所有文章，你也可以自己编辑文件)</p>
-<pre><code>---
-layout: default
-title: 我的Blog
----
-&lt;h2&gt;{{ page.title }}&lt;/h2&gt;
-&lt;p&gt;最新文章&lt;/p&gt;
-&lt;ul&gt;
-    {{"<!--￼1-->
-			<li>{{"{{ post.date | date_to_string "}}}} &lt;a href=&quot;{{"{{ site.baseurl "}}}}{{"{{ post.url "}}}}&quot;&gt;{{"{{ post.title "}}}}&lt;/a&gt;&lt;/li&gt;
-    {{&quot;{% endfor "}}%}
-&lt;/ul&gt;
-</li></code></pre></li>
-<li><p>提交发布（提交到github后，一般十分钟后，页面生效）</p>
-<pre><code>$git add -A
-$git commit -m &quot;first post&quot;
-
-# blog是在github上创建的项目
-$git remote add origin https://github.com/username/blog.git
-
-# 把本地gh-pages分支推送到origin主机的gh-pages分支上
-$git push -u origin gh-pages
-</code></pre><p> <a href="http://username.github.com/blog/" target="_blank" rel="external">http://username.github.com/blog/</a> (如果步骤3设置中<code>base_url=/blog</code>)这个地址就是博客地址</p>
-</li>
-</ol>
-<h2 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h2><p>基本blog就搭建完成了，如果需要把站点域名换成自己的域名，也非常简单：</p>
 <ol>
-<li><p>项目根目录下面，新建一个名为CNAME的文本文件，里面写入你要绑定的域名，如：<br>example.com 或者 xxx.example.com</p>
-</li>
-<li><p>在你的域名商那添加一条cname记录指向username.github.com，如果是顶级域名得是A记录</p>
-</li>
-<li><p>并把_config.yml中的baseurl改成‘/’指向username.github.com</p>
-</li>
+<li>写好符合 jekyll 规范网站源码</li>
+<li>上传到 github</li>
+<li>由 github 生成并托管整个网站</li>
 </ol>
-<h2 id="jeklly主题"><a href="#jeklly主题" class="headerlink" title="jeklly主题"></a>jeklly主题</h2><p>以上是从零开始搭建，但是很多页面美化等都没有，现在有一个快速搭建功能齐全的工具<a href="http://jekyllbootstrap.com/" target="_blank" rel="external">JekyllBootstrap</a></p>
-<ol>
-<li>在github上创建一个新的项目，比如：blog</li>
-<li><p>安装Jekyll Bootstrap</p>
-<pre><code>git clone https://github.com/plusjade/jekyll-bootstrap.git blog
-cd blog
-rm -rf .git
-git init
-git checkout --orphan gh-pages
-git add -A
-git commit -m &apos;first commit&apos;
-git remote add origin https://github.com/username/blog.git
-git push -u origin gh-pages
-</code></pre></li>
-<li><p>安装jekyll，以便在本地查看博客</p>
-<pre><code>gem install jekyll
-cd blog
-jekyll serve（localhost:4000 上可以访问博客了）
-</code></pre></li>
-<li><p>新建一个文章：</p>
-<pre><code>$ rake post title=&quot;Hello World&quot;
-</code></pre></li>
-<li><p>安装一个主题：</p>
-<pre><code># 可以在github上自行寻找jeklly的主题
-rake theme:install git=&quot;git://github.com/jekyllbootstrap/theme-mark-reid.git&quot;
-</code></pre></li>
-</ol>
-<p>———– EOF —————</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/01/01/blog-github/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -981,20 +882,20 @@ rake theme:install git=&quot;git://github.com/jekyllbootstrap/theme-mark-reid.gi
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">分类</span>
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
-          
-
           
 
         </nav>
@@ -1079,7 +980,7 @@ rake theme:install git=&quot;git://github.com/jekyllbootstrap/theme-mark-reid.gi
 
         
         
-          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
               优秀推荐
@@ -1087,15 +988,11 @@ rake theme:install git=&quot;git://github.com/jekyllbootstrap/theme-mark-reid.gi
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
                   <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yangzhiping.com/" title="阳志平" target="_blank">阳志平</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
@@ -1104,6 +1001,14 @@ rake theme:install git=&quot;git://github.com/jekyllbootstrap/theme-mark-reid.gi
               
                 <li class="links-of-blogroll-item">
                   <a href="http://www.williamlong.info/" title="月光博客" target="_blank">月光博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
                 </li>
               
                 <li class="links-of-blogroll-item">

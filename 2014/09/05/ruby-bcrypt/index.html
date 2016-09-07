@@ -1,0 +1,1008 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="技术,ruby,bcrypt,加密," />
+
+
+
+
+
+  <link rel="alternate" href="/rss2.xml" title="I am tonyrisk" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://7rf2ks.com1.z0.glb.clouddn.com/image/avatar/fav.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="以前在开发游戏的时候，玩家的密码经常被我们明文保存在数据库中 :)，但是想到在其他游戏内或者网站中，他们也如此对待我的密码，思之极恐啊  :( 。因为大部分人一个密码走天下，如果在一个地方密码泄露了，那么你的微博，微信，qq，邮箱等等全部沦陷。
+而最近我正好在搭建电商网站，于是就涉及到相关问题，今天就好好来理理这个问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谈谈用户密码存储">
+<meta property="og:url" content="http://www.tonyrisk.top/2014/09/05/ruby-bcrypt/index.html">
+<meta property="og:site_name" content="I am tonyrisk">
+<meta property="og:description" content="以前在开发游戏的时候，玩家的密码经常被我们明文保存在数据库中 :)，但是想到在其他游戏内或者网站中，他们也如此对待我的密码，思之极恐啊  :( 。因为大部分人一个密码走天下，如果在一个地方密码泄露了，那么你的微博，微信，qq，邮箱等等全部沦陷。
+而最近我正好在搭建电商网站，于是就涉及到相关问题，今天就好好来理理这个问题。">
+<meta property="og:updated_time" content="2016-09-07T07:41:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谈谈用户密码存储">
+<meta name="twitter:description" content="以前在开发游戏的时候，玩家的密码经常被我们明文保存在数据库中 :)，但是想到在其他游戏内或者网站中，他们也如此对待我的密码，思之极恐啊  :( 。因为大部分人一个密码走天下，如果在一个地方密码泄露了，那么你的微博，微信，qq，邮箱等等全部沦陷。
+而最近我正好在搭建电商网站，于是就涉及到相关问题，今天就好好来理理这个问题。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.tonyrisk.top/2014/09/05/ruby-bcrypt/"/>
+
+  <title> 谈谈用户密码存储 | I am tonyrisk </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?36481653da69937b145eecaa2b7c0343";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">I am tonyrisk</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一路走来，一路记录</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                谈谈用户密码存储
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-09-05T00:00:00+08:00" content="2014-09-05">
+              2014-09-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/09/05/ruby-bcrypt/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/05/ruby-bcrypt/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i> 本文总阅读量
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以前在开发游戏的时候，玩家的密码经常被我们明文保存在数据库中 :)，但是想到在其他游戏内或者网站中，他们也如此对待我的密码，思之极恐啊  :( 。因为大部分人一个密码走天下，如果在一个地方密码泄露了，那么你的微博，微信，qq，邮箱等等全部沦陷。</p>
+<p>而最近我正好在搭建电商网站，于是就涉及到相关问题，今天就好好来理理这个问题。</p>
+<a id="more"></a>
+<p>对密码处理呢，一般处于三种考虑</p>
+<ol>
+<li>保证用户数据安全，比如一些网银，密码太重要了！一个不小心就是经济损失</li>
+<li>我们是正经人，是君子，虽然我们能看到你的密码，但是我们绝对不看，所以我们经过一定算法产生无意义的字符串后存储。</li>
+<li>万一我们技不如人，或者被竞争对手攻击导致资料外泄，那么别人拿到的密码，也猜不出用户的原码，所以对用户还是安全的。</li>
+</ol>
+<p>先看下业务模型：</p>
+<ul>
+<li><p>用户注册时在网页上输入密码（此时常常显示***，其实只是安慰用户，实际上只是显示为*而已，只是显示）</p>
+</li>
+<li><p>用户点击确定，前端就通过post方法将密码发送到服务器（众多周知用get会在地址栏中看到明文密码。但是post报文中只要用一些能查看http request的工具还是能看到，比如chrome自带的开发者工具）</p>
+</li>
+<li><p>服务器收到密码后存储（有良心的，对密码加密下，否则只要有数据库权限的人都能看到每个用户的密码，甚至如果数据库被黑了，泄漏了，那就使得所有用户的密码暴露在光天化日之下）</p>
+</li>
+</ul>
+<p>所以针对上面的流程，安全的做法应该是：</p>
+<ul>
+<li><p>使用浏览器密码控件，保证输入安全</p>
+</li>
+<li><p>有别于http协议（http协议是明文）使用https协议，保证网络传输安全</p>
+</li>
+<li><p>对密码加密后存储</p>
+</li>
+</ul>
+<p>浏览器插件和https协议此文不详细展开，这里主要看看怎么加密。</p>
+<p>现在比较流行的是md5，sha-1或者两者结合，再安全一点就配合salt一起。</p>
+<p>md5，sha1，salt都是啥啊？嗯，其实我也不太清楚，最近看到过这些字母是在微信开发api中，所以我特意去了解了下。</p>
+<p>严格来说md5，sha1都不是加密技术，只是哈希算法，具体解释请继续阅读：</p>
+<h1 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h1><p>MD5，全称Message Digest Algorithm 5（中文叫消息摘要算法第五版，所以有md2，md3，md4各个历史版本）。<br><code>基础原理是将数据（比如一段文字）运算后变为一固定长度（128位）的值。</code><br>经过md5算法的过程是不可逆的，即知道结果字符串和md5的算法也不能倒推出原来的数据是什么。<br>两个不一样的数据经过md5算法后产生的结果如果一致，那么就是<code>哈希冲突</code>。<br>在2004年之前（后文会说明这个时间点），一致认为md5产生的值是唯一的，可当作<code>数字签名</code>(数字指纹)。</p>
+<p><strong>用法一：</strong> 用来确保资料在传输过程中的完整性。比如服务器预先提供一个MD5校验和，用户下载完文件以后，用MD5算法计算下载文件的MD5校验和，然后通过检查这两个校验和是否一致，就能判断下载的文件是否出错。</p>
+<p><strong>用法二：</strong> 广泛用于操作系统的登陆认证上。如在Unix系统中用户的密码是以MD5（或其它类似的算法）经Hash运算后存储在文件系统中。当用户登录的时候，系统把用户输入的密码进行MD5 Hash运算，然后再去和保存在文件系统中的MD5值进行比较，进而确定输入的密码是否正确。通过这样的步骤，系统在并不知道用户密码的明码的情况下就可以确定用户登录系统的合法性。</p>
+<p>值得骄傲的是2004年，我国的王小云教授和她的团队公布了MD系列算法的哈希冲突，即不同的数据能够产生相同的Hash值，也就是说，可以找到两份具有相同数字手印的不同电子文件。从理论上说明md5的不安全性，但是实际中md5产生相同的概率极低。</p>
+<h1 id="SHA-1"><a href="#SHA-1" class="headerlink" title="SHA-1"></a>SHA-1</h1><p>SHA，全称Secure Hash Algorithm（安全哈希算法），对于长度小于2^64位的消息，SHA1会产生一个160位的消息摘要。用法和原理与MD5类似，也是不可逆的，都是用于数字签名，判断数据完整性。SHA1曾被视为是MD5的后继者，不过王小云教授还是证明虽然较为困难，但是还是出现了哈希碰撞的发生。<br>但是目前还没有SHA2（SHA-224, SHA-256, SHA-384和SHA-512，它们生成的摘要密文分别就是224,256,384,512位）的破解新闻。</p>
+<h1 id="MD5和SHA1"><a href="#MD5和SHA1" class="headerlink" title="MD5和SHA1"></a>MD5和SHA1</h1><p>md5和sha1被证明不同的数据能产生同一个值的影响是什么呢？最直接的就是签名的不安全，比如有人可以伪造我的密码登陆系统。在实际应用过程中，其实没有太多意义，你想啊，这和猜你的密码有啥区别，还不如试着破解你的密码来的高效，应该大部分人的密码都是有规律的，什么姓名生日等的组合。</p>
+<p>现在通行的破解做法是穷举字典暴力破解法，通过把字典中罗列的密码经过md5算法处理后得到的字符串和目标对比倒推出原文。进阶一点的把常用密码的常见组合进行单向哈希，得到一个摘要组合来对比，这个组合就是俗称的彩虹表。</p>
+<p>md5，sha1，sha2因为结果位数越来越长，安全性也越来越高，当然消耗的计算量也是越来越大，所以一般的密码使用md5已经是够了。</p>
+<p>综上，还算安全的做法是产生一个固定较长的随机数salt1，和随机salt2（比如主键），和用户密码一起，经过md5的计算。比如密码是123456，salt1是x1y1z1，sal2是234355，组成字符串’123456x1y1z1234355’，再经过个几次（apache迭代了1000次）md5运算基本就已经算是安全了，当然也要确保salt避免被泄漏。当然还要加强应用安全，如输错三次就暂时锁定等。<br>目前大部分的网站都是用此种方式，而知乎用的是bcrypt。</p>
+<h1 id="bcrypt"><a href="#bcrypt" class="headerlink" title="bcrypt"></a>bcrypt</h1><p>bcrypt是专门为密码存储而设计的算法，基于Blowfish加密算法变形而来，由Niels Provos和David Mazières发表于1999年的USENIX。<br>bcrypt最大的好处是有一个参数（work factor)，可用于调整计算强度，而且work factor是包括在输出的摘要中的。随着攻击者计算能力的提高，使用者可以逐步增大work factor，而且不会影响已有用户的登陆。<br>bcrypt经过了很多安全专家的仔细分析，使用在以安全著称的OpenBSD中，一般认为它比PBKDF2更能承受随着计算能力加强而带来的风险。bcrypt也有广泛的函数库支持，因此我们建议使用这种方式存储密码。</p>
+<p>但是！bcrypt比md5和sha1的消耗都要大，如果用默认的work factor＝10，计算一次将消耗0.3秒(在我2013年买的中配版 MacBook Pro 上)。</p>
+<p>———– EOF —————</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得对你有帮助</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7rf2ks.com1.z0.glb.clouddn.com/image/general/tip-me-by-wechat.jpeg" alt="tonyrisk WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7rf2ks.com1.z0.glb.clouddn.com/image/general/tip-me-by-alipay.jpeg" alt="tonyrisk Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术/" rel="tag">#技术</a>
+          
+            <a href="/tags/ruby/" rel="tag">#ruby</a>
+          
+            <a href="/tags/bcrypt/" rel="tag">#bcrypt</a>
+          
+            <a href="/tags/加密/" rel="tag">#加密</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/09/learn-css/" rel="next" title="CSS 学习笔记">
+                <i class="fa fa-chevron-left"></i> CSS 学习笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/10/10/div-mask/" rel="prev" title="div做蒙板，遮罩">
+                div做蒙板，遮罩 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2014/09/05/ruby-bcrypt/"
+           data-title="谈谈用户密码存储" data-url="http://www.tonyrisk.top/2014/09/05/ruby-bcrypt/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7rf2ks.com1.z0.glb.clouddn.com/image/avatar/avatar-348.jpg"
+               alt="tonyrisk" />
+          <p class="site-author-name" itemprop="name">tonyrisk</p>
+          <p class="site-description motion-element" itemprop="description">一直努力只想以后可以有选择的自由</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/rss2.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/laoshucheng" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/tonylau1987" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100013354331020" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.weibo.com/niuniucomeback" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/tonyrisk" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/tonyrisk" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              优秀推荐
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yangzhiping.com/" title="阳志平" target="_blank">阳志平</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://coolshell.cn/" title="酷壳" target="_blank">酷壳</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.williamlong.info/" title="月光博客" target="_blank">月光博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://gold.xitu.io" title="稀土掘金" target="_blank">稀土掘金</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MD5"><span class="nav-number">1.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SHA-1"><span class="nav-number">2.</span> <span class="nav-text">SHA-1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MD5和SHA1"><span class="nav-number">3.</span> <span class="nav-text">MD5和SHA1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bcrypt"><span class="nav-number">4.</span> <span class="nav-text">bcrypt</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tonyrisk</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i>本站访问次数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i>本站总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tonyrisk"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

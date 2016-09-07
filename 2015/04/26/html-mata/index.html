@@ -1,0 +1,1065 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="web,html,meta," />
+
+
+
+
+
+  <link rel="alternate" href="/rss2.xml" title="I am tonyrisk" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://7rf2ks.com1.z0.glb.clouddn.com/image/avatar/fav.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 概述HTML 中的 &amp;lt;meta&amp;gt; 标签被包含在 &amp;lt;head&amp;gt; 标签中，是不被用户可见的内容，主要描述了网页的一些元信息。
+meta 最常见的用法就是提供一些关键字和描述使得搜索引擎便于搜集。
+这些元信息都是以键值对的形式被定义，比如：
+&amp;lt;meta name=&quot;keywords&quot; content=&quot;HTML,ASP,PHP,SQL&quot;/&amp;gt;
+其中 name 就是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML 中 meta 标签的妙用">
+<meta property="og:url" content="http://www.tonyrisk.top/2015/04/26/html-mata/index.html">
+<meta property="og:site_name" content="I am tonyrisk">
+<meta property="og:description" content="1. 概述HTML 中的 &amp;lt;meta&amp;gt; 标签被包含在 &amp;lt;head&amp;gt; 标签中，是不被用户可见的内容，主要描述了网页的一些元信息。
+meta 最常见的用法就是提供一些关键字和描述使得搜索引擎便于搜集。
+这些元信息都是以键值对的形式被定义，比如：
+&amp;lt;meta name=&quot;keywords&quot; content=&quot;HTML,ASP,PHP,SQL&quot;/&amp;gt;
+其中 name 就是">
+<meta property="og:updated_time" content="2016-09-07T08:30:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML 中 meta 标签的妙用">
+<meta name="twitter:description" content="1. 概述HTML 中的 &amp;lt;meta&amp;gt; 标签被包含在 &amp;lt;head&amp;gt; 标签中，是不被用户可见的内容，主要描述了网页的一些元信息。
+meta 最常见的用法就是提供一些关键字和描述使得搜索引擎便于搜集。
+这些元信息都是以键值对的形式被定义，比如：
+&amp;lt;meta name=&quot;keywords&quot; content=&quot;HTML,ASP,PHP,SQL&quot;/&amp;gt;
+其中 name 就是">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.tonyrisk.top/2015/04/26/html-mata/"/>
+
+  <title> HTML 中 meta 标签的妙用 | I am tonyrisk </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?36481653da69937b145eecaa2b7c0343";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">I am tonyrisk</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一路走来，一路记录</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                HTML 中 meta 标签的妙用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-26T00:00:00+08:00" content="2015-04-26">
+              2015-04-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/26/html-mata/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/26/html-mata/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i> 本文总阅读量
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>HTML 中的 <code>&lt;meta&gt;</code> 标签被包含在 <code>&lt;head&gt;</code> 标签中，是不被用户可见的内容，主要描述了网页的一些元信息。</p>
+<p>meta 最常见的用法就是提供一些关键字和描述使得搜索引擎便于搜集。</p>
+<p>这些元信息都是以键值对的形式被定义，比如：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"HTML,ASP,PHP,SQL"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>其中 name 就是<code>键</code>，content 就是描述<code>值</code></p>
+<a id="more"></a>
+<h1 id="2-键"><a href="#2-键" class="headerlink" title="2. 键"></a>2. 键</h1><p>meta 描述<code>值</code>只能使用 content 属性，但是表示‘键’却有2个属性：http-equiv 和 name</p>
+<h2 id="2-1-属性：http-equiv"><a href="#2-1-属性：http-equiv" class="headerlink" title="2.1 属性：http-equiv"></a>2.1 属性：http-equiv</h2><p>Web 服务器会把这些由 http-equiv 描述的键值对添加到发送给浏览器的头部(我们最熟悉的头部键值对就是：’content-type: text/html’)</p>
+<p>例如：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"charset"</span> <span class="attr">content</span>=<span class="string">"utf-8"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>那么在浏览器头部至少会有以下信息：</p>
+<pre><code>content-type: text/html
+charset: utf8
+</code></pre><h3 id="取值"><a href="#取值" class="headerlink" title="取值"></a>取值</h3><ul>
+<li><p>content-type：通常都是 <code>text/html</code> 告诉浏览器返回的类型是 html 页面</p>
+  <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=gb2312"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>content-Language：显示语言的设定</p>
+  <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Language"</span> <span class="attr">content</span>=<span class="string">"zh-cn"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>X-UA-Compatible: 设置IE浏览器兼容模式</p>
+  <figure class="highlight html"><table><tr><td class="code"><pre><div class="line">// IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame</div><div class="line">// Chrome Frame可以让旧版IE浏览器使用Chrome的WebKit渲染引擎处理网页，</div><div class="line">// 因此旧版IE用户可以体验到包括HTML5在内的众多现代网页技术</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=Edge;chrome=1"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>expires：设定网页的到期时间。一旦网页过期，必须到服务器上重新传输</p>
+  <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"expires"</span> <span class="attr">content</span>=<span class="string">"Fri,12 Jan 2001 18:18:18 GMT"</span>/&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>refresh：刷新页面/重定向页面</p>
+  <figure class="highlight html"><table><tr><td class="code"><pre><div class="line">// 每五秒刷新页面</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">'refresh'</span> <span class="attr">content</span>=<span class="string">'5'</span>/&gt;</span></div><div class="line"></div><div class="line">// 五秒后跳转到对应url</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">'refresh'</span> <span class="attr">content</span>=<span class="string">'5; url=http://www.baidu.com'</span>/&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>set-cookie：cookie 设定（如果网页过期，那么设置的 cookie 也会无效）</p>
+  <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"set-cookie"</span> <span class="attr">content</span>=<span class="string">"cookievalue=xxx; expires=Friday,12-Jan-2001 18:18:18 GMT; path=/"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>cache-control(<a href="http://baike.baidu.com/view/9238254.htm" target="_blank" rel="external">各种情况下的详解</a>)<br>meta 的 content 常用取值：</p>
+<ul>
+<li>public: 可以 cache 在私有缓存中</li>
+<li>private: 只能 cache 在私有缓存中</li>
+<li>no-cache: 不允许 cache</li>
+<li>no-store: 可以被 cache 但是不存储</li>
+</ul>
+</li>
+<li><p>pragma</p>
+  <figure class="highlight html"><table><tr><td class="code"><pre><div class="line">// 禁止浏览器从本地计算机的缓存中访问页面内容, 将无法脱机浏览</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Pragma"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-2-属性：name"><a href="#2-2-属性：name" class="headerlink" title="2.2 属性：name"></a>2.2 属性：name</h2><p>使用最多的属性，把 content 属性的内容连接到 name，一般搜索引擎就是搜集网页的这些信息，所以 SEO 优化也会在 name 属性上下工夫(如果要 seo <code>&lt;title&gt;</code>标签也很重要哦，常常被搜索引擎收录 title 信息)</p>
+<h3 id="取值-1"><a href="#取值-1" class="headerlink" title="取值"></a>取值</h3><ul>
+<li><p>author：网页的作者，如 <code>&lt;meta name=&#39;author&#39; content=&#39;tony&#39;/&gt;</code></p>
+</li>
+<li><p>description：网页描述，如 <code>&lt;meta name=&#39;description&#39; content=&#39;讲解关于 html 中 meta 标签的用法&#39;/&gt;</code></p>
+</li>
+<li><p>keywords：网页关键字，如 <code>&lt;meta name=&#39;keywords&#39; content=&#39;html meta name content http-equiv&#39;/&gt;</code></p>
+</li>
+<li><p>robots：告诉搜索机器人哪些页面需要索引，哪些页面不需要索引</p>
+  <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"robots"</span> <span class="attr">content</span>=<span class="string">"index,follow"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p><meta> content 取值为：</p>
+<ul>
+<li>all：文件将被检索，且页面上的链接可以被查询；(默认值)</li>
+<li>none：文件将不被检索，且页面上的链接不可以被查询；</li>
+<li>index：文件将被检索；</li>
+<li>follow：页面上的链接可以被查询；</li>
+<li>noindex：文件将不被检索，但页面上的链接可以被查询；</li>
+<li>nofollow：文件将不被检索，页面上的链接可以被查询。</li>
+</ul>
+</li>
+<li><p>generator: 说明网站的采用的什么软件制作</p>
+</li>
+<li><p>copyright: 网站版权信息</p>
+</li>
+</ul>
+<h1 id="3-补充属性-scheme"><a href="#3-补充属性-scheme" class="headerlink" title="3. 补充属性: scheme"></a>3. 补充属性: scheme</h1><p>定义用于翻译 content 属性值的格式</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"revised"</span> <span class="attr">content</span>=<span class="string">"2006-11-03"</span> <span class="attr">scheme</span>=<span class="string">"YYYY-MM-DD"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="4-meta-更多用法"><a href="#4-meta-更多用法" class="headerlink" title="4. meta 更多用法"></a>4. meta 更多用法</h1><p>上文讲的都是基础的 meta 含义。近年来随着移动互联网的发展，伴随着响应式设计，移动网页浏览体验的优化，衍生出更多的 meta 用法</p>
+<h3 id="viewport"><a href="#viewport" class="headerlink" title="viewport"></a>viewport</h3><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>width：宽度（数值 / device-width）（范围从200 到10,000，默认为980 像素）</li>
+<li>height：高度（数值 / device-height）（范围从223 到10,000）</li>
+<li>initial-scale：初始的缩放比例 （范围从&gt;0 到10）</li>
+<li>minimum-scale：允许用户缩放到的最小比例</li>
+<li>maximum-scale：允许用户缩放到的最大比例</li>
+<li><p>user-scalable：用户是否可以手动缩 (no,yes)</p>
+<p><strong>如果不是响应式网站，不要使用 initial-scale 或者禁用缩放</strong><br>【注】使用 initial-scale=1 到非响应式网站上，这会让网站以100%宽度渲染，用户需要手动移动页面或者缩放；如果和 initial-scale=1 同时使用 user-scalable=no 或 maximum-scale=1，则用户将不能放大/缩小网页来看到全部的内容</p>
+</li>
+</ul>
+<h3 id="email-telephone-支持"><a href="#email-telephone-支持" class="headerlink" title="email/telephone 支持"></a>email/telephone 支持</h3><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"format-detection"</span> <span class="attr">content</span>=<span class="string">"telephone=yes"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"format-detection"</span> <span class="attr">content</span>=<span class="string">"email=yes"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="ios-独有支持"><a href="#ios-独有支持" class="headerlink" title="ios 独有支持"></a>ios 独有支持</h3><figure class="highlight html"><table><tr><td class="code"><pre><div class="line">// 可以添加网页到桌面</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-capable"</span> <span class="attr">content</span>=<span class="string">"yes"</span> /&gt;</span></div><div class="line"></div><div class="line">// 只有在开启WebApp全屏模式时才生效。content的值为default | black | black-translucent</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-status-bar-style"</span> <span class="attr">content</span>=<span class="string">"black-translucent"</span> /&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-title"</span> <span class="attr">content</span>=<span class="string">"标题"</span>&gt;</span></div><div class="line"></div><div class="line">// 添加智能 App 广告条 Smart App Banner：告诉浏览器这个网站对应的app，并在页面上显示下载banner</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-itunes-app"</span> <span class="attr">content</span>=<span class="string">"app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="一些移动特定浏览器上的支持"><a href="#一些移动特定浏览器上的支持" class="headerlink" title="一些移动特定浏览器上的支持"></a>一些移动特定浏览器上的支持</h3><figure class="highlight html"><table><tr><td class="code"><pre><div class="line">// 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"HandheldFriendly"</span> <span class="attr">content</span>=<span class="string">"true"</span>&gt;</span></div><div class="line"></div><div class="line">// 微软的老式浏览器</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"MobileOptimized"</span> <span class="attr">content</span>=<span class="string">"320"</span>&gt;</span></div><div class="line"></div><div class="line">// uc强制竖屏</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"screen-orientation"</span> <span class="attr">content</span>=<span class="string">"portrait"</span>&gt;</span></div><div class="line"></div><div class="line">// QQ强制竖屏</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-orientation"</span> <span class="attr">content</span>=<span class="string">"portrait"</span>&gt;</span></div><div class="line"></div><div class="line">// UC强制全屏</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"full-screen"</span> <span class="attr">content</span>=<span class="string">"yes"</span>&gt;</span></div><div class="line"></div><div class="line">// QQ强制全屏</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-fullscreen"</span> <span class="attr">content</span>=<span class="string">"true"</span>&gt;</span></div><div class="line"></div><div class="line">// UC应用模式</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"browsermode"</span> <span class="attr">content</span>=<span class="string">"application"</span>&gt;</span></div><div class="line"></div><div class="line">// QQ应用模式</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-page-mode"</span> <span class="attr">content</span>=<span class="string">"app"</span>&gt;</span></div><div class="line"></div><div class="line">// windows phone 点击无高光</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-tap-highlight"</span> <span class="attr">content</span>=<span class="string">"no"</span>&gt;</span></div><div class="line"></div><div class="line">// Windows 8 磁贴颜色</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-TileColor"</span> <span class="attr">content</span>=<span class="string">"#000"</span>/&gt;</span></div><div class="line"></div><div class="line">// Windows 8 磁贴图标</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-TileImage"</span> <span class="attr">content</span>=<span class="string">"icon.png"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="浏览器内核控制"><a href="#浏览器内核控制" class="headerlink" title="浏览器内核控制"></a>浏览器内核控制</h3><p>国内浏览器很多都是双内核: <a href="http://se.360.cn/v6/help/meta.html" target="_blank" rel="external">介绍说明</a></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"renderer"</span> <span class="attr">content</span>=<span class="string">"webkit|ie-comp|ie-stand"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="转码申明"><a href="#转码申明" class="headerlink" title="转码申明:"></a>转码申明:</h3><p>用百度打开网页可能会对其进行转码（比如贴广告），避免转码可添加如下meta</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Cache-Control"</span> <span class="attr">content</span>=<span class="string">"no-siteapp"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="Open-Graph-Protocol"><a href="#Open-Graph-Protocol" class="headerlink" title="Open Graph Protocol"></a>Open Graph Protocol</h3><p>这种协议由 Facebook 在 F8 上提出。遵循这个协议的可以让网页成为一个“富媒体对象”，用了Meta Property=og标签，<br>就是你同意了网页内容可以被其他社会化网站引用等，目前这种协议被SNS网站如Fackbook、renren采用。<br>虽然有些内容和 meta 一些值重复，但是不能替代 meta，因为完全就是两个概念(<a href="http://ogp.me/" target="_blank" rel="external">点击查看</a>)</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:type"</span> <span class="attr">content</span>=<span class="string">"website"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:site_name"</span> <span class="attr">content</span>=<span class="string">"xxxxx"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>———– EOF —————</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得对你有帮助</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7rf2ks.com1.z0.glb.clouddn.com/image/general/tip-me-by-wechat.jpeg" alt="tonyrisk WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7rf2ks.com1.z0.glb.clouddn.com/image/general/tip-me-by-alipay.jpeg" alt="tonyrisk Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web/" rel="tag">#web</a>
+          
+            <a href="/tags/html/" rel="tag">#html</a>
+          
+            <a href="/tags/meta/" rel="tag">#meta</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/20/restfull-api/" rel="next" title="谈谈 Restful API">
+                <i class="fa fa-chevron-left"></i> 谈谈 Restful API
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/05/28/js-module/" rel="prev" title="js的模块化">
+                js的模块化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/04/26/html-mata/"
+           data-title="HTML 中 meta 标签的妙用" data-url="http://www.tonyrisk.top/2015/04/26/html-mata/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7rf2ks.com1.z0.glb.clouddn.com/image/avatar/avatar-348.jpg"
+               alt="tonyrisk" />
+          <p class="site-author-name" itemprop="name">tonyrisk</p>
+          <p class="site-description motion-element" itemprop="description">一直努力只想以后可以有选择的自由</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/rss2.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/laoshucheng" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/tonylau1987" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100013354331020" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.weibo.com/niuniucomeback" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/tonyrisk" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/tonyrisk" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              优秀推荐
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yangzhiping.com/" title="阳志平" target="_blank">阳志平</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://coolshell.cn/" title="酷壳" target="_blank">酷壳</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.williamlong.info/" title="月光博客" target="_blank">月光博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://gold.xitu.io" title="稀土掘金" target="_blank">稀土掘金</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-概述"><span class="nav-number">1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-键"><span class="nav-number">2.</span> <span class="nav-text">2. 键</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-属性：http-equiv"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 属性：http-equiv</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#取值"><span class="nav-number">2.1.1.</span> <span class="nav-text">取值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-属性：name"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 属性：name</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#取值-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">取值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-补充属性-scheme"><span class="nav-number">3.</span> <span class="nav-text">3. 补充属性: scheme</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-meta-更多用法"><span class="nav-number">4.</span> <span class="nav-text">4. meta 更多用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#viewport"><span class="nav-number">4.0.1.</span> <span class="nav-text">viewport</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#email-telephone-支持"><span class="nav-number">4.0.2.</span> <span class="nav-text">email/telephone 支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-独有支持"><span class="nav-number">4.0.3.</span> <span class="nav-text">ios 独有支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些移动特定浏览器上的支持"><span class="nav-number">4.0.4.</span> <span class="nav-text">一些移动特定浏览器上的支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器内核控制"><span class="nav-number">4.0.5.</span> <span class="nav-text">浏览器内核控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转码申明"><span class="nav-number">4.0.6.</span> <span class="nav-text">转码申明:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Open-Graph-Protocol"><span class="nav-number">4.0.7.</span> <span class="nav-text">Open Graph Protocol</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tonyrisk</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i>本站访问次数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i>本站总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tonyrisk"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

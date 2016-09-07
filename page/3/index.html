@@ -192,16 +192,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
@@ -218,6 +208,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -293,7 +293,7 @@
             
               
                 
-                <a class="post-title-link" href="/2014/11/05/ruby-bcrypt/" itemprop="url">
+                <a class="post-title-link" href="/2014/09/05/ruby-bcrypt/" itemprop="url">
                   谈谈用户密码存储
                 </a>
               
@@ -307,8 +307,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-11-05T00:00:00+08:00" content="2014-11-05">
-              2014-11-05
+            <time itemprop="dateCreated" datetime="2014-09-05T00:00:00+08:00" content="2014-09-05">
+              2014-09-05
             </time>
           </span>
 
@@ -318,8 +318,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/11/05/ruby-bcrypt/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/05/ruby-bcrypt/" itemprop="commentsCount"></span>
+                <a href="/2014/09/05/ruby-bcrypt/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/05/ruby-bcrypt/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -343,53 +343,13 @@
 
       
         
-          
-            <h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>以前在开发游戏的时候，玩家的密码经常被我们明文保存在数据库中:)，但是想到在其他游戏内或者网站中，他们也如此对待我的密码，思之极恐啊 :( 。因为大部分人一个密码走天下，如果在一个地方密码泄露了，那么你的微博，微信，qq，邮箱等等全部沦陷。</p>
+          <p>以前在开发游戏的时候，玩家的密码经常被我们明文保存在数据库中 :)，但是想到在其他游戏内或者网站中，他们也如此对待我的密码，思之极恐啊  :( 。因为大部分人一个密码走天下，如果在一个地方密码泄露了，那么你的微博，微信，qq，邮箱等等全部沦陷。</p>
 <p>而最近我正好在搭建电商网站，于是就涉及到相关问题，今天就好好来理理这个问题。</p>
-<!--break-->
-<p>对密码处理呢，一般处于三种考虑</p>
-<ol>
-<li>保证用户数据安全，比如一些网银，密码太重要了！一个不小心就是经济损失</li>
-<li>我们是正经人，是君子，虽然我们能看到你的密码，但是我们绝对不看，所以我们经过一定算法产生无意义的字符串后存储。</li>
-<li>万一我们技不如人，或者被竞争对手攻击导致资料外泄，那么别人拿到的密码，也猜不出用户的原码，所以对用户还是安全的。有木有很负责啊！</li>
-</ol>
-<p>先看下业务模型：</p>
-<ul>
-<li><p>a. 用户注册时在网页上输入密码（此时常常显示<em>**，其实只是安慰用户，实际上只是显示为</em>而已，只是显示）</p>
-</li>
-<li><p>b. 用户点击确定，前端就通过post方法将密码发送到服务器（众多周知用get会在地址栏中看到明文密码。但是post报文中只要用一些能查看http request的工具还是能看到，比如chrome自带的开发者工具）</p>
-</li>
-<li><p>c. 服务器收到密码后存储（有良心的，对密码加密下，否则只要有数据库权限的人都能看到每个用户的密码，甚至如果数据库被黑了，泄漏了，那就使得所有用户的密码红果果地暴露在光天化日之下啊）</p>
-</li>
-</ul>
-<p>所以针对上面的流程，安全的做法应该是：</p>
-<ul>
-<li><p>a. 使用浏览器密码控件，保证输入安全</p>
-</li>
-<li><p>b. 有别于http协议（http协议是明文）使用https协议，保证网络传输安全</p>
-</li>
-<li><p>c. 对密码加密后存储</p>
-</li>
-</ul>
-<p>浏览器插件和https协议此文不详细展开，这里主要看看怎么加密。</p>
-<p>现在比较流行的是md5，sha-1或者两者结合，再安全一点就配合salt一起。</p>
-<p>md5，sha1，salt都是啥啊？嗯，其实我也不太清楚，最近看到过这些字母是在微信开发api中，所以我特意去了解了下。</p>
-<p>严格来说md5，sha1都不是加密技术，只是哈希算法，具体解释请继续阅读：</p>
-<h1 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h1><p>MD5，全称Message Digest Algorithm 5（中文叫消息摘要算法第五版，所以有md2，md3，md4各个历史版本）。<br><code>基础原理是将数据（比如一段文字）运算后变为一固定长度（128位）的值。</code><br>经过md5算法的过程是不可逆的，即知道结果字符串和md5的算法也不能倒推出原来的数据是什么。<br>两个不一样的数据经过md5算法后产生的结果如果一致，那么就是’哈希冲突’。<br>在2004年之前（后文会说明这个时间点），一致认为md5产生的值是唯一的，可当作‘数字签名’(数字指纹)。</p>
-<p><strong>用法一：</strong>用来确保资料在传输过程中的完整性。比如服务器预先提供一个MD5校验和，用户下载完文件以后，用MD5算法计算下载文件的MD5校验和，然后通过检查这两个校验和是否一致，就能判断下载的文件是否出错。</p>
-<p><strong>用法二：</strong>广泛用于操作系统的登陆认证上。如在Unix系统中用户的密码是以MD5（或其它类似的算法）经Hash运算后存储在文件系统中。当用户登录的时候，系统把用户输入的密码进行MD5 Hash运算，然后再去和保存在文件系统中的MD5值进行比较，进而确定输入的密码是否正确。通过这样的步骤，系统在并不知道用户密码的明码的情况下就可以确定用户登录系统的合法性。</p>
-<p>值得骄傲的是2004年，我国的王小云教授和她的团队公布了MD系列算法的哈希冲突，即不同的数据能够产生相同的Hash值，也就是说，可以找到两份具有相同数字手印的不同电子文件。从理论上说明md5的不安全性，但是实际中md5产生相同的概率极低。</p>
-<h1 id="SHA-1"><a href="#SHA-1" class="headerlink" title="SHA-1"></a>SHA-1</h1><p>SHA，全称Secure Hash Algorithm（安全哈希算法），对于长度小于2^64位的消息，SHA1会产生一个160位的消息摘要。用法和原理与MD5类似，也是不可逆的，都是用于数字签名，判断数据完整性。SHA1曾被视为是MD5的后继者，不过王小云教授还是证明虽然较为困难，但是还是出现了哈希碰撞的发生。<br>但是目前还没有SHA2（SHA-224, SHA-256, SHA-384和SHA-512，它们生成的摘要密文分别就是224,256,384,512位）SHA2的破解新闻。</p>
-<h1 id="MD5和SHA1"><a href="#MD5和SHA1" class="headerlink" title="MD5和SHA1"></a>MD5和SHA1</h1><p>md5和sha1被证明不同的数据能产生同一个值的影响是什么呢？最直接的就是签名的不安全，比如有人可以伪造我的密码登陆系统。在实际应用过程中，其实没有太多意义，你想啊，这和猜你的密码有啥区别，还不如试着破解你的密码来的高效，应该大部分人的密码都是有规律的，什么姓名生日等的组合。</p>
-<p>现在通行的破解做法是穷举字典暴力破解法，通过把字典中罗列的密码经过md5算法处理后得到的字符串和目标对比倒推出原文。进阶一点的把常用密码的常见组合进行单向哈希，得到一个摘要组合来对比，这个组合就是俗称的彩虹表。</p>
-<p>md5，sha1，sha2因为结果位数越来越长，安全性也越来越高，当然消耗的计算量也是越来越大，所以一般的密码使用md5已经是够了。</p>
-<p>综上，还算安全的做法是产生一个固定较长的随机数salt1，和随机salt2（比如主键），和用户密码一起，经过md5的计算。比如密码是123456，salt1是x1y1z1，sal2是234355，组成字符串’123456x1y1z1234355’，再经过个几次（apache迭代了1000次）md5运算基本就已经算是安全了，当然也要确保salt避免被泄漏。当然还要加强应用安全，如输错三次就暂时锁定等。<br>目前大部分的网站都是用此种方式，而知乎用的是bcrypt。</p>
-<p>#bcrypt</p>
-<p>bcrypt是专门为密码存储而设计的算法，基于Blowfish加密算法变形而来，由Niels Provos和David Mazières发表于1999年的USENIX。<br>bcrypt最大的好处是有一个参数（work factor)，可用于调整计算强度，而且work factor是包括在输出的摘要中的。随着攻击者计算能力的提高，使用者可以逐步增大work factor，而且不会影响已有用户的登陆。<br>bcrypt经过了很多安全专家的仔细分析，使用在以安全著称的OpenBSD中，一般认为它比PBKDF2更能承受随着计算能力加强而带来的风险。bcrypt也有广泛的函数库支持，因此我们建议使用这种方式存储密码。</p>
-<p>但是！bcrypt比md5和sha1的消耗都要大，如果用默认的work factor＝10，计算一次将消耗0.3秒。</p>
-<p>———– EOF —————</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/05/ruby-bcrypt/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -437,7 +397,7 @@
             
               
                 
-                <a class="post-title-link" href="/2014/10/20/learn-css/" itemprop="url">
+                <a class="post-title-link" href="/2014/08/09/learn-css/" itemprop="url">
                   CSS 学习笔记
                 </a>
               
@@ -451,8 +411,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-10-20T00:00:00+08:00" content="2014-10-20">
-              2014-10-20
+            <time itemprop="dateCreated" datetime="2014-08-09T00:00:00+08:00" content="2014-08-09">
+              2014-08-09
             </time>
           </span>
 
@@ -462,8 +422,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/10/20/learn-css/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/20/learn-css/" itemprop="commentsCount"></span>
+                <a href="/2014/08/09/learn-css/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/09/learn-css/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -487,8 +447,7 @@
 
       
         
-          
-            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>HTML语言定义了一个网页需要展示的内容，而CSS则定义了这些元素的展示样式；比如，大小，颜色，布局等等。<br>所以CSS内容主要就围绕怎么对样式进行操作：</p>
+          <p>HTML语言定义了一个网页需要展示的内容，而CSS则定义了这些元素的展示样式；比如，大小，颜色，布局等等。<br>所以CSS内容主要就围绕怎么对样式进行操作：</p>
 <pre><code>selector {
     property1: value1;
     property2: value2;
@@ -499,105 +458,12 @@
 selector: 选择器
 property: 属性
 value: 属性值
-</code></pre><ol>
-<li><p>选择元素：选择要操作的HTML元素</p>
-<ul>
-<li>需要改变样式的HTML元素，如 <code>h1</code> 等</li>
-<li>也可以分组，每个元素之间用逗号分割，如 <code>h1,h2,h3</code>；</li>
-<li>子元素默认继承父元素的样式</li>
-</ul>
-</li>
-<li><p>各种属性：比如边框，字体，高度，大小</p>
-<ul>
-<li>想要设置的样式，如 <code>color</code>，<code>font-size</code> 等</li>
-</ul>
-</li>
-<li><p>各种属性值：颜色值，solid（边框样式）等</p>
-<ul>
-<li>如<code>red</code>，<code>#f00</code>, <code>&quot;sans serif&quot;</code>等</li>
-<li>如果值为若干单词，则要给值加<strong>引号</strong></li>
-</ul>
-</li>
-</ol>
-<h1 id="生效优先级"><a href="#生效优先级" class="headerlink" title="生效优先级"></a>生效优先级</h1><p>当同一个 HTML 元素被不止一个样式定义时，会按下面优先顺序执行（4优先级最高）</p>
-<ol>
-<li>浏览器缺省设置</li>
-<li>外部样式表</li>
-<li>内部样式表（位于 <head> 标签内部）</head></li>
-<li>内联样式（在 HTML 元素内部）</li>
-</ol>
-<!--break-->
-<h1 id="选择器分类"><a href="#选择器分类" class="headerlink" title="选择器分类"></a>选择器分类</h1><p><a href="http://www.w3school.com.cn/cssref/css_selectors.asp" target="_blank" rel="external">查看更多</a></p>
-<ul>
-<li>通用选择器：<code>*</code> 对所有元素都生效</li>
-<li>派生选择器：如 <code>li strong</code> 当 li 下有 strong 元素则生效</li>
-<li>id选择器: 如<code>#test</code> 对 id=’test’ 的元素生效</li>
-<li>id选择器-派生选择器: 如<code>#test strong</code> 对 id=’test’ 下的 strong 元素生效</li>
-<li>派生选择器-id选择器: 如<code>div#test</code> 对 div 中 id=’test’ 的元素生效</li>
-<li>类选择器: 如<code>.test</code> 对 class=’test’ 的元素生效（<strong>类名的第一个字符不能使用数字</strong>）</li>
-<li>类选择器-派生选择器: 如<code>.test strong</code> 对 class=’test’ 下的 strong 元素生效</li>
-<li>派生选择器-类选择器: 如<code>div.test</code> 对 div 中 class=’test’ 的元素生效</li>
-<li>属性选择器: 不仅仅局限于 id 和 class 属性而选择（只有在规定了 !DOCTYPE 时，IE7 和 IE8 才支持属性选择器）,<a href="http://www.w3school.com.cn/css/css_syntax_attribute_selector.asp" target="_blank" rel="external">更多介绍</a></li>
-</ul>
-<h1 id="CSS属性note"><a href="#CSS属性note" class="headerlink" title="CSS属性note"></a>CSS属性note</h1><p><a href="http://www.w3school.com.cn/cssref/index.asp" target="_blank" rel="external">查看更多</a></p>
-<ul>
-<li>font-family 属性应该使用若干种字体名称作为回退系统，以确保最大兼容性，<a href="http://www.w3school.com.cn/cssref/css_websafe_fonts.asp" target="_blank" rel="external">常用字体</a></li>
-<li>CSS中的单位参考 <a href="http://www.w3school.com.cn/cssref/css_units.asp" target="_blank" rel="external">点击查看</a></li>
-<li>背景设置相关：如背景颜色，背景图片，背景位置等 <a href="http://www.w3school.com.cn/css/css_background.asp" target="_blank" rel="external">参考</a></li>
-<li>文本设置相关：如文本的颜色、字符间距，对齐，装饰文本，对文本进行缩进等 <a href="http://www.w3school.com.cn/css/css_text.asp" target="_blank" rel="external">参考</a></li>
-<li>字体设置相关：如字体、大小，风格等 <a href="http://www.w3school.com.cn/css/css_font.asp" target="_blank" rel="external">参考</a>, <a href="http://www.w3school.com.cn/cssref/css_websafe_fonts.asp" target="_blank" rel="external">网络安全字体组合</a>，CSS3还能提供自定义字体功能（下文会提到）</li>
-<li>链接设置相关：除了常规设置外，还可以根据链接不同时候的状态进行设置 <a href="http://www.w3school.com.cn/css/css_link.asp" target="_blank" rel="external">参考</a></li>
-<li>列表设置相关：<a href="http://www.w3school.com.cn/css/css_list.asp" target="_blank" rel="external">参考</a></li>
-<li>表格设置相关：<a href="http://www.w3school.com.cn/css/css_table.asp" target="_blank" rel="external">参考</a></li>
-<li>轮廓设置相关：<a href="http://www.w3school.com.cn/css/css_outline.asp" target="_blank" rel="external">参考</a></li>
-</ul>
-<h1 id="框模型（Box-Model）"><a href="#框模型（Box-Model）" class="headerlink" title="框模型（Box Model）"></a>框模型（Box Model）</h1><p>规定了元素框处理元素内容、内边距、边框 和 外边距 的方式</p>
-<p><img src="http://www.w3school.com.cn/i/ct_boxmodel.gif"></p>
-<ul>
-<li><code>内边距</code> 直接包围内容，内边距呈现了元素的背景</li>
-<li>内边距的边缘是<code>边框</code></li>
-<li>边框以外是<code>外边距</code>，外边距默认是透明的，因此不会遮挡其后的任何元素，外边距可以是负值</li>
-<li><code>背景</code>应用于由内容和内边距、边框组成的区域</li>
-<li><code>内边距</code>、<code>边框</code>和<code>外边距</code>可以应用于一个元素的所有边，也可以应用于单独的边</li>
-<li><p>默认按照<code>上、右、下、左</code>的顺序来设置框模型，如：</p>
-<pre><code>h1 {padding: 10px 0.25em 2ex 20%;}
-</code></pre></li>
-<li><p>外边距合并：当两个垂直外边距相遇时，它们将形成一个外边距。合并后的外边距的高度等于两个发生合并的外边距的高度中的较大者。</p>
-<p>  <img src="http://www.w3school.com.cn/i/ct_css_margin_collapsing_example_1.gif"></p>
-<p>  <strong>只有普通文档流中块框的垂直外边距才会发生外边距合并。行内框、浮动框或绝对定位之间的外边距不会合并</strong></p>
-</li>
-</ul>
-<h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p>定位是很重要的功能，操作页面元素的布局，决定一个元素是在左边还是右边，是叠加在另一个元素上，还是被其他元素覆盖。</p>
-<p>甚至能决定是相对定位（比如在父元素居中），或者是绝对定位（比如在页面的三分之一处）。</p>
-<h2 id="块"><a href="#块" class="headerlink" title="块"></a>块</h2><p>说起定位，我们还不得不提<code>块</code>的概念。像<code>&lt;div&gt;</code>,<code>&lt;p&gt;</code>,<code>&lt;h1&gt;</code>等，这些叫<code>块级内容</code>，有这些属性的一定会和其他元素换行显示。而<code>&lt;span&gt;</code>,<code>&lt;b&gt;</code>称为<code>行内块</code>，可以和同是行内块的元素显示在一行中。</p>
-<p>控制这一行为的是<code>display</code>属性，常用取值为：<code>inline</code>(行内块)、<code>block</code>(块级内容)、<code>none</code>(不显示元素)。</p>
-<p>块级内容，一行接着一行显示，之间的垂直距离由框的<code>外边距</code>计算而得。</p>
-<p>行内块，一行中水平布局，框模型中的水平取值都能生效，但是垂直属性不会影响行内块。当前行所在的快元素的高度默认是足以容纳所有元素，但是也可以手动设置来获得更佳的高度。</p>
-<p>比如 <div style="display:inline"> ，这个div本来默认表现是块级内容，但是现在改成行内块的行为。</div></p>
-<h2 id="主要属性"><a href="#主要属性" class="headerlink" title="主要属性"></a>主要属性</h2><p><a href="http://www.w3school.com.cn/css/css_positioning.asp" target="_blank" rel="external">查看更多</a></p>
-<ul>
-<li>position：relative，absolute（相对网页文档），fixed（相对视窗），static</li>
-<li>top/bottom/right/left：元素外边框和其父快的偏移</li>
-<li>overflow：定义溢出内容的呈现方式，默认会出现滚动条</li>
-<li>z-index：叠加关系</li>
-<li>vertical-align：垂直对其方式</li>
-<li>clip：剪影显示</li>
-<li>float：元素浮动，<a href="http://www.w3school.com.cn/css/css_positioning_floating.asp" target="_blank" rel="external">详情</a></li>
-</ul>
-<h1 id="CSS3-新增属性"><a href="#CSS3-新增属性" class="headerlink" title="CSS3 新增属性"></a>CSS3 新增属性</h1><ul>
-<li>边框：border-radius(圆角边框), box-shadow(添加投影), borde-image(使用图片绘制边框) 等, <a href="http://www.w3school.com.cn/css3/css3_border.asp" target="_blank" rel="external">更多</a></li>
-<li>背景：background-size(背景图片尺寸), background-origin(规定背景图片的定位区域，放在框模型三个box中的哪一个) 等, <a href="http://www.w3school.com.cn/css3/css3_background.asp" target="_blank" rel="external">更多</a></li>
-<li>文本：text-shadow(给文字添加阴影), word-wrap(文字自动换行，会拆开单词) 等, <a href="http://www.w3school.com.cn/css3/css3_text_effect.asp" target="_blank" rel="external">更多</a></li>
-<li>字体：可以自定义字体，然后把字体放在服务器上，浏览器会自动下载 <a href="http://www.w3school.com.cn/css3/css3_font.asp" target="_blank" rel="external">更多</a></li>
-<li>更多2D, 3D操作：<a href="http://www.w3school.com.cn/css3/css3_2dtransform.asp" target="_blank" rel="external">2D</a>，<a href="http://www.w3school.com.cn/css3/css3_3dtransform.asp" target="_blank" rel="external">3D</a></li>
-<li>过渡：使元素从一个样式过渡到另一个样式，可以做出很炫的动画，<a href="http://www.w3school.com.cn/css3/css3_transition.asp" target="_blank" rel="external">更多</a></li>
-<li>动画：animation和@keyframes，来创建动画效果，<a href="http://www.w3school.com.cn/css3/css3_animation.asp" target="_blank" rel="external">更多</a></li>
-<li>多列：CSS3中可以操作div对象就像table一样，按照我们的要求来排版，<a href="http://www.w3school.com.cn/css3/css3_multiple_columns.asp" target="_blank" rel="external">更多</a></li>
-<li>用户界面：CSS3提供更多的属性才改变框模型，<a href="http://www.w3school.com.cn/css3/css3_user_interface.asp" target="_blank" rel="external">更多</a></li>
-</ul>
-<p>———– EOF —————</p>
-
-          
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/09/learn-css/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -645,8 +511,8 @@ value: 属性值
             
               
                 
-                <a class="post-title-link" href="/2014/10/19/update-tech-path/" itemprop="url">
-                  个人技术Path
+                <a class="post-title-link" href="/2014/07/08/update-tech-path/" itemprop="url">
+                  个人技术 Path
                 </a>
               
             
@@ -659,8 +525,8 @@ value: 属性值
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-10-19T00:00:00+08:00" content="2014-10-19">
-              2014-10-19
+            <time itemprop="dateCreated" datetime="2014-07-08T00:00:00+08:00" content="2014-07-08">
+              2014-07-08
             </time>
           </span>
 
@@ -670,8 +536,8 @@ value: 属性值
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/10/19/update-tech-path/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/19/update-tech-path/" itemprop="commentsCount"></span>
+                <a href="/2014/07/08/update-tech-path/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/08/update-tech-path/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -695,102 +561,12 @@ value: 属性值
 
       
         
-          
-            <p>常年累月，你总要知道时间献给了哪些技术</p>
-<!--break-->
-<h1 id="2009-07-大三开始实习到毕业后工作（当然在同一家公司）"><a href="#2009-07-大三开始实习到毕业后工作（当然在同一家公司）" class="headerlink" title="2009.07 大三开始实习到毕业后工作（当然在同一家公司）"></a>2009.07 大三开始实习到毕业后工作（当然在同一家公司）</h1><h2 id="阶段1–没经验的小菜鸟"><a href="#阶段1–没经验的小菜鸟" class="headerlink" title="阶段1–没经验的小菜鸟"></a>阶段1–没经验的小菜鸟</h2><ul>
-<li>emacs</li>
-<li>C/C++</li>
-<li>lua</li>
-<li>ruby</li>
-<li>makefile</li>
-<li>gdb</li>
-<li>valgrind</li>
-<li>linux命令和bash脚本</li>
-</ul>
-<h2 id="阶段2–开始搞前端"><a href="#阶段2–开始搞前端" class="headerlink" title="阶段2–开始搞前端"></a>阶段2–开始搞前端</h2><ul>
-<li>flash as3</li>
-</ul>
-<h1 id="2012-04-换了一家公司"><a href="#2012-04-换了一家公司" class="headerlink" title="2012.04 换了一家公司"></a>2012.04 换了一家公司</h1><h2 id="阶段1–维护老游戏"><a href="#阶段1–维护老游戏" class="headerlink" title="阶段1–维护老游戏"></a>阶段1–维护老游戏</h2><ul>
-<li>flex</li>
-<li>php</li>
-<li>java</li>
-</ul>
-<h2 id="阶段2–开发新游戏"><a href="#阶段2–开发新游戏" class="headerlink" title="阶段2–开发新游戏"></a>阶段2–开发新游戏</h2><ul>
-<li>c++</li>
-<li>as3</li>
-</ul>
-<h2 id="阶段3–开发新手游"><a href="#阶段3–开发新手游" class="headerlink" title="阶段3–开发新手游"></a>阶段3–开发新手游</h2><ul>
-<li>cocos2dx</li>
-<li>js</li>
-<li>c++</li>
-</ul>
-<h1 id="2014-07-01辞职创业"><a href="#2014-07-01辞职创业" class="headerlink" title="2014.07.01辞职创业"></a>2014.07.01辞职创业</h1><h2 id="阶段1–技术调研阶段"><a href="#阶段1–技术调研阶段" class="headerlink" title="阶段1–技术调研阶段"></a>阶段1–技术调研阶段</h2><ul>
-<li><p>使用git管理项目</p>
-</li>
-<li><p>使用U3D技术</p>
-<ul>
-<li>U3D和iOS UIKit结合</li>
-<li>U3D的ui库: NGUI</li>
-<li>TexturePaker的使用</li>
-</ul>
-</li>
-<li><p>cocos2d</p>
-<ul>
-<li>cocos2d和box2d</li>
-<li>cocos2d和iOS UIKit</li>
-<li>TexturePaker的使用</li>
-</ul>
-</li>
-</ul>
-<h2 id="阶段2–开发IOS-app"><a href="#阶段2–开发IOS-app" class="headerlink" title="阶段2–开发IOS app"></a>阶段2–开发IOS app</h2><ul>
-<li>dash</li>
-<li>objective-c</li>
-<li>swift</li>
-<li>storyboard</li>
-<li>ppi/dpi</li>
-</ul>
-<h2 id="阶段3–开发web服务器"><a href="#阶段3–开发web服务器" class="headerlink" title="阶段3–开发web服务器"></a>阶段3–开发web服务器</h2><ul>
-<li>restfull设计</li>
-<li>cookie、session了解</li>
-<li>ruby,rum,gems,bundle,rackup,rake</li>
-<li>sinatra</li>
-<li>mongodb</li>
-<li>mongoid（autoid）</li>
-<li>carriewave-mongoid</li>
-<li>redist</li>
-<li>curl 简单模拟web访问</li>
-<li>nginx</li>
-<li>压力测试<ul>
-<li>ab</li>
-<li>http_load</li>
-</ul>
-</li>
-</ul>
-<h2 id="阶段4–开发产品后台管理系统"><a href="#阶段4–开发产品后台管理系统" class="headerlink" title="阶段4–开发产品后台管理系统"></a>阶段4–开发产品后台管理系统</h2><ul>
-<li>html/css/js/jquery/ajax</li>
-<li>haml</li>
-<li>coffeescript</li>
-</ul>
-<h2 id="阶段5–集成各个第三方平台"><a href="#阶段5–集成各个第三方平台" class="headerlink" title="阶段5–集成各个第三方平台"></a>阶段5–集成各个第三方平台</h2><ul>
-<li>auth2.0</li>
-<li>wxpay</li>
-<li>alipay</li>
-<li>云通讯sdk</li>
-<li>数据分析</li>
-<li>百度统计</li>
-<li>flurry</li>
-</ul>
-<h2 id="阶段6–搭建电商、重筹网站"><a href="#阶段6–搭建电商、重筹网站" class="headerlink" title="阶段6–搭建电商、重筹网站"></a>阶段6–搭建电商、重筹网站</h2><ul>
-<li>bootstrap</li>
-<li>ruby on rails</li>
-</ul>
-<h2 id="阶段7–-Idea问答社区"><a href="#阶段7–-Idea问答社区" class="headerlink" title="阶段7– Idea问答社区"></a>阶段7– Idea问答社区</h2><ul>
-<li>uikit (一个和bootstrap一样的前端框架)</li>
-</ul>
-<p>———– EOF —————</p>
-
-          
+          <p>常年累月，你总要知道时间献给了哪些技术。所以这里记录一些个人接触过的技术大纲</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/07/08/update-tech-path/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -838,7 +614,7 @@ value: 属性值
             
               
                 
-                <a class="post-title-link" href="/2014/10/12/learn-html-3/" itemprop="url">
+                <a class="post-title-link" href="/2014/06/29/learn-html-3/" itemprop="url">
                   HTML的学习笔记(三)
                 </a>
               
@@ -852,8 +628,8 @@ value: 属性值
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-10-12T00:00:00+08:00" content="2014-10-12">
-              2014-10-12
+            <time itemprop="dateCreated" datetime="2014-06-29T00:00:00+08:00" content="2014-06-29">
+              2014-06-29
             </time>
           </span>
 
@@ -863,8 +639,8 @@ value: 属性值
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/10/12/learn-html-3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/12/learn-html-3/" itemprop="commentsCount"></span>
+                <a href="/2014/06/29/learn-html-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/06/29/learn-html-3/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -888,18 +664,17 @@ value: 属性值
 
       
         
-          
-            <h1 id="知识点分类"><a href="#知识点分类" class="headerlink" title="知识点分类"></a>知识点分类</h1><ol>
-<li><p>标签（<a href="http://www.w3school.com.cn/tags/html_ref_byfunc.asp" target="_blank" rel="external">完整标签手册</a>）</p>
+          <h1 id="知识点分类"><a href="#知识点分类" class="headerlink" title="知识点分类"></a>知识点分类</h1><ol>
+<li><p>标签（<a href="http://www.w3school.com.cn/tags/html_ref_byfunc.asp">完整标签手册</a>）</p>
 <pre><code>HTML有众多标签，如文档类的 &lt;h1&gt;，显示连接的 &lt;a&gt; ，图片 &lt;img&gt; 等；
 </code></pre></li>
-<li><p>标签属性（<a href="http://www.w3school.com.cn/tags/html_ref_standardattributes.asp" target="_blank" rel="external">完整的属性手册</a>）</p>
+<li><p>标签属性（<a href="http://www.w3school.com.cn/tags/html_ref_standardattributes.asp">完整的属性手册</a>）</p>
 <pre><code>每个标签有不同的属性，比较常用有：表示样式表中类名的class，标识唯一的id，html5新出来的用来存储私有定制数据的data-*
 </code></pre></li>
-<li><p>HTML事件（<a href="http://www.w3school.com.cn/tags/html_ref_eventattributes.asp" target="_blank" rel="external">完整的事件手册</a>）</p>
+<li><p>HTML事件（<a href="http://www.w3school.com.cn/tags/html_ref_eventattributes.asp">完整的事件手册</a>）</p>
 <pre><code>页面中的元素和用户发生交互后，会产生一系列的事件，比如鼠标事件，键盘时间，表单事件等等，而升级到HTML5则增加了很多多媒体事件
 </code></pre></li>
-<li><p>实体符号（<a href="http://www.w3school.com.cn/tags/html_ref_entities.html" target="_blank" rel="external">完整的实体符号</a>）</p>
+<li><p>实体符号（<a href="http://www.w3school.com.cn/tags/html_ref_entities.html">完整的实体符号</a>）</p>
 <pre><code>还有一些符号，需要做转义，不能直接出现在HTML代码中，这些被称作 HTML 实体，写成 &apos;&amp;entity_name;&apos; 或者 &apos;&amp;#entity_number;&apos;
 
 注意最后有 &apos;;&apos; ， entity_name  容易记,但是浏览器兼容性不太好， entity_number 正好相反
@@ -907,119 +682,11 @@ value: 属性值
 比如 &apos;&lt;&apos; ，会被HTML当作是标签开头，而应该用 &apos;&amp;lt;&apos; 或者 &apos;&amp;#60;&apos;
 </code></pre></li>
 </ol>
-<!--break-->
-<h1 id="常用标签"><a href="#常用标签" class="headerlink" title="常用标签"></a>常用标签</h1><p>W3C官网上做了一些常用标签的示例：<a href="http://www.w3school.com.cn/html/html_quick.asp" target="_blank" rel="external">这里</a></p>
-<ul>
-<li><p><code>&lt;!-- comment content --&gt;</code> 这是HTML的注释</p>
-</li>
-<li><p><code>&lt;br/&gt;</code> 是用来折行，但最好不要用来排版，而是单纯用来段落中换行</p>
-</li>
-<li><p><code>&lt;address&gt;&lt;/address&gt;</code> 地址标签用来写地址</p>
-</li>
-<li><p><code>&lt;bdo&gt;&lt;/bdo&gt;</code> 可覆盖默认的文本方向</p>
-</li>
-<li><p><code>&lt;abbr&gt;&lt;/abbr&gt;</code> 通过对缩写进行标记，能够为浏览器、拼写检查和搜索引擎提供有用的信息</p>
-</li>
-<li><p><code>&lt;blockquote&gt;&lt;/blockquote&gt;</code> 是长引用，会额外插入换行和外边框</p>
-</li>
-<li><p><code>&lt;q&gt;&lt;/q&gt;</code> 是短引用，一般表现和引用号类似</p>
-</li>
-<li><p>除了用<code>&lt;link/&gt;</code>标签引用外部css样式表外，也可以直接用<code>&lt;style&gt;</code>，如：</p>
-<pre><code>&lt;style type=&quot;text/css&quot;&gt;
-    body {background-color: red}
-    p {margin-left: 20px}
-&lt;/style&gt;
-</code></pre><p>  也可以直接使用标签元素的style属性，如：</p>
-<pre><code>&lt;p style=&quot;color: red; margin-left: 20px&quot;&gt;
-    This is a paragraph
-&lt;/p&gt;
-</code></pre><p>  当然上面两种都不推荐，最好的就是直接引用外部链接</p>
-</li>
-<li><p>和CSS一样，JS脚本除了链接，也可以直接在标签中写</p>
-<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
-    document.write(&quot;Hello World!&quot;)
-&lt;/script&gt;
-&lt;noscript&gt;Your browser does not support JavaScript!&lt;/noscript&gt;
-</code></pre><p>  <code>&lt;noscript&gt;</code> 标签提供无法使用脚本时的替代内容</p>
-</li>
-<li><p><code>&lt;div&gt;&lt;/div&gt;</code> 定义文档中的节或区域（块级）</p>
-</li>
-<li><p><code>&lt;span&gt;&lt;/span&gt;</code> 定义文档中的行内的小块或区域</p>
-</li>
-<li><p><code>&lt;a name=&#39;section-one&#39;&gt;&lt;/a&gt;</code> 链接比较实用的一个属性就是name，可以定位到页面中的元素，相当于书签</p>
-<pre><code>&lt;a name=&quot;tips&quot;&gt;基本的注意事项 - 有用的提示&lt;/a&gt;
-
-// 直接跳到tips
-&lt;a href=&quot;#tips&quot;&gt;有用的提示&lt;/a&gt;
-
-// 也可以调到其他页面
-&lt;a href=&quot;http://www.example.com/another_page.html#tips&quot;&gt;有用的提示&lt;/a&gt;
-</code></pre></li>
-<li><p><code>&lt;img/&gt;</code>有两个辅助标签 <code>&lt;map&gt;&lt;/map&gt;</code> 和 <code>&lt;area/&gt;</code>，可以定义图片中可点击的区域</p>
-</li>
-<li><p>表格是最常用的功能了，可以整理组织显示内容，也可以用来布局网页元素</p>
-<pre><code>&lt;table&gt;
-    &lt;caption&gt;此标签用于表格标题&lt;/caption&gt;
-    &lt;thead&gt;
-        &lt;tr&gt;
-            &lt;th&gt;th定义表头&lt;/th&gt;
-            &lt;th&gt;th可替代td位置&lt;/th&gt;
-        &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-        &lt;tr&gt;
-            &lt;td&gt;tr用于定义一行&lt;/td&gt;
-            &lt;td&gt;td用于定义一个单元格&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tbody&gt;
-    &lt;tfoot&gt;
-        &lt;tr&gt;
-            &lt;td&gt;thead,tbody,tfoot&lt;/td&gt;
-            &lt;td&gt;这三者应该结合起来用&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tfoot&gt;
-&lt;/table&gt;
-</code></pre></li>
-<li><p>列表：</p>
-<pre><code>&lt;ul&gt;
-    &lt;li&gt;无序列表&lt;/li&gt;
-    &lt;li&gt;Coffee&lt;/li&gt;
-    &lt;li&gt;Milk&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-    &lt;li&gt;有序列表&lt;/li&gt;
-    &lt;li&gt;Coffee&lt;/li&gt;
-    &lt;li&gt;Milk&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;dl&gt;
-    &lt;dt&gt;自定义列表&lt;/dt&gt;
-    &lt;dd&gt;自定义列表是项目及其注释的组合&lt;/dd&gt;
-    &lt;dt&gt;Coffee&lt;/dt&gt;
-    &lt;dd&gt;Black hot drink&lt;/dd&gt;
-    &lt;dt&gt;Milk&lt;/dt&gt;
-    &lt;dd&gt;White cold drink&lt;/dd&gt;
-&lt;/dl&gt;
-</code></pre></li>
-<li><p><code>&lt;form&gt;</code>表单实在是太重要了，用于把用户的输入数据传输到服务器上，包含一系列<code>&lt;input&gt;</code>,<code>textarea</code>,<code>label</code>等元素</p>
-<p>  了解更多Form表单：<a href="http://www.w3school.com.cn/html/html_forms.asp" target="_blank" rel="external">W3C中Form的介绍</a></p>
-</li>
-<li><p>框架（<code>&lt;frame&gt;</code> <code>&lt;frameset&gt;</code> <code>&lt;iframe&gt;</code>）可以允许在一个浏览器窗口中显示多个页面，不过越来越不太用了</p>
-</li>
-<li><p><code>object</code>和<code>embed</code></p>
-<pre><code>`object` 几乎被所有主流浏览器都支持。用于包含对象，比如图像、音频、视频、Java applets、ActiveX、各种插件、PDF 以及 Flash
-可以用于向HTML页面定义一个嵌入的多媒体对象，并且可以规定插入 HTML 文档中的对象的数据和参数
-如果未显示 object 元素，就会执行位于 &lt;object&gt; 和 &lt;/object&gt; 之间的代码。通过这种方式，我们能够嵌套多个 object 元素（每个对应一个浏览器）
-
-`embed` 是HTML5的新标签。定义嵌入的内容，比如插件，flash等
-</code></pre></li>
-<li><p>HTML5 三个新的标签: <code>audio</code>, <code>video</code>, <code>canvas</code></p>
-</li>
-</ul>
-<p>———– EOF —————</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/06/29/learn-html-3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1067,7 +734,7 @@ value: 属性值
             
               
                 
-                <a class="post-title-link" href="/2014/10/11/learn-html-2/" itemprop="url">
+                <a class="post-title-link" href="/2014/06/03/learn-html-2/" itemprop="url">
                   HTML的学习笔记(二)
                 </a>
               
@@ -1081,8 +748,8 @@ value: 属性值
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-10-11T00:00:00+08:00" content="2014-10-11">
-              2014-10-11
+            <time itemprop="dateCreated" datetime="2014-06-03T00:00:00+08:00" content="2014-06-03">
+              2014-06-03
             </time>
           </span>
 
@@ -1092,8 +759,8 @@ value: 属性值
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/10/11/learn-html-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/11/learn-html-2/" itemprop="commentsCount"></span>
+                <a href="/2014/06/03/learn-html-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/06/03/learn-html-2/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1117,8 +784,7 @@ value: 属性值
 
       
         
-          
-            <h1 id="HTML-Javascript-CSS"><a href="#HTML-Javascript-CSS" class="headerlink" title="HTML, Javascript, CSS"></a>HTML, Javascript, CSS</h1><p>在开发Web过程中，不可避免的还要接触其他两样技术：javascript和css。</p>
+          <h1 id="HTML-Javascript-CSS"><a href="#HTML-Javascript-CSS" class="headerlink" title="HTML, Javascript, CSS"></a>HTML, Javascript, CSS</h1><p>在开发Web过程中，不可避免的还要接触其他两样技术：javascript和css。</p>
 <p>javascript是世界上最流行的脚本语言，增加网页间的交互性，可以动态改变网页元素。由此展开还有Html Dom知识，JQuery（最好用的js库），Ajax概念。</p>
 <p>CSS全称为Cascading Style Sheets（层叠样式表），定义如何显示 HTML 元素，实现内容和表现分离。</p>
 <p>总得来说</p>
@@ -1127,101 +793,12 @@ value: 属性值
 <li>JS定义这些元素交互方式和响应方式，比如点击按钮会做什么事；</li>
 <li>CSS定义应该怎么表现这些元素，比如字体，背景颜色，布局方式；</li>
 </ul>
-<p>网页显示是按顺序来加载内容，所以根据三者的功能现在流行的方式是把CSS样式放在<head>元素中，把js内容放到</head><body>的最后面（因为js操作html元素，必须先的有页面元素）</body></p>
-<!--break-->
-<p>#先看一段标准Html5网页模板</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;网站名称 - 网页描述&lt;/title&gt;
-
-    &lt;meta http-equiv=&quot;Content-Type&quot; Content=&quot;text/html; Charset=utf-8&quot; /&gt;
-    &lt;meta name=&quot;keywords&quot; contect=&quot;html,学习&quot; /&gt;
-    &lt;meta name=&quot;description&quot; contect=&quot;学习html的相关笔记&quot; /&gt;
-    &lt;meta name=&quot;author&quot; contect=&quot;tonyrisk&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
-
-    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;example.css&quot; /&gt;
-
-    &lt;link rel=&quot;shortcut icon&quot; href=&quot;favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;
-
-    &lt;link rel=&quot;alternate&quot; type=&quot;application/atom+xml&quot; title=&quot;Atom&quot; href=&quot;&quot;/&gt;
-  &lt;/head&gt;
-
-  &lt;body&gt;
-    &lt;header&gt;&lt;/header&gt;
-    &lt;footer&gt;&lt;/footer&gt;
-    &lt;script src=&quot;example.js&quot;&gt;&lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre><ol>
-<li><p><code>&lt;!DOCTYPE&gt;</code></p>
-<ul>
-<li>&lt;!DOCTYPE&gt;必须是 HTML 文档的第一行，位于 <html> 标签之前</html></li>
-<li>&lt;!DOCTYPE&gt; 声明不是 HTML 标签；它是指示 web 浏览器关于页面使用哪个 HTML 版本进行编写的指令</li>
-<li>其他版本写法：<a href="http://www.w3school.com.cn/tags/tag_doctype.asp" target="_blank" rel="external">点此</a></li>
-</ul>
-</li>
-<li><p><code>&lt;head&gt;</code></p>
-<ul>
-<li>用于定义文档的头部, 描述了文档的各种属性和信息</li>
-<li>绝大多数文档头部包含的数据都不会真正作为内容显示给读者</li>
-</ul>
-</li>
-<li><p><code>&lt;title&gt;</code></p>
-<ul>
-<li>title是<head>中唯一必须要有的元素</head></li>
-<li>最好写成<code>网站名称 - 网页描述</code>的形式，便于搜索引擎收录</li>
-</ul>
-</li>
-<li><p><code>&lt;meta&gt;</code></p>
-<ul>
-<li>meta大部分都用来给搜索引擎提供信息，以便搜索引擎更好收录</li>
-<li>http-equiv用来注定当前页面内容信息，比如编码是utf-8</li>
-<li>viewport被用在移动浏览器中，提供移动设备信息</li>
-</ul>
-</li>
-<li><p><code>&lt;link&gt;</code></p>
-<ul>
-<li>链接外部资源</li>
-<li>stylesheet链接css文件</li>
-<li>icon链接后显示网页的图标</li>
-<li>alternate加入网页的feed</li>
-</ul>
-</li>
-<li><p>不常用的标签<code>&lt;base&gt;</code></p>
-<ul>
-<li>属于<code>&lt;head&gt;</code>内标签</li>
-<li><p>为页面上的所有链接规定默认地址或默认目标</p>
-<pre><code>&lt;base href=&quot;http://www.w3school.com.cn/i/&quot; /&gt;
-&lt;base target=&quot;_blank&quot; /&gt;
-</code></pre></li>
-</ul>
-</li>
-<li><p><code>&lt;body&gt;</code></p>
-<ul>
-<li>定义文档的主体</li>
-<li>包含文档的所有内容（比如文本、超链接、图像、表格和列表等等。）</li>
-</ul>
-</li>
-<li><p><code>&lt;header&gt;</code></p>
-<ul>
-<li>是 HTML 5 中的<code>新标签</code></li>
-<li>标签定义文档的页眉（介绍信息）</li>
-</ul>
-</li>
-<li><p><code>&lt;footer&gt;</code></p>
-<ul>
-<li>是 HTML 5 中的<code>新标签</code></li>
-<li>定义文档或节的页脚</li>
-<li>页脚通常包含文档的作者、版权信息、使用条款链接、联系信息等等</li>
-<li>您可以在一个文档中使用多个 <footer> 元素</footer></li>
-</ul>
-</li>
-</ol>
-<p>———– EOF —————</p>
-
-          
+<p>网页显示是按顺序来加载内容，所以根据三者的功能现在流行的方式是把CSS样式放在<head>元素中，把js内容放到<body>的最后面（因为js操作html元素，必须先的有页面元素）</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/06/03/learn-html-2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1293,20 +870,20 @@ value: 属性值
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">分类</span>
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
-          
-
           
 
         </nav>
@@ -1391,7 +968,7 @@ value: 属性值
 
         
         
-          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
               优秀推荐
@@ -1399,15 +976,11 @@ value: 属性值
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
                   <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yangzhiping.com/" title="阳志平" target="_blank">阳志平</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
@@ -1416,6 +989,14 @@ value: 属性值
               
                 <li class="links-of-blogroll-item">
                   <a href="http://www.williamlong.info/" title="月光博客" target="_blank">月光博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
                 </li>
               
                 <li class="links-of-blogroll-item">

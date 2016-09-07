@@ -192,16 +192,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
@@ -218,6 +208,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -313,25 +313,6 @@
           </span>
 
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/blog/" itemprop="url" rel="index">
-                    <span itemprop="name">blog</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
 
           
             
@@ -362,8 +343,7 @@
 
       
         
-          
-            <p>在上次的文章中（<a href="/2014/01/01/blog-github/">使用 Github 搭建个人博客</a>）介绍了怎么用 <code>Github</code> 默认支持的 Web 框架 <code>Jekyll</code> 来搭建博客。相对于曾经接触过的 <code>Wordpress</code> 是不知道要轻量级多少倍了。但是在使用过程中也发现几点问题：</p>
+          <p>在上次的文章中（<a href="/2014/01/01/blog-github/">使用 Github 搭建个人博客</a>）介绍了怎么用 <code>Github</code> 默认支持的 Web 框架 <code>Jekyll</code> 来搭建博客。相对于曾经接触过的 <code>Wordpress</code> 是不知道要轻量级多少倍了。但是在使用过程中也发现几点问题：</p>
 <ol>
 <li>配置过于繁琐</li>
 <li>对 <code>markdown</code> 支持不是特别好</li>
@@ -375,36 +355,11 @@
 <li>一键部署</li>
 <li>丰富的插件和主题</li>
 </ol>
-<h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>安装 Hexo 非常简单：</p>
-<ul>
-<li>安装 Git</li>
-<li>安装 node（hexo 是基于 nodejs 的，建议用 nvm 来安装）</li>
-<li>安装 Hexo<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-cli -g</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="开始建站"><a href="#开始建站" class="headerlink" title="开始建站"></a>开始建站</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ hexo init your-project-folder</div><div class="line">$ <span class="built_in">cd</span> your-project-folder</div><div class="line">$ npm install</div><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>之后编辑文件夹下的 <code>_config.yml</code> 进行全站设置</p>
-<h2 id="把文章从-Jekyll-迁移到-Hexo"><a href="#把文章从-Jekyll-迁移到-Hexo" class="headerlink" title="把文章从 Jekyll 迁移到 Hexo"></a>把文章从 Jekyll 迁移到 Hexo</h2><p>从 Jekyll 迁移非常简单，把所有文章从 <code>_posts</code> 文件夹内的所有文件复制到 <code>source/_posts</code> 文件夹，并在 <code>_config.yml</code> 中修改 <code>new_post_name</code> 参数</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new_post_name: :year-:month-:day-:title.md</div></pre></td></tr></table></figure>
-<p>如果发现网站没发生变化，需要手动清除下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo serve</div></pre></td></tr></table></figure>
-<h2 id="增加其他页面"><a href="#增加其他页面" class="headerlink" title="增加其他页面"></a>增加其他页面</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo new page about <span class="comment"># 关于</span></div><div class="line">$ hexo new page tags <span class="comment"># 标签</span></div><div class="line">$ hexo new page categories <span class="comment"># 分类</span></div></pre></td></tr></table></figure>
-<h2 id="部署设置"><a href="#部署设置" class="headerlink" title="部署设置"></a>部署设置</h2><p>支持 Github 和 HeroKu，我只用了 Github，所以就记录下 Github 设置</p>
-<ol>
-<li><p>安装插件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置 <code>_config.yml</code>(默认传到<code>gh-pages</code>分支)</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">  type:</span> git</div><div class="line"><span class="attr">  repo:</span> &lt;repo url<span class="string">&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$ hexo new [layout] &lt;title&gt; <span class="comment"># 新建文章, layout 可在 _config.yml 中设置默认值</span></div><div class="line"></div><div class="line">$ hexo new draft &lt;title&gt; <span class="comment"># 新建草稿</span></div><div class="line"></div><div class="line">$ hexo --draft <span class="comment"># 查看草稿</span></div><div class="line"></div><div class="line">$ hexo publish [layout] &lt;title&gt; <span class="comment"># 发表草稿</span></div><div class="line"></div><div class="line">$ hexo serve --draft <span class="comment"># 启动服务器，参数 draft 可以预览草稿</span></div><div class="line"></div><div class="line">$ hexo generate --deploy <span class="comment"># 生成后自动部署网站</span></div><div class="line"></div><div class="line">$ hexo list <span class="comment"># 查看所有静态文件</span></div><div class="line"></div><div class="line">$ hexo clean</div></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>配置好后，一般的流程：</p>
-<p><strong>新建草稿 -&gt; 发布草稿 -&gt; 预览 -&gt; 生成并发布</strong></p>
-<p>参考：<br><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo 官方文档</a></p>
-<p>———- EOF ———-</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/04/move-blog-from-jekyll-to-hexo/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -452,7 +407,7 @@
             
               
                 
-                <a class="post-title-link" href="/2014/12/29/js-function/" itemprop="url">
+                <a class="post-title-link" href="/2015/07/29/js-function/" itemprop="url">
                   js模块化二
                 </a>
               
@@ -466,8 +421,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-29T00:00:00+08:00" content="2014-12-29">
-              2014-12-29
+            <time itemprop="dateCreated" datetime="2015-07-29T00:00:00+08:00" content="2015-07-29">
+              2015-07-29
             </time>
           </span>
 
@@ -477,8 +432,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/12/29/js-function/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/29/js-function/" itemprop="commentsCount"></span>
+                <a href="/2015/07/29/js-function/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/29/js-function/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -502,26 +457,13 @@
 
       
         
-          
-            <h2 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="function"><span class="keyword">function</span>(<span class="params">p1, p2</span>)</span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line">a(xx, yy)</div></pre></td></tr></table></figure>
+          <h2 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h2><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="function"><span class="keyword">function</span>(<span class="params">p1, p2</span>)</span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line">a(xx, yy)</div></pre></td></tr></table></figure>
 <p>js 中函数可以是一个变量，调用函数，可以直接调用变量；所以立即执行函数，其实就是这样：</p>
-<!--break-->
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> result = (<span class="function"><span class="keyword">function</span>(<span class="params">p1, p2</span>)</span>&#123;</div><div class="line">    <span class="comment">//... </span></div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
-<h2 id="CommonJS-规范"><a href="#CommonJS-规范" class="headerlink" title="CommonJS 规范"></a>CommonJS 规范</h2><p>CommonJS 只是一种规范，NodeJs 是最著名的实现此规范的技术<br>有几个关键的特性：</p>
-<ol>
-<li>一个文件就是一个独立的模块，内部的变量和方法都不能被外部引用；除非返回了映射结果，或者是定义成 global 对象的属性</li>
-<li>使用 require 来加载模块</li>
-<li>通过 module.exports 对象作为模块对外的接口</li>
-</ol>
-<h2 id="AMD-规范"><a href="#AMD-规范" class="headerlink" title="AMD 规范"></a>AMD 规范</h2><p>AMD(异步模块定义) 也是一种规范。CommondJS 加载模块是同步，而 AMD 则是异步</p>
-<ol>
-<li>define([mod array], callback)</li>
-<li>AMD 兼容 CommondJS 规范</li>
-<li>比较流行的有 RequireJs</li>
-</ol>
-<p>———– EOF —————</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/29/js-function/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -569,7 +511,7 @@
             
               
                 
-                <a class="post-title-link" href="/2014/12/28/js-module/" itemprop="url">
+                <a class="post-title-link" href="/2015/05/28/js-module/" itemprop="url">
                   js的模块化
                 </a>
               
@@ -583,8 +525,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-28T00:00:00+08:00" content="2014-12-28">
-              2014-12-28
+            <time itemprop="dateCreated" datetime="2015-05-28T00:00:00+08:00" content="2015-05-28">
+              2015-05-28
             </time>
           </span>
 
@@ -594,8 +536,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/12/28/js-module/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/28/js-module/" itemprop="commentsCount"></span>
+                <a href="/2015/05/28/js-module/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/28/js-module/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -619,40 +561,20 @@
 
       
         
-          
-            <p>当网站开发越来越复杂，js 也会写的越来越多，维护性和扩展性的重要程度也就随即提升。</p>
+          <p>当网站开发越来越复杂，js 也会写的越来越多，维护性和扩展性的重要程度也就随即提升。</p>
 <p>在写 js 的过程中，一般会有以下几个阶段：</p>
-<h3 id="1-定义全局函数，并且按照功能归属分别不同文件"><a href="#1-定义全局函数，并且按照功能归属分别不同文件" class="headerlink" title="1. 定义全局函数，并且按照功能归属分别不同文件"></a>1. 定义全局函数，并且按照功能归属分别不同文件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">global_func</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.debug(<span class="string">"I am JS function"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="1-定义全局函数，并且按照功能归属分别不同文件"><a href="#1-定义全局函数，并且按照功能归属分别不同文件" class="headerlink" title="1. 定义全局函数，并且按照功能归属分别不同文件"></a>1. 定义全局函数，并且按照功能归属分别不同文件</h3><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">global_func</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.debug(<span class="string">"I am JS function"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>【缺点】</p>
 <ul>
 <li>污染全局变量</li>
 <li>容易重名</li>
 <li>每个函数相互之间的关系不容易看出来</li>
 </ul>
-<!--break-->
-<h3 id="2-对象封装"><a href="#2-对象封装" class="headerlink" title="2. 对象封装"></a>2. 对象封装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> module1 = <span class="keyword">new</span> <span class="built_in">Object</span>(&#123;</div><div class="line">    _count : <span class="number">0</span>,</div><div class="line">    m1 : <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;,</div><div class="line">    m2 : <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>使用的时候直接：<code>module1.m1()</code></p>
-<p>【缺点】</p>
-<ul>
-<li>暴露所有模块成员( module1._count 外部也可直接读写)</li>
-</ul>
-<h3 id="3-立即执行函数写法"><a href="#3-立即执行函数写法" class="headerlink" title="3. 立即执行函数写法"></a>3. 立即执行函数写法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> _count = <span class="number">0</span>;</div><div class="line">    <span class="keyword">var</span> m1 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">var</span> m2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        outer_name1 : m1,</div><div class="line">        outer_name2 : m2</div><div class="line">    &#125;;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
-<p>【优点】</p>
-<ul>
-<li>解决了方式2的缺点</li>
-</ul>
-<h3 id="4-加强版方式3"><a href="#4-加强版方式3" class="headerlink" title="4. 加强版方式3"></a>4. 加强版方式3</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span>(<span class="params">mod</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> mod.m3 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">return</span> mod;</div><div class="line">&#125;)(<span class="built_in">window</span>.module1 || &#123;&#125;);</div></pre></td></tr></table></figure>
-<p>【优点】</p>
-<ul>
-<li>可以分模块，也可以实现继承</li>
-<li>解决分段load模块，模块之间依赖关系</li>
-<li><p>通过传输全局参数更加独立</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span> (<span class="params">$, YAHOO</span>) </span>&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;)(jQuery, YAHOO);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>———– EOF —————</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/05/28/js-module/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -700,7 +622,7 @@
             
               
                 
-                <a class="post-title-link" href="/2014/12/26/html-mata/" itemprop="url">
+                <a class="post-title-link" href="/2015/04/26/html-mata/" itemprop="url">
                   HTML 中 meta 标签的妙用
                 </a>
               
@@ -714,8 +636,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-26T00:00:00+08:00" content="2014-12-26">
-              2014-12-26
+            <time itemprop="dateCreated" datetime="2015-04-26T00:00:00+08:00" content="2015-04-26">
+              2015-04-26
             </time>
           </span>
 
@@ -725,8 +647,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/12/26/html-mata/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/26/html-mata/" itemprop="commentsCount"></span>
+                <a href="/2015/04/26/html-mata/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/26/html-mata/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -750,99 +672,16 @@
 
       
         
-          
-            <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>HTML 中的 <meta> 标签被包含在 <head> 标签中，是不被用户可见的内容，主要描述了网页的一些元信息。</head></p>
+          <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>HTML 中的 <code>&lt;meta&gt;</code> 标签被包含在 <code>&lt;head&gt;</code> 标签中，是不被用户可见的内容，主要描述了网页的一些元信息。</p>
 <p>meta 最常见的用法就是提供一些关键字和描述使得搜索引擎便于搜集。</p>
 <p>这些元信息都是以键值对的形式被定义，比如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"HTML,ASP,PHP,SQL"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<p>其中 name 就是‘键’，content 就是描述‘值’</p>
-<!--break-->
-<h1 id="2-‘键’"><a href="#2-‘键’" class="headerlink" title="2. ‘键’"></a>2. ‘键’</h1><p>meta 描述‘值’只能使用 content 属性，但是表示‘键’却有2个属性：http-equiv 和 name</p>
-<h3 id="2-1-属性：http-equiv"><a href="#2-1-属性：http-equiv" class="headerlink" title="2.1 属性：http-equiv"></a>2.1 属性：http-equiv</h3><p>Web 服务器会把这些由 http-equiv 描述的键值对添加到发送给浏览器的头部(我们最熟悉的头部键值对就是：’content-type: text/html’)</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"charset"</span> <span class="attr">content</span>=<span class="string">"utf-8"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<p>那么在浏览器头部至少会有以下信息：</p>
-<pre><code>content-type: text/html
-charset: utf8
-</code></pre><h4 id="取值"><a href="#取值" class="headerlink" title="取值"></a>取值</h4><ul>
-<li><p>content-type：通常都是 ‘text/html’ 告诉浏览器返回的类型是 html 页面</p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=gb2312"</span> /&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>content-Language：显示语言的设定</p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Language"</span> <span class="attr">content</span>=<span class="string">"zh-cn"</span> /&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>X-UA-Compatible: 设置IE浏览器兼容模式</p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame</div><div class="line">// Chrome Frame可以让旧版IE浏览器使用Chrome的WebKit渲染引擎处理网页，</div><div class="line">// 因此旧版IE用户可以体验到包括HTML5在内的众多现代网页技术</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=Edge;chrome=1"</span> /&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>expires：设定网页的到期时间。一旦网页过期，必须到服务器上重新传输</p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"expires"</span> <span class="attr">content</span>=<span class="string">"Fri,12 Jan 2001 18:18:18 GMT"</span>/&gt;</span></div><div class="line">    ``` </div><div class="line"></div><div class="line">- refresh：刷新页面/重定向页面</div><div class="line"></div><div class="line">    ``` html</div><div class="line">    // 每五秒刷新页面</div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">'refresh'</span> <span class="attr">content</span>=<span class="string">'5'</span>/&gt;</span></div><div class="line">    </div><div class="line">    // 五秒后跳转到对应url</div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">'refresh'</span> <span class="attr">content</span>=<span class="string">'5; url=http://www.baidu.com'</span>/&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>set-cookie：cookie 设定（如果网页过期，那么设置的 cookie 也会无效）</p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"set-cookie"</span> <span class="attr">content</span>=<span class="string">"cookievalue=xxx; expires=Friday,12-Jan-2001 18:18:18 GMT; path=/"</span> /&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>cache-control(<a href="http://baike.baidu.com/view/9238254.htm" target="_blank" rel="external">各种情况下的详解</a>)<br>meta 的 content 常用取值：</p>
-<ul>
-<li>public: 可以 cache 在私有缓存中</li>
-<li>private: 只能 cache 在私有缓存中</li>
-<li>no-cache: 不允许 cache</li>
-<li>no-store: 可以被 cache 但是不存储</li>
-</ul>
-</li>
-<li><p>pragma</p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 禁止浏览器从本地计算机的缓存中访问页面内容, 将无法脱机浏览</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Pragma"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span> /&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="2-2-属性：name"><a href="#2-2-属性：name" class="headerlink" title="2.2 属性：name"></a>2.2 属性：name</h3><p>使用最多的属性，把 content 属性的内容连接到 name，一般搜索引擎就是搜集网页的这些信息，所以 SEO 优化也会在 name 属性上下工夫(如果要 seo <code>&lt;title&gt;</code>标签也很重要哦，常常被搜索引擎收录 title 信息)</p>
-<h4 id="取值-1"><a href="#取值-1" class="headerlink" title="取值"></a>取值</h4><ul>
-<li><p>author：网页的作者，如 <code>&lt;meta name=&#39;author&#39; content=&#39;tony&#39;/&gt;</code></p>
-</li>
-<li><p>description：网页描述，如 <code>&lt;meta name=&#39;description&#39; content=&#39;讲解关于 html 中 meta 标签的用法&#39;/&gt;</code></p>
-</li>
-<li><p>keywords：网页关键字，如 <code>&lt;meta name=&#39;keywords&#39; content=&#39;html meta name content http-equiv&#39;/&gt;</code></p>
-</li>
-<li><p>robots：告诉搜索机器人哪些页面需要索引，哪些页面不需要索引</p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"robots"</span> <span class="attr">content</span>=<span class="string">"index,follow"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p><meta> content 取值为： </p>
-<ul>
-<li>all：文件将被检索，且页面上的链接可以被查询；(默认值)</li>
-<li>none：文件将不被检索，且页面上的链接不可以被查询；</li>
-<li>index：文件将被检索；</li>
-<li>follow：页面上的链接可以被查询；</li>
-<li>noindex：文件将不被检索，但页面上的链接可以被查询；</li>
-<li>nofollow：文件将不被检索，页面上的链接可以被查询。</li>
-</ul>
-</li>
-<li><p>generator: 说明网站的采用的什么软件制作</p>
-</li>
-<li><p>copyright: 网站版权信息</p>
-</li>
-</ul>
-<h1 id="3-补充属性-scheme"><a href="#3-补充属性-scheme" class="headerlink" title="3. 补充属性: scheme"></a>3. 补充属性: scheme</h1><p>定义用于翻译 content 属性值的格式</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"revised"</span> <span class="attr">content</span>=<span class="string">"2006-11-03"</span> <span class="attr">scheme</span>=<span class="string">"YYYY-MM-DD"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<h1 id="4-meta-更多用法"><a href="#4-meta-更多用法" class="headerlink" title="4. meta 更多用法"></a>4. meta 更多用法</h1><p>上文讲的都是基础的 meta 含义。近年来随着移动互联网的发展，伴随着响应式设计，移动网页浏览体验的优化，衍生出更多的 meta 用法</p>
-<h4 id="viewport"><a href="#viewport" class="headerlink" title="viewport"></a>viewport</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>width：宽度（数值 / device-width）（范围从200 到10,000，默认为980 像素）</li>
-<li>height：高度（数值 / device-height）（范围从223 到10,000）</li>
-<li>initial-scale：初始的缩放比例 （范围从&gt;0 到10）</li>
-<li>minimum-scale：允许用户缩放到的最小比例</li>
-<li>maximum-scale：允许用户缩放到的最大比例</li>
-<li><p>user-scalable：用户是否可以手动缩 (no,yes)</p>
-<p><strong>如果不是响应式网站，不要使用 initial-scale 或者禁用缩放</strong><br>【注】使用 initial-scale=1 到非响应式网站上，这会让网站以100%宽度渲染，用户需要手动移动页面或者缩放；如果和 initial-scale=1 同时使用 user-scalable=no 或 maximum-scale=1，则用户将不能放大/缩小网页来看到全部的内容</p>
-</li>
-</ul>
-<h4 id="email-telephone-支持"><a href="#email-telephone-支持" class="headerlink" title="email/telephone 支持"></a>email/telephone 支持</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"format-detection"</span> <span class="attr">content</span>=<span class="string">"telephone=yes"</span> /&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"format-detection"</span> <span class="attr">content</span>=<span class="string">"email=yes"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<h4 id="ios-独有支持"><a href="#ios-独有支持" class="headerlink" title="ios 独有支持"></a>ios 独有支持</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 可以添加网页到桌面</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-capable"</span> <span class="attr">content</span>=<span class="string">"yes"</span> /&gt;</span></div><div class="line"></div><div class="line">// 只有在开启WebApp全屏模式时才生效。content的值为default | black | black-translucent</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-status-bar-style"</span> <span class="attr">content</span>=<span class="string">"black-translucent"</span> /&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-title"</span> <span class="attr">content</span>=<span class="string">"标题"</span>&gt;</span></div><div class="line"></div><div class="line">// 添加智能 App 广告条 Smart App Banner：告诉浏览器这个网站对应的app，并在页面上显示下载banner</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-itunes-app"</span> <span class="attr">content</span>=<span class="string">"app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL"</span>&gt;</span></div></pre></td></tr></table></figure>
-<h4 id="一些移动特定浏览器上的支持"><a href="#一些移动特定浏览器上的支持" class="headerlink" title="一些移动特定浏览器上的支持"></a>一些移动特定浏览器上的支持</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">// 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"HandheldFriendly"</span> <span class="attr">content</span>=<span class="string">"true"</span>&gt;</span></div><div class="line"></div><div class="line">// 微软的老式浏览器 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"MobileOptimized"</span> <span class="attr">content</span>=<span class="string">"320"</span>&gt;</span></div><div class="line"></div><div class="line">// uc强制竖屏 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"screen-orientation"</span> <span class="attr">content</span>=<span class="string">"portrait"</span>&gt;</span></div><div class="line"></div><div class="line">// QQ强制竖屏 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-orientation"</span> <span class="attr">content</span>=<span class="string">"portrait"</span>&gt;</span></div><div class="line"></div><div class="line">// UC强制全屏 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"full-screen"</span> <span class="attr">content</span>=<span class="string">"yes"</span>&gt;</span></div><div class="line"></div><div class="line">// QQ强制全屏 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-fullscreen"</span> <span class="attr">content</span>=<span class="string">"true"</span>&gt;</span></div><div class="line"></div><div class="line">// UC应用模式 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"browsermode"</span> <span class="attr">content</span>=<span class="string">"application"</span>&gt;</span></div><div class="line"></div><div class="line">// QQ应用模式 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-page-mode"</span> <span class="attr">content</span>=<span class="string">"app"</span>&gt;</span></div><div class="line"></div><div class="line">// windows phone 点击无高光 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-tap-highlight"</span> <span class="attr">content</span>=<span class="string">"no"</span>&gt;</span></div><div class="line"></div><div class="line">// Windows 8 磁贴颜色</div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-TileColor"</span> <span class="attr">content</span>=<span class="string">"#000"</span>/&gt;</span></div><div class="line"></div><div class="line">// Windows 8 磁贴图标 </div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-TileImage"</span> <span class="attr">content</span>=<span class="string">"icon.png"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<h4 id="浏览器内核控制"><a href="#浏览器内核控制" class="headerlink" title="浏览器内核控制"></a>浏览器内核控制</h4><p>国内浏览器很多都是双内核: <a href="http://se.360.cn/v6/help/meta.html" target="_blank" rel="external">介绍说明</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"renderer"</span> <span class="attr">content</span>=<span class="string">"webkit|ie-comp|ie-stand"</span>&gt;</span></div></pre></td></tr></table></figure>
-<h4 id="转码申明"><a href="#转码申明" class="headerlink" title="转码申明:"></a>转码申明:</h4><p>用百度打开网页可能会对其进行转码（比如贴广告），避免转码可添加如下meta</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Cache-Control"</span> <span class="attr">content</span>=<span class="string">"no-siteapp"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<h4 id="Open-Graph-Protocol"><a href="#Open-Graph-Protocol" class="headerlink" title="Open Graph Protocol"></a>Open Graph Protocol</h4><p>这种协议由 Facebook 在 F8 上提出。遵循这个协议的可以让网页成为一个“富媒体对象”，用了Meta Property=og标签，<br>就是你同意了网页内容可以被其他社会化网站引用等，目前这种协议被SNS网站如Fackbook、renren采用。<br>虽然有些内容和 meta 一些值重复，但是不能替代 meta，因为完全就是两个概念(<a href="http://ogp.me/" target="_blank" rel="external">点击查看</a>)</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:type"</span> <span class="attr">content</span>=<span class="string">"website"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:site_name"</span> <span class="attr">content</span>=<span class="string">"xxxxx"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p>———– EOF —————</p>
-
-          
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"HTML,ASP,PHP,SQL"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>其中 name 就是<code>键</code>，content 就是描述<code>值</code></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/04/26/html-mata/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -890,8 +729,8 @@ charset: utf8
             
               
                 
-                <a class="post-title-link" href="/2014/12/20/restfull-api/" itemprop="url">
-                  谈谈 Restful Api
+                <a class="post-title-link" href="/2015/03/20/restfull-api/" itemprop="url">
+                  谈谈 Restful API
                 </a>
               
             
@@ -904,8 +743,8 @@ charset: utf8
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-20T00:00:00+08:00" content="2014-12-20">
-              2014-12-20
+            <time itemprop="dateCreated" datetime="2015-03-20T00:00:00+08:00" content="2015-03-20">
+              2015-03-20
             </time>
           </span>
 
@@ -915,8 +754,8 @@ charset: utf8
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/12/20/restfull-api/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/20/restfull-api/" itemprop="commentsCount"></span>
+                <a href="/2015/03/20/restfull-api/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/20/restfull-api/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -940,8 +779,7 @@ charset: utf8
 
       
         
-          
-            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Representational State Transfer（REST，表现层资源状态转化），是Roy Thomas Fielding提出的互联网软件的架构原则。</p>
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Representational State Transfer（REST，表现层资源状态转化），是Roy Thomas Fielding提出的互联网软件的架构原则。</p>
 <p>满足这个原则的架构，就被叫做 Restful 架构。</p>
 <ol>
 <li><p>在 http 中也存在着 CURD(create, update, read, delete) 的操作，那就是：get, post, put, delete</p>
@@ -951,28 +789,11 @@ charset: utf8
 <li><p>对外的网络服务中，资源一般是系统内部的对象，通常就是数据库中的’表’，数据的交流最好使用 json 格式</p>
 </li>
 </ol>
-<!--break-->
-<p>所以结合三点一般的 API 设计就是：</p>
-<ul>
-<li>get ‘/users’ ：获得用户列表</li>
-<li>post ‘/users’ ：创建一个用户</li>
-<li>get ‘/users/:id’ ：获得具体用户信息</li>
-<li>get ‘/users/:id/messages’ ：获得具体用户的消息列表</li>
-<li>get ‘/users/:id/messages/:mid’ ：获得具体用户具体消息内容</li>
-<li>put ‘/users/:id’ ：更新用户信息</li>
-<li>delete ‘/users/:id’ ：删除用户</li>
-</ul>
-<p>所有 URL 都是名词，动作都在 HTTP 方法中</p>
-<p>有时候会有排序等需求，就直接跟在 URL中，如<br>    get ‘/users?order=name&amp;page=1’</p>
-<h1 id="一些建议"><a href="#一些建议" class="headerlink" title="一些建议"></a>一些建议</h1><ol>
-<li>如果是对外的 Api 服务，尽量采用 https, 身份认证应该使用 OAuth 2.0 框架</li>
-<li>api.xxx.com 尽量把 api 作为专有域名，最次也要写成 www.xxx.com/api/</li>
-<li>版本可以跟在 url 中： api.xxx.com/v1/ 或 www.xxx.com/api/v1/</li>
-<li>所有资源名词都为复数</li>
-</ol>
-<p>———– EOF —————</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/03/20/restfull-api/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1044,20 +865,20 @@ charset: utf8
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">分类</span>
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
-          
-
           
 
         </nav>
@@ -1142,7 +963,7 @@ charset: utf8
 
         
         
-          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
               优秀推荐
@@ -1150,15 +971,11 @@ charset: utf8
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
                   <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yangzhiping.com/" title="阳志平" target="_blank">阳志平</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
@@ -1167,6 +984,14 @@ charset: utf8
               
                 <li class="links-of-blogroll-item">
                   <a href="http://www.williamlong.info/" title="月光博客" target="_blank">月光博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
                 </li>
               
                 <li class="links-of-blogroll-item">

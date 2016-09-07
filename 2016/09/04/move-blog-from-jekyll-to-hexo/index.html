@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="个人博客, 技术" />
+  <meta name="keywords" content="blog,github pages,hexo," />
 
 
 
@@ -106,7 +106,7 @@
 近几年随着 Hexo 的发展，社区中不断对这个博客框架的贡献，使得 Hexo 日趋完善，并且涌现出几大优点：
 
 源">
-<meta property="og:updated_time" content="2016-09-06T09:52:24.000Z">
+<meta property="og:updated_time" content="2016-09-07T08:36:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="把博客从 Jekyll 迁移到 Hexo">
 <meta name="twitter:description" content="在上次的文章中（使用 Github 搭建个人博客）介绍了怎么用 Github 默认支持的 Web 框架 Jekyll 来搭建博客。相对于曾经接触过的 Wordpress 是不知道要轻量级多少倍了。但是在使用过程中也发现几点问题：
@@ -212,16 +212,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
@@ -238,6 +228,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -330,25 +330,6 @@
           </span>
 
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/blog/" itemprop="url" rel="index">
-                    <span itemprop="name">blog</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
 
           
             
@@ -395,30 +376,32 @@
 <li>一键部署</li>
 <li>丰富的插件和主题</li>
 </ol>
+<a id="more"></a>
 <h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>安装 Hexo 非常简单：</p>
 <ul>
 <li>安装 Git</li>
 <li>安装 node（hexo 是基于 nodejs 的，建议用 nvm 来安装）</li>
-<li>安装 Hexo<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-cli -g</div></pre></td></tr></table></figure>
+<li>安装 Hexo<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ npm install hexo-cli -g</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="开始建站"><a href="#开始建站" class="headerlink" title="开始建站"></a>开始建站</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ hexo init your-project-folder</div><div class="line">$ <span class="built_in">cd</span> your-project-folder</div><div class="line">$ npm install</div><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<h2 id="开始建站"><a href="#开始建站" class="headerlink" title="开始建站"></a>开始建站</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo init your-project-folder</div><div class="line">$ <span class="built_in">cd</span> your-project-folder</div><div class="line">$ npm install</div><div class="line">$ hexo server</div></pre></td></tr></table></figure>
 <p>之后编辑文件夹下的 <code>_config.yml</code> 进行全站设置</p>
 <h2 id="把文章从-Jekyll-迁移到-Hexo"><a href="#把文章从-Jekyll-迁移到-Hexo" class="headerlink" title="把文章从 Jekyll 迁移到 Hexo"></a>把文章从 Jekyll 迁移到 Hexo</h2><p>从 Jekyll 迁移非常简单，把所有文章从 <code>_posts</code> 文件夹内的所有文件复制到 <code>source/_posts</code> 文件夹，并在 <code>_config.yml</code> 中修改 <code>new_post_name</code> 参数</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new_post_name: :year-:month-:day-:title.md</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">new_post_name: :year-:month-:day-:title.md</div></pre></td></tr></table></figure>
 <p>如果发现网站没发生变化，需要手动清除下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo serve</div></pre></td></tr></table></figure>
-<h2 id="增加其他页面"><a href="#增加其他页面" class="headerlink" title="增加其他页面"></a>增加其他页面</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo new page about <span class="comment"># 关于</span></div><div class="line">$ hexo new page tags <span class="comment"># 标签</span></div><div class="line">$ hexo new page categories <span class="comment"># 分类</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo serve</div></pre></td></tr></table></figure>
+<h2 id="增加其他页面"><a href="#增加其他页面" class="headerlink" title="增加其他页面"></a>增加其他页面</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new page about <span class="comment"># 关于</span></div><div class="line">$ hexo new page tags <span class="comment"># 标签</span></div><div class="line">$ hexo new page categories <span class="comment"># 分类</span></div></pre></td></tr></table></figure>
 <h2 id="部署设置"><a href="#部署设置" class="headerlink" title="部署设置"></a>部署设置</h2><p>支持 Github 和 HeroKu，我只用了 Github，所以就记录下 Github 设置</p>
 <ol>
 <li><p>安装插件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
 </li>
 <li><p>配置 <code>_config.yml</code>(默认传到<code>gh-pages</code>分支)</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">  type:</span> git</div><div class="line"><span class="attr">  repo:</span> &lt;repo url<span class="string">&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">  type:</span> git</div><div class="line"><span class="attr">  repo:</span> &lt;repo url<span class="string">&gt;</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$ hexo new [layout] &lt;title&gt; <span class="comment"># 新建文章, layout 可在 _config.yml 中设置默认值</span></div><div class="line"></div><div class="line">$ hexo new draft &lt;title&gt; <span class="comment"># 新建草稿</span></div><div class="line"></div><div class="line">$ hexo --draft <span class="comment"># 查看草稿</span></div><div class="line"></div><div class="line">$ hexo publish [layout] &lt;title&gt; <span class="comment"># 发表草稿</span></div><div class="line"></div><div class="line">$ hexo serve --draft <span class="comment"># 启动服务器，参数 draft 可以预览草稿</span></div><div class="line"></div><div class="line">$ hexo generate --deploy <span class="comment"># 生成后自动部署网站</span></div><div class="line"></div><div class="line">$ hexo list <span class="comment"># 查看所有静态文件</span></div><div class="line"></div><div class="line">$ hexo clean</div></pre></td></tr></table></figure>
+<h2 id="设置自定义域名"><a href="#设置自定义域名" class="headerlink" title="设置自定义域名"></a>设置自定义域名</h2><p>利用 github 的 pages 功能可以在项目页面查看网站信息。可以在项目设置中绑定自定义域名，同时在 dns 解析到 github 的ip</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new [layout] &lt;title&gt; <span class="comment"># 新建文章, layout 可在 _config.yml 中设置默认值</span></div><div class="line"></div><div class="line">$ hexo new draft &lt;title&gt; <span class="comment"># 新建草稿</span></div><div class="line"></div><div class="line">$ hexo --draft <span class="comment"># 查看草稿</span></div><div class="line"></div><div class="line">$ hexo publish [layout] &lt;title&gt; <span class="comment"># 发表草稿</span></div><div class="line"></div><div class="line">$ hexo serve --draft <span class="comment"># 启动服务器，参数 draft 可以预览草稿</span></div><div class="line"></div><div class="line">$ hexo generate --deploy <span class="comment"># 生成后自动部署网站</span></div><div class="line"></div><div class="line">$ hexo list <span class="comment"># 查看所有静态文件</span></div><div class="line"></div><div class="line">$ hexo clean</div></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>配置好后，一般的流程：</p>
 <p><strong>新建草稿 -&gt; 发布草稿 -&gt; 预览 -&gt; 生成并发布</strong></p>
 <p>参考：<br><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo 官方文档</a></p>
@@ -464,12 +447,22 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/blog/" rel="tag">#blog</a>
+          
+            <a href="/tags/github-pages/" rel="tag">#github pages</a>
+          
+            <a href="/tags/hexo/" rel="tag">#hexo</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/12/29/js-function/" rel="next" title="js模块化二">
+              <a href="/2015/07/29/js-function/" rel="next" title="js模块化二">
                 <i class="fa fa-chevron-left"></i> js模块化二
               </a>
             
@@ -577,20 +570,20 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">分类</span>
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
-          
-
           
 
         </nav>
@@ -675,7 +668,7 @@
 
         
         
-          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
               优秀推荐
@@ -683,15 +676,11 @@
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
                   <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yangzhiping.com/" title="阳志平" target="_blank">阳志平</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
@@ -700,6 +689,14 @@
               
                 <li class="links-of-blogroll-item">
                   <a href="http://www.williamlong.info/" title="月光博客" target="_blank">月光博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
@@ -719,7 +716,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Hexo"><span class="nav-number">1.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始建站"><span class="nav-number">2.</span> <span class="nav-text">开始建站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把文章从-Jekyll-迁移到-Hexo"><span class="nav-number">3.</span> <span class="nav-text">把文章从 Jekyll 迁移到 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加其他页面"><span class="nav-number">4.</span> <span class="nav-text">增加其他页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署设置"><span class="nav-number">5.</span> <span class="nav-text">部署设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">6.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Hexo"><span class="nav-number">1.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始建站"><span class="nav-number">2.</span> <span class="nav-text">开始建站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把文章从-Jekyll-迁移到-Hexo"><span class="nav-number">3.</span> <span class="nav-text">把文章从 Jekyll 迁移到 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加其他页面"><span class="nav-number">4.</span> <span class="nav-text">增加其他页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署设置"><span class="nav-number">5.</span> <span class="nav-text">部署设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置自定义域名"><span class="nav-number">6.</span> <span class="nav-text">设置自定义域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">7.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>

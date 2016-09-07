@@ -1,0 +1,1120 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="git,github," />
+
+
+
+
+
+  <link rel="alternate" href="/rss2.xml" title="I am tonyrisk" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://7rf2ks.com1.z0.glb.clouddn.com/image/avatar/fav.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Git 是一个分布式的版本控制工具，每个开发人员从 git 版本库 checkout 的时候会在自己的机器上也克隆一个版本库。在没网络的情况下，也能提交文件，查看 log，查看历史版本，创建分支等。
+Git 主分支的名字，默认叫做 master 。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。
+不同于 svn，git 在本地的状态有三个：
+
+工作目录(working dir): 持">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 常用操作">
+<meta property="og:url" content="http://www.tonyrisk.top/2014/01/11/git-general-operations/index.html">
+<meta property="og:site_name" content="I am tonyrisk">
+<meta property="og:description" content="Git 是一个分布式的版本控制工具，每个开发人员从 git 版本库 checkout 的时候会在自己的机器上也克隆一个版本库。在没网络的情况下，也能提交文件，查看 log，查看历史版本，创建分支等。
+Git 主分支的名字，默认叫做 master 。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。
+不同于 svn，git 在本地的状态有三个：
+
+工作目录(working dir): 持">
+<meta property="og:updated_time" content="2016-09-07T03:22:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 常用操作">
+<meta name="twitter:description" content="Git 是一个分布式的版本控制工具，每个开发人员从 git 版本库 checkout 的时候会在自己的机器上也克隆一个版本库。在没网络的情况下，也能提交文件，查看 log，查看历史版本，创建分支等。
+Git 主分支的名字，默认叫做 master 。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。
+不同于 svn，git 在本地的状态有三个：
+
+工作目录(working dir): 持">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.tonyrisk.top/2014/01/11/git-general-operations/"/>
+
+  <title> Git 常用操作 | I am tonyrisk </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?36481653da69937b145eecaa2b7c0343";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">I am tonyrisk</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一路走来，一路记录</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Git 常用操作
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-01-11T00:00:00+08:00" content="2014-01-11">
+              2014-01-11
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/01/11/git-general-operations/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/01/11/git-general-operations/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i> 本文总阅读量
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Git 是一个<strong>分布式</strong>的版本控制工具，每个开发人员从 git 版本库 checkout 的时候会在自己的机器上也克隆一个版本库。在没网络的情况下，也能提交文件，查看 log，查看历史版本，创建分支等。</p>
+<p>Git 主分支的名字，默认叫做 <code>master</code> 。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。</p>
+<p>不同于 svn，git 在本地的状态有三个：</p>
+<ul>
+<li>工作目录(<code>working dir</code>): 持有的实际文件</li>
+<li>暂存区(<code>index</code>): 通过 <code>add</code> 命令，临时保存的改动</li>
+<li><code>head</code>: 指向最后一次提交(<code>commit</code>)的结果</li>
+</ul>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Mac 下直接下面命令（ Mac 用户强烈建议安装 <a href="http://brew.sh/" target="_blank" rel="external">homebrew</a>和 <a href="http://caskroom.io/" target="_blank" rel="external">brew cask</a>）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ brew install git</div></pre></td></tr></table></figure>
+<p>安装完后，可以用 <code>git help</code> 查看用法帮助</p>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="git配置有三大块："><a href="#git配置有三大块：" class="headerlink" title="git配置有三大块："></a>git配置有三大块：</h3><ol>
+<li>系统级别：/etc/gitconfig (<code>git config --system</code> 设置或者读取时用 system 参数)</li>
+<li>全局级别：~/.gitconfig (<code>git config --global</code> 设置或者读取时用 global 参数)</li>
+<li><p>项目级别：myproject/.git/config (<code>git config</code>)</p>
+<p> <strong>优先级：</strong> 3 &gt; 2 &gt; 1（优先级高的覆盖优先级低的）</p>
+</li>
+</ol>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ul>
+<li>设置：<code>git config --global user.name &#39;xxx&#39;</code></li>
+<li>查看：<code>git config --global user.name</code></li>
+<li>查看当前生效所有设置：<code>git config --list</code></li>
+<li>也可以直接编辑上面所提到的 <code>gitconfig</code> 文件</li>
+</ul>
+<p><em>一般会先用 global 设置用户层面的配置，再在项目层面设置针对项目的设置</em></p>
+<h3 id="常用配置"><a href="#常用配置" class="headerlink" title="常用配置"></a>常用配置</h3><figure class="highlight yml"><table><tr><td class="code"><pre><div class="line">[user]		</div><div class="line">	name = xxxx</div><div class="line">	email = xxx@xxx.com</div><div class="line">[color]</div><div class="line">	<span class="comment">#开启着色功能</span></div><div class="line">	ui＝ <span class="literal">true</span></div><div class="line">	status = auto</div><div class="line">	diff = auto</div><div class="line">	branch = auto</div><div class="line">	interactive = auto</div><div class="line">[merge]</div><div class="line">	<span class="comment">#默认 merge 都加上 --no-ff</span></div><div class="line">	ff = <span class="literal">false</span></div><div class="line">[alias]</div><div class="line">	<span class="comment">#别名</span></div><div class="line">	st = status</div><div class="line">	ci = <span class="string">"commit -m"</span></div><div class="line">	br = branch</div><div class="line">	co = checkout</div><div class="line">	cia = <span class="string">"commit -am"</span></div><div class="line">	df = diff</div><div class="line">	dt = difftool</div><div class="line">	mg = merge</div><div class="line">	mt = mergetool</div><div class="line">	ll = <span class="string">"log --oneline"</span></div><div class="line">	last = <span class="string">"log -1 HEAD"</span></div></pre></td></tr></table></figure>
+<h2 id="新建版本库"><a href="#新建版本库" class="headerlink" title="新建版本库"></a>新建版本库</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ mkdir myproject</div><div class="line">$ touch README.md LICENSE .gitignore</div><div class="line">$ git init	<span class="comment"># 会在目录下建立.git文件夹</span></div><div class="line">$ git add *	<span class="comment"># 把所有文件都放入本地缓存区</span></div><div class="line">$ git commit -m ‘first commit’	<span class="comment"># 将更改记录成快照</span></div><div class="line"></div><div class="line"><span class="comment"># 还没有克隆现有仓库，并欲将本地仓库连接到某个远程服务器</span></div><div class="line">$ git remote add origin https://github.com/xxxx/test.git</div><div class="line"></div><div class="line"><span class="comment"># 把本地改动更新到远程仓库的master分支上去</span></div><div class="line">$ git push -u origin master</div></pre></td></tr></table></figure>
+<h2 id="复制版本库"><a href="#复制版本库" class="headerlink" title="复制版本库"></a>复制版本库</h2><pre><code># 常用clone：
+git clone http[s]://example.com/path/to/repo.git/
+git clone [user@]example.com:path/to/repo.git/
+
+# 只clone某一个分支
+git clone -b branch-name git@github.com:user/myproject.git
+</code></pre><h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h2><pre><code># 查看本地分支
+git branch
+
+# 查看远程分支
+git branch -r
+
+# 建立分支
+git branch branch-name
+
+# 建立无父节点的分支
+git checkout --orphan branch-name
+
+# 建立并切换分支
+git checkout -b branch-name [from_branch]
+
+# 建立/提交 远程分支(注意和下面删除远程分支区别)
+git push [远程主机名] [分支名]
+
+# 删除分支
+git branch -d branch-name
+
+# 删除远程分支
+git push [远程主机名] :[分支名]
+
+# 切换分支
+git checkout branch-name
+
+# 查看已经和当前分支合并的分支
+git branch --merged
+
+# 查看尚未和当前分支合并的分支
+git branch --no-merged
+
+# 在本地分支上合并本地分支
+git merge --no-ff master
+
+# 在本地分支上合并远程分支
+git merge --no-ff origin/master
+</code></pre><h3 id="分支使用场景实例"><a href="#分支使用场景实例" class="headerlink" title="分支使用场景实例"></a>分支使用场景实例</h3><pre><code>#基于 develeop 分支创建一个功能分支：
+git checkout -b feature-x develop
+
+#开发完成后，将功能分支合并到 develop 分支：
+git checkout develop
+git merge –no-ff feature-x
+
+#删除 feature 分支：
+git branch -d feature-x
+</code></pre><h2 id="推送本地更新到服务器"><a href="#推送本地更新到服务器" class="headerlink" title="推送本地更新到服务器"></a>推送本地更新到服务器</h2><pre><code>git push [远程主机名] [本地分支名]:[远程分支名]
+</code></pre><h2 id="更新远程主机的内容到本地"><a href="#更新远程主机的内容到本地" class="headerlink" title="更新远程主机的内容到本地"></a>更新远程主机的内容到本地</h2><pre><code>git pull [远程主机名] [远程分支名]:[本地分支名]
+</code></pre><h2 id="撤销回滚"><a href="#撤销回滚" class="headerlink" title="撤销回滚"></a>撤销回滚</h2><pre><code># reset 命令是把当前分支指向另一个位置
+# 把 add 的文件，撤销
+git reset -- &lt;filename&gt;
+git reset                                 # 撤销所有 add 的文件
+
+# 会用 HEAD 中最新的内容替换掉工作目录中的内容，回滚到最后一个 commit
+git checkout -- &lt;filename&gt;
+
+# 想丢弃你在本地的所有改动与提交，可以到服务器上获取最新的版本历史，
+# 并将你本地主分支指向它：
+git fetch origin
+git reset --hard origin/master
+
+# 检出某个文件的历史版本：
+git checkout &lt;commit&gt; &lt;paths&gt;
+
+# 检出某个文件的历史版本到其他文件名：
+git show &lt;commit&gt;:&lt;file&gt; new_name
+例：git show d06b1cf09d2:text.txt &gt; test1.txt
+</code></pre><h2 id="Diff"><a href="#Diff" class="headerlink" title="Diff"></a>Diff</h2><pre><code># 查看两个版本之间的区别
+git diff version1 version2
+
+# 查看当前缓存区（就是add后）和最新commit版本的区别
+git diff --cached
+
+# 查看当前工作目录和最新commit之间的区别
+git diff HEAD
+
+# 当前工作目录和其他分支之间的区别
+git diff branch-name
+
+# 查看缓存区和工作目录之间的区别
+git diff
+</code></pre><h2 id="存储-保存当前工作内容到git栈，然后回复到最新commit状态"><a href="#存储-保存当前工作内容到git栈，然后回复到最新commit状态" class="headerlink" title="存储: 保存当前工作内容到git栈，然后回复到最新commit状态"></a>存储: 保存当前工作内容到git栈，然后回复到最新commit状态</h2><pre><code># 存储
+git stash
+
+# 恢复最新一次存储
+git stash pop
+
+# 查看现有所有存储的列表
+git stash list
+</code></pre><h2 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h2><pre><code># 查看本地库状态
+git status [-s]
+
+# 添加文件到暂存区
+git add [-A]
+
+# 提交暂存区文件到本地库
+git commit -m &quot;msg&quot;
+
+# 等价于add，加commit操作：
+git commit -am &quot;msg&quot;
+</code></pre><h1 id="从缓存区中删除"><a href="#从缓存区中删除" class="headerlink" title="从缓存区中删除"></a>从缓存区中删除</h1><p>  git rm file_name</p>
+<h1 id="如果要在工作目录中留着该文件，可以使用"><a href="#如果要在工作目录中留着该文件，可以使用" class="headerlink" title="如果要在工作目录中留着该文件，可以使用"></a>如果要在工作目录中留着该文件，可以使用</h1><p>  git rm –cached file_name</p>
+<h1 id="移动或者重命名缓存区中的文件"><a href="#移动或者重命名缓存区中的文件" class="headerlink" title="移动或者重命名缓存区中的文件"></a>移动或者重命名缓存区中的文件</h1><p>  git mv old_file new_file</p>
+<h1 id="显示一个分支中提交的更改记录"><a href="#显示一个分支中提交的更改记录" class="headerlink" title="显示一个分支中提交的更改记录"></a>显示一个分支中提交的更改记录</h1><p>  git log</p>
+<pre><code># 显示某个文件的更改记录
+git log -p filename
+</code></pre><h2 id="扩展和参考"><a href="#扩展和参考" class="headerlink" title="扩展和参考"></a>扩展和参考</h2><p>技术光是看书，如果没有实战完全不能深入理解的，最好的学习还是赶紧建立一个git库，然后在实战中学习吧。<br>另外看其他人总结的经验和知识点也能少走不少弯路：</p>
+<ul>
+<li>github的员工所著，豆瓣评分9.1的神书：<a href="http://iissnan.com/progit/" target="_blank" rel="external">pro git</a></li>
+<li>个人觉得最简单易懂介绍git的：<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰讲git</a></li>
+<li>git官方命令不够？没关系，牛人已经封装了更多git实用命令，总有一款适合你：<a href="https://github.com/visionmedia/git-extras" target="_blank" rel="external">去看看</a></li>
+<li>一张图让你上手git：<a href="http://sfault-image.b0.upaiyun.com/37/92/37923f2478edc5709b36562b26c9e008" target="_blank" rel="external">点击查看大图</a></li>
+<li>GitHub和Git一些使用技巧：<a href="http://snowdream86.gitbooks.io/github-cheat-sheet/content/zh/index.html" target="_blank" rel="external">在这</a></li>
+</ul>
+<p>———- EOF ———-</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得对你有帮助</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7rf2ks.com1.z0.glb.clouddn.com/image/general/tip-me-by-wechat.jpeg" alt="tonyrisk WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7rf2ks.com1.z0.glb.clouddn.com/image/general/tip-me-by-alipay.jpeg" alt="tonyrisk Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag">#git</a>
+          
+            <a href="/tags/github/" rel="tag">#github</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/01/01/blog-github/" rel="next" title="使用 Github 搭建个人博客">
+                <i class="fa fa-chevron-left"></i> 使用 Github 搭建个人博客
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/01/22/git-flow/" rel="prev" title="Git 工作流">
+                Git 工作流 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2014/01/11/git-general-operations/"
+           data-title="Git 常用操作" data-url="http://www.tonyrisk.top/2014/01/11/git-general-operations/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7rf2ks.com1.z0.glb.clouddn.com/image/avatar/avatar-348.jpg"
+               alt="tonyrisk" />
+          <p class="site-author-name" itemprop="name">tonyrisk</p>
+          <p class="site-description motion-element" itemprop="description">一直努力只想以后可以有选择的自由</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/rss2.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/laoshucheng" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/tonylau1987" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100013354331020" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.weibo.com/niuniucomeback" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/tonyrisk" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/tonyrisk" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              优秀推荐
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yangzhiping.com/" title="阳志平" target="_blank">阳志平</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://coolshell.cn/" title="酷壳" target="_blank">酷壳</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.williamlong.info/" title="月光博客" target="_blank">月光博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://news.dbanotes.net/" title="Startup News" target="_blank">Startup News</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ruby-china.org/" title="Ruby China" target="_blank">Ruby China</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://gold.xitu.io" title="稀土掘金" target="_blank">稀土掘金</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-number">2.</span> <span class="nav-text">设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git配置有三大块："><span class="nav-number">2.1.</span> <span class="nav-text">git配置有三大块：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">2.2.</span> <span class="nav-text">操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用配置"><span class="nav-number">2.3.</span> <span class="nav-text">常用配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建版本库"><span class="nav-number">3.</span> <span class="nav-text">新建版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制版本库"><span class="nav-number">4.</span> <span class="nav-text">复制版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支操作"><span class="nav-number">5.</span> <span class="nav-text">分支操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支使用场景实例"><span class="nav-number">5.1.</span> <span class="nav-text">分支使用场景实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推送本地更新到服务器"><span class="nav-number">6.</span> <span class="nav-text">推送本地更新到服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新远程主机的内容到本地"><span class="nav-number">7.</span> <span class="nav-text">更新远程主机的内容到本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销回滚"><span class="nav-number">8.</span> <span class="nav-text">撤销回滚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diff"><span class="nav-number">9.</span> <span class="nav-text">Diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储-保存当前工作内容到git栈，然后回复到最新commit状态"><span class="nav-number">10.</span> <span class="nav-text">存储: 保存当前工作内容到git栈，然后回复到最新commit状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他常用命令"><span class="nav-number">11.</span> <span class="nav-text">其他常用命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从缓存区中删除"><span class="nav-number"></span> <span class="nav-text">从缓存区中删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果要在工作目录中留着该文件，可以使用"><span class="nav-number"></span> <span class="nav-text">如果要在工作目录中留着该文件，可以使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#移动或者重命名缓存区中的文件"><span class="nav-number"></span> <span class="nav-text">移动或者重命名缓存区中的文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示一个分支中提交的更改记录"><span class="nav-number"></span> <span class="nav-text">显示一个分支中提交的更改记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展和参考"><span class="nav-number">1.</span> <span class="nav-text">扩展和参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tonyrisk</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i>本站访问次数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i>本站总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tonyrisk"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
