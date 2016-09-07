@@ -1180,10 +1180,10 @@ value: 属性值
       
         &lt;h1 id=&quot;知识点分类&quot;&gt;&lt;a href=&quot;#知识点分类&quot; class=&quot;headerlink&quot; title=&quot;知识点分类&quot;&gt;&lt;/a&gt;知识点分类&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;标签（&lt;a href=&quot;http://www.w3school.com.cn/tags/html_ref_byfunc.asp&quot;&gt;完整标签手册&lt;/a&gt;）&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;HTML有众多标签，如文档类的 &amp;lt;h1&amp;gt;，显示连接的 &amp;lt;a&amp;gt; ，图片 &amp;lt;img&amp;gt; 等；
+&lt;pre&gt;&lt;code&gt;HTML有众多标签，如文档类的 `&amp;lt;h1&amp;gt;`，显示连接的 `&amp;lt;a&amp;gt;` ，图片 `&amp;lt;img&amp;gt;` 等
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;标签属性（&lt;a href=&quot;http://www.w3school.com.cn/tags/html_ref_standardattributes.asp&quot;&gt;完整的属性手册&lt;/a&gt;）&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;每个标签有不同的属性，比较常用有：表示样式表中类名的class，标识唯一的id，html5新出来的用来存储私有定制数据的data-*
+&lt;pre&gt;&lt;code&gt;每个标签有不同的属性，比较常用有：表示样式表中类名的class，标识唯一的id，html5新出来的用来存储私有定制数据的 `data-*`
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;HTML事件（&lt;a href=&quot;http://www.w3school.com.cn/tags/html_ref_eventattributes.asp&quot;&gt;完整的事件手册&lt;/a&gt;）&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;页面中的元素和用户发生交互后，会产生一系列的事件，比如鼠标事件，键盘时间，表单事件等等，而升级到HTML5则增加了很多多媒体事件
@@ -1201,10 +1201,10 @@ value: 属性值
       
       <content:encoded><![CDATA[<h1 id="知识点分类"><a href="#知识点分类" class="headerlink" title="知识点分类"></a>知识点分类</h1><ol>
 <li><p>标签（<a href="http://www.w3school.com.cn/tags/html_ref_byfunc.asp" target="_blank" rel="external">完整标签手册</a>）</p>
-<pre><code>HTML有众多标签，如文档类的 &lt;h1&gt;，显示连接的 &lt;a&gt; ，图片 &lt;img&gt; 等；
+<pre><code>HTML有众多标签，如文档类的 `&lt;h1&gt;`，显示连接的 `&lt;a&gt;` ，图片 `&lt;img&gt;` 等
 </code></pre></li>
 <li><p>标签属性（<a href="http://www.w3school.com.cn/tags/html_ref_standardattributes.asp" target="_blank" rel="external">完整的属性手册</a>）</p>
-<pre><code>每个标签有不同的属性，比较常用有：表示样式表中类名的class，标识唯一的id，html5新出来的用来存储私有定制数据的data-*
+<pre><code>每个标签有不同的属性，比较常用有：表示样式表中类名的class，标识唯一的id，html5新出来的用来存储私有定制数据的 `data-*`
 </code></pre></li>
 <li><p>HTML事件（<a href="http://www.w3school.com.cn/tags/html_ref_eventattributes.asp" target="_blank" rel="external">完整的事件手册</a>）</p>
 <pre><code>页面中的元素和用户发生交互后，会产生一系列的事件，比如鼠标事件，键盘时间，表单事件等等，而升级到HTML5则增加了很多多媒体事件
@@ -1218,7 +1218,7 @@ value: 属性值
 </code></pre></li>
 </ol>
 <a id="more"></a>
-<h1 id="常用标签"><a href="#常用标签" class="headerlink" title="常用标签"></a>常用标签</h1><p>W3C官网上做了一些常用标签的示例：<a href="http://www.w3school.com.cn/html/html_quick.asp" target="_blank" rel="external">点我查看</a></p>
+<h1 id="常用标签"><a href="#常用标签" class="headerlink" title="常用标签"></a>常用标签</h1><p>W3C官网上做了一些常用标签的示例：<a href="http://www.w3school.com.cn/html/html_quick.asp" target="_blank" rel="external">点我查看</a></p>
 <ul>
 <li><p><code>&lt;!-- comment content --&gt;</code> 这是HTML的注释</p>
 </li>
@@ -1513,7 +1513,7 @@ embed 是HTML5的新标签。定义嵌入的内容，比如插件，flash等
 <p>下面简单介绍一些属性</p>
 <ul>
 <li><code>项目</code>：属于哪个项目</li>
-<li><code>上下文</code>：可以是任何内容，指出动作所要用到的内容，有点类似标签。比如时间，地点，人物，资源，优先级等。一个动作只能分配一个上下文，如果需要多个，只能分解动作。上下文可以让你关联起多个分散的动作</li>
+<li><code>上下文</code>：可以是任何内容，指出动作所要用到的内容，有点类似标签。比如时间，地点，人物，资源，优先级等。一个动作只能配一个上下文，如果需要多个，只能分解动作。上下文可以让你关联起多个分散的动作</li>
 <li><code>时间</code>：<strong>必填</strong> 如果不写时间，还是不能管理事情，只是无序的记录下事情罢了。估算所花费时间，开始时间，截至时间。最小单位是 1 分钟</li>
 <li><code>重复</code>：可以把动作设置成重复项</li>
 </ul>
@@ -1533,7 +1533,7 @@ embed 是HTML5的新标签。定义嵌入的内容，比如插件，flash等
 </tbody>
 </table>
 <h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>整理后，可以在<code>预测</code>中看到各个动作，如果觉得某个动作重要，还可以<code>标记</code>它。之后就开始做吧！</p>
-<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>Omnifocus 的<code>透视</code>（还可以自定义）可以让你快速查看所有动作，便于整理。预置的有：已完成，已更改，标记，检查，上下文等等。</p>
+<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>Omnifocus 的<code>透视</code>（还可以自定义）可以让你快速查看所有动作，便于整理。预置的有：已完成，已更改，标记，检查，上下文等等。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总体而言，Omnifocus 是一款非常棒的 GTD 软件，只要坚持使用可以帮助你安排好所有的事情。而且还有3个非常好的 <strong>优点</strong>：</p>
 <ol>
 <li>支持项目无限层级（有别于 Things）</li>
