@@ -1,6 +1,6 @@
 ---
 title: 把博客从 Jekyll 迁移到 Hexo
-categories: [blog]
+tags: [blog, hexo, github pages]
 ---
 
 在上次的文章中（[使用 Github 搭建个人博客](/2014/01/01/blog-github/)）介绍了怎么用 `Github` 默认支持的 Web 框架 `Jekyll` 来搭建博客。相对于曾经接触过的 `Wordpress` 是不知道要轻量级多少倍了。但是在使用过程中也发现几点问题：
@@ -12,6 +12,8 @@ categories: [blog]
 2. 对 `markdown` 支持更好，并且还扩展 `Github` 的 `markdown` 语法
 3. 一键部署
 4. 丰富的插件和主题
+
+<!-- more -->
 
 ## 安装 Hexo
 安装 Hexo 非常简单：
@@ -67,6 +69,8 @@ deploy:
   repo: <repo url>
 ```
 
+## 设置自定义域名
+利用 github 的 pages 功能可以在项目页面查看网站信息。可以在项目设置中绑定自定义域名，同时在 dns 解析到 github 的ip
 
 ## 常用命令
 ``` bash

@@ -1,5 +1,6 @@
 ---
-title: "谈谈 Restful Api"
+title: 谈谈 Restful API
+tags: [技术, restful, api]
 ---
 
 # 概述
@@ -13,7 +14,7 @@ Representational State Transfer（REST，表现层资源状态转化），是Roy
 
 3. 对外的网络服务中，资源一般是系统内部的对象，通常就是数据库中的'表'，数据的交流最好使用 json 格式
 
-<!--break-->
+<!--more-->
 
 所以结合三点一般的 API 设计就是：
 - get '/users' ：获得用户列表
