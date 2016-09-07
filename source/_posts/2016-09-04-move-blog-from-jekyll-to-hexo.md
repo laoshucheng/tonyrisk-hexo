@@ -70,7 +70,11 @@ deploy:
 ```
 
 ## 设置自定义域名
-利用 github 的 pages 功能可以在项目页面查看网站信息。可以在项目设置中绑定自定义域名，同时在 dns 解析到 github 的ip
+利用 github 的 pages 功能可以在项目页面查看网站信息。新建文件 `source/CNAME`，写上网站域名：
+```
+www.yoursite.com
+```
+同时在 dns 解析到 github 的 ip
 
 ## 常用命令
 ``` bash
