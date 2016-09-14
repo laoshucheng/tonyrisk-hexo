@@ -160,6 +160,19 @@ $ git push -u origin master
 
 	git pull [远程主机名] [远程分支名]:[本地分支名]
 
+## 标签操作
+
+   git ls-remote --tags                 # 查看远程 tag
+   git tag                              # 查看已有 tag
+   git tag -l '1.2.*'                   # 只查看 1.2 版本
+   git tag -a 'tag-name'[ -m 'message'] # 新建 tag，message 可省略
+   git show tag-name                    # 查看详细信息
+   git tag -a v1.2 9fceb02              # 后期补上 tag
+   git push origin tag-name             # 分享 tag
+
+   git tag -d tag-name                  # 删除本地 tag
+   git push --delete origin tag-name    # 删除远程 tag
+
 ## 撤销回滚
 	# reset 命令是把当前分支指向另一个位置
 	# 把 add 的文件，撤销

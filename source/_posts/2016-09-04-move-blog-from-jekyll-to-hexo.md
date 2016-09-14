@@ -20,6 +20,7 @@ tags: [blog, hexo, github pages]
 - 安装 Git
 - 安装 node（hexo 是基于 nodejs 的，建议用 nvm 来安装）
 - 安装 Hexo
+
   ``` bash
   $ npm install hexo-cli -g
   ```
@@ -104,3 +105,5 @@ $ hexo clean
 [Hexo 官方文档](https://hexo.io/zh-cn/docs/)
 
 ---------- EOF ----------
+
+
