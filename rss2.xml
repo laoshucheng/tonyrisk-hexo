@@ -8,8 +8,272 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>一直努力只想以后可以有选择的自由</description>
-    <pubDate>Wed, 07 Sep 2016 09:36:24 GMT</pubDate>
+    <pubDate>Wed, 14 Sep 2016 18:29:05 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>我的工作流</title>
+      <link>http://www.tonyrisk.top/2016/09/15/workflow/</link>
+      <guid>http://www.tonyrisk.top/2016/09/15/workflow/</guid>
+      <pubDate>Wed, 14 Sep 2016 16:00:00 GMT</pubDate>
+      <description>
+      
+        &lt;p&gt;基本流程：&lt;br&gt;&lt;code&gt;文档收集&lt;/code&gt; -&amp;gt; &lt;code&gt;任务分配&lt;/code&gt; -&amp;gt; &lt;code&gt;代码实现&lt;/code&gt; -&amp;gt; &lt;code&gt;质量保证&lt;/code&gt; -&amp;gt; &lt;code&gt;自动化部署&lt;/code&gt; -&amp;gt; &lt;code&gt;线上监控&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&quot;文档收集&quot;&gt;&lt;a href=&quot;#文档收集&quot; class=&quot;headerlink&quot; title=&quot;文档收集&quot;&gt;&lt;/a&gt;文档收集&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;需求文档（需要有业务流程）&lt;/li&gt;
+&lt;li&gt;整体架构设计&lt;/li&gt;
+&lt;li&gt;功能模块概要、详细&lt;/li&gt;
+&lt;li&gt;根据功能写出测试用例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;功能名称&lt;/th&gt;
+&lt;th&gt;用例名称&lt;/th&gt;
+&lt;th&gt;测试数据&lt;/th&gt;
+&lt;th&gt;前置条件&lt;/th&gt;
+&lt;th&gt;操作步骤&lt;/th&gt;
+&lt;th&gt;预期结果&lt;/th&gt;
+&lt;th&gt;测试结果&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;th&gt;review说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;数据模型（表，模型）&lt;/li&gt;
+&lt;li&gt;API 文档（未开始实现前的文档，精确到输入输出，实际中开发可略微调整）&lt;/li&gt;
+&lt;li&gt;部署文档&lt;/li&gt;
+&lt;li&gt;发布 changelog&lt;/li&gt;
+&lt;/ul&gt;
+      
+      </description>
+      
+      <content:encoded><![CDATA[<p>基本流程：<br><code>文档收集</code> -&gt; <code>任务分配</code> -&gt; <code>代码实现</code> -&gt; <code>质量保证</code> -&gt; <code>自动化部署</code> -&gt; <code>线上监控</code></p>
+<h1 id="文档收集"><a href="#文档收集" class="headerlink" title="文档收集"></a>文档收集</h1><ul>
+<li>需求文档（需要有业务流程）</li>
+<li>整体架构设计</li>
+<li>功能模块概要、详细</li>
+<li>根据功能写出测试用例</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>功能名称</th>
+<th>用例名称</th>
+<th>测试数据</th>
+<th>前置条件</th>
+<th>操作步骤</th>
+<th>预期结果</th>
+<th>测试结果</th>
+<th>备注</th>
+<th>review说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>数据模型（表，模型）</li>
+<li>API 文档（未开始实现前的文档，精确到输入输出，实际中开发可略微调整）</li>
+<li>部署文档</li>
+<li>发布 changelog</li>
+</ul>
+<a id="more"></a>
+<h1 id="任务分配和管理"><a href="#任务分配和管理" class="headerlink" title="任务分配和管理"></a>任务分配和管理</h1><ol>
+<li>使用 <code>Omnifocus</code> 列出和归类任务</li>
+<li>使用 <code>OmniPlan</code> 制作计划进度</li>
+<li>使用 <code>Tower</code> 分配任务和跟踪</li>
+<li>日报，周报体系</li>
+<li>每日 5 分钟晨会制度</li>
+</ol>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><ul>
+<li>Git / Git Workflow</li>
+<li>开发时 mock 前后端解除互相依赖<ul>
+<li>前端方案：<ol>
+<li>mockjs</li>
+<li>后端提供静态数据，参考 <a href="https://blog.phpgao.com/how-to-httpbin.html" target="_blank" rel="external">httpbin</a></li>
+</ol>
+</li>
+<li>后端方案：<ol>
+<li>写测试用例，比如 rspec</li>
+<li>使用 postman 模拟 api 请求</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>提高技术<ul>
+<li>RD Wiki 和 Blog（分享经验和新技术）</li>
+<li>参与开源项目</li>
+<li>定期黑客马拉松</li>
+</ul>
+</li>
+</ul>
+<h1 id="质量保证"><a href="#质量保证" class="headerlink" title="质量保证"></a>质量保证</h1><ul>
+<li>目标<ul>
+<li>保证代码（规范，源代码分析，单元测试）</li>
+<li>保证功能（集成测试）</li>
+<li>保证性能（压力测试）</li>
+</ul>
+</li>
+<li>制度<ul>
+<li>结对编程</li>
+<li>code review</li>
+<li>PR（pull request）</li>
+</ul>
+</li>
+<li>测试工具<ul>
+<li>postman</li>
+<li>App bug管理：<a href="https://www.bugtags.com/" target="_blank" rel="external">bugtags</a></li>
+<li>apache ab</li>
+<li>ruby rspec</li>
+</ul>
+</li>
+<li>上线确认</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>2.11 版本上线确认书</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>需求确认</td>
+<td>意见：</td>
+<td>确认人：[由各个负责人签字]</td>
+</tr>
+<tr>
+<td>开发确认</td>
+<td>意见：</td>
+<td>确认人：</td>
+</tr>
+<tr>
+<td>测试确认</td>
+<td>意见：</td>
+<td>确认人：</td>
+</tr>
+<tr>
+<td>服务器改动</td>
+<td>服务器应用配置和重启哪些服务器</td>
+<td>确认人：</td>
+</tr>
+<tr>
+<td>服务器硬件配置</td>
+<td>[是否需要增加新的服务器ip,是否需要修改 nginx，是否新装软件，是否新建域名？]</td>
+<td>确认人：</td>
+</tr>
+<tr>
+<td>数据库更改</td>
+<td>[是否需要修改线上数据库？是否有初始化语句]</td>
+<td>确认人：</td>
+</tr>
+<tr>
+<td>数据初始化</td>
+<td>[是否有初始化数据？如价格，默认分类等]</td>
+<td>确认人：</td>
+</tr>
+<tr>
+<td>上线评审结论</td>
+<td>[ ] 通过 <br> [ ] 未通过，不能上线 <br> [ ] 未通过，但修改完制定Bug后可直接上线</td>
+<td>确认人：</td>
+</tr>
+<tr>
+<td>计划上线时间</td>
+<td>2016-08-01</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h1 id="自动化部署"><a href="#自动化部署" class="headerlink" title="自动化部署"></a>自动化部署</h1><ul>
+<li>总流程<ul>
+<li>配置</li>
+<li>编译</li>
+<li>压缩混淆</li>
+<li>打包整个部署文件，并上传到版本库</li>
+<li>更新远程</li>
+<li>重启服务</li>
+</ul>
+</li>
+<li>客户端<ul>
+<li>ios / android 打包上传</li>
+<li>weixin / web-pages 部署更新</li>
+</ul>
+</li>
+<li>服务器<ul>
+<li>配置重启</li>
+<li>是否有新的服务提供</li>
+</ul>
+</li>
+</ul>
+<h1 id="线上检测"><a href="#线上检测" class="headerlink" title="线上检测"></a>线上检测</h1><ul>
+<li>信息收集<ul>
+<li>青云中系统预警系统等的硬件检测</li>
+<li>oneapm，relic 等应用监测</li>
+<li>BugHD 等 bug 收集</li>
+<li>收集客户端网络链路信息</li>
+<li>服务器 Log</li>
+</ul>
+</li>
+<li>修改<ul>
+<li>app 中的热修补</li>
+</ul>
+</li>
+<li>记录：把踩过的坑记下来</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>2016.08.01xxx故障总结</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>故障等级</td>
+<td>[故障等级]</td>
+</tr>
+<tr>
+<td>故障描述</td>
+<td>[描述故障发生的现象]</td>
+</tr>
+<tr>
+<td>故障发现时间及发现人</td>
+<td>[xxx于xxxx年xx月xx日 HH:mm 如何发现该问题。]</td>
+</tr>
+<tr>
+<td>故障影响</td>
+<td>[影响时间范围、影响版本范围、影响产品范围]</td>
+</tr>
+<tr>
+<td>故障原因</td>
+<td>[阐述故障发生的原因]</td>
+</tr>
+<tr>
+<td>解决方案</td>
+<td>[详细记录如何解决此次的故障]</td>
+</tr>
+<tr>
+<td>故障教训</td>
+<td>[如何避免下次出现类似的事故]</td>
+</tr>
+</tbody>
+</table>
+<p>———- EOF ———-</p>
+]]></content:encoded>
+      
+      <comments>http://www.tonyrisk.top/2016/09/15/workflow/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>把博客从 Jekyll 迁移到 Hexo</title>
@@ -50,7 +314,8 @@
 <ul>
 <li>安装 Git</li>
 <li>安装 node（hexo 是基于 nodejs 的，建议用 nvm 来安装）</li>
-<li>安装 Hexo<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ npm install hexo-cli -g</div></pre></td></tr></table></figure>
+<li><p>安装 Hexo</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ npm install hexo-cli -g</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="开始建站"><a href="#开始建站" class="headerlink" title="开始建站"></a>开始建站</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo init your-project-folder</div><div class="line">$ <span class="built_in">cd</span> your-project-folder</div><div class="line">$ npm install</div><div class="line">$ hexo server</div></pre></td></tr></table></figure>
@@ -2313,7 +2578,9 @@ git merge –no-ff feature-x
 git branch -d feature-x
 </code></pre><h2 id="推送本地更新到服务器"><a href="#推送本地更新到服务器" class="headerlink" title="推送本地更新到服务器"></a>推送本地更新到服务器</h2><pre><code>git push [远程主机名] [本地分支名]:[远程分支名]
 </code></pre><h2 id="更新远程主机的内容到本地"><a href="#更新远程主机的内容到本地" class="headerlink" title="更新远程主机的内容到本地"></a>更新远程主机的内容到本地</h2><pre><code>git pull [远程主机名] [远程分支名]:[本地分支名]
-</code></pre><h2 id="撤销回滚"><a href="#撤销回滚" class="headerlink" title="撤销回滚"></a>撤销回滚</h2><pre><code># reset 命令是把当前分支指向另一个位置
+</code></pre><h2 id="标签操作"><a href="#标签操作" class="headerlink" title="标签操作"></a>标签操作</h2><p>   git ls-remote –tags                 # 查看远程 tag<br>   git tag                              # 查看已有 tag<br>   git tag -l ‘1.2.*’                   # 只查看 1.2 版本<br>   git tag -a ‘tag-name’[ -m ‘message’] # 新建 tag，message 可省略<br>   git show tag-name                    # 查看详细信息<br>   git tag -a v1.2 9fceb02              # 后期补上 tag<br>   git push origin tag-name             # 分享 tag</p>
+<p>   git tag -d tag-name                  # 删除本地 tag<br>   git push –delete origin tag-name    # 删除远程 tag</p>
+<h2 id="撤销回滚"><a href="#撤销回滚" class="headerlink" title="撤销回滚"></a>撤销回滚</h2><pre><code># reset 命令是把当前分支指向另一个位置
 # 把 add 的文件，撤销
 git reset -- &lt;filename&gt;
 git reset                                 # 撤销所有 add 的文件

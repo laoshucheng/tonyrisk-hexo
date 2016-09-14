@@ -293,6 +293,141 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/15/workflow/" itemprop="url">
+                  我的工作流
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-15T00:00:00+08:00" content="2016-09-15">
+              2016-09-15
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/15/workflow/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/15/workflow/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>基本流程：<br><code>文档收集</code> -&gt; <code>任务分配</code> -&gt; <code>代码实现</code> -&gt; <code>质量保证</code> -&gt; <code>自动化部署</code> -&gt; <code>线上监控</code></p>
+<h1 id="文档收集"><a href="#文档收集" class="headerlink" title="文档收集"></a>文档收集</h1><ul>
+<li>需求文档（需要有业务流程）</li>
+<li>整体架构设计</li>
+<li>功能模块概要、详细</li>
+<li>根据功能写出测试用例</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>功能名称</th>
+<th>用例名称</th>
+<th>测试数据</th>
+<th>前置条件</th>
+<th>操作步骤</th>
+<th>预期结果</th>
+<th>测试结果</th>
+<th>备注</th>
+<th>review说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>数据模型（表，模型）</li>
+<li>API 文档（未开始实现前的文档，精确到输入输出，实际中开发可略微调整）</li>
+<li>部署文档</li>
+<li>发布 changelog</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/15/workflow/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/04/move-blog-from-jekyll-to-hexo/" itemprop="url">
                   把博客从 Jekyll 迁移到 Hexo
                 </a>
@@ -708,123 +843,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/03/20/restfull-api/" itemprop="url">
-                  谈谈 Restful API
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-03-20T00:00:00+08:00" content="2015-03-20">
-              2015-03-20
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/03/20/restfull-api/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/20/restfull-api/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Representational State Transfer（REST，表现层资源状态转化），是Roy Thomas Fielding提出的互联网软件的架构原则。</p>
-<p>满足这个原则的架构，就被叫做 Restful 架构。</p>
-<ol>
-<li><p>在 http 中也存在着 CURD(create, update, read, delete) 的操作，那就是：get, post, put, delete</p>
-</li>
-<li><p>网络资源一般指上的一个实体，或者说网络上的一个具体信息，一般可以是一段文本，一张图片，一个音频等等</p>
-</li>
-<li><p>对外的网络服务中，资源一般是系统内部的对象，通常就是数据库中的’表’，数据的交流最好使用 json 格式</p>
-</li>
-</ol>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/20/restfull-api/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -865,7 +888,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -875,7 +898,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

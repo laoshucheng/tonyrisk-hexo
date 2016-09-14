@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="github,git," />
+  <meta name="keywords" content="git,github," />
 
 
 
@@ -100,7 +100,7 @@ Git 主分支的名字，默认叫做 master 。它是自动建立的，版本�
 不同于 svn，git 在本地的状态有三个：
 
 工作目录(working dir): 持">
-<meta property="og:updated_time" content="2016-09-07T03:22:46.000Z">
+<meta property="og:updated_time" content="2016-09-08T11:13:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 常用操作">
 <meta name="twitter:description" content="Git 是一个分布式的版本控制工具，每个开发人员从 git 版本库 checkout 的时候会在自己的机器上也克隆一个版本库。在没网络的情况下，也能提交文件，查看 log，查看历史版本，创建分支等。
@@ -438,7 +438,9 @@ git merge –no-ff feature-x
 git branch -d feature-x
 </code></pre><h2 id="推送本地更新到服务器"><a href="#推送本地更新到服务器" class="headerlink" title="推送本地更新到服务器"></a>推送本地更新到服务器</h2><pre><code>git push [远程主机名] [本地分支名]:[远程分支名]
 </code></pre><h2 id="更新远程主机的内容到本地"><a href="#更新远程主机的内容到本地" class="headerlink" title="更新远程主机的内容到本地"></a>更新远程主机的内容到本地</h2><pre><code>git pull [远程主机名] [远程分支名]:[本地分支名]
-</code></pre><h2 id="撤销回滚"><a href="#撤销回滚" class="headerlink" title="撤销回滚"></a>撤销回滚</h2><pre><code># reset 命令是把当前分支指向另一个位置
+</code></pre><h2 id="标签操作"><a href="#标签操作" class="headerlink" title="标签操作"></a>标签操作</h2><p>   git ls-remote –tags                 # 查看远程 tag<br>   git tag                              # 查看已有 tag<br>   git tag -l ‘1.2.*’                   # 只查看 1.2 版本<br>   git tag -a ‘tag-name’[ -m ‘message’] # 新建 tag，message 可省略<br>   git show tag-name                    # 查看详细信息<br>   git tag -a v1.2 9fceb02              # 后期补上 tag<br>   git push origin tag-name             # 分享 tag</p>
+<p>   git tag -d tag-name                  # 删除本地 tag<br>   git push –delete origin tag-name    # 删除远程 tag</p>
+<h2 id="撤销回滚"><a href="#撤销回滚" class="headerlink" title="撤销回滚"></a>撤销回滚</h2><pre><code># reset 命令是把当前分支指向另一个位置
 # 把 add 的文件，撤销
 git reset -- &lt;filename&gt;
 git reset                                 # 撤销所有 add 的文件
@@ -548,9 +550,9 @@ git log -p filename
       
         <div class="post-tags">
           
-            <a href="/tags/github/" rel="tag">#github</a>
-          
             <a href="/tags/git/" rel="tag">#git</a>
+          
+            <a href="/tags/github/" rel="tag">#github</a>
           
         </div>
       
@@ -671,7 +673,7 @@ git log -p filename
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -681,7 +683,7 @@ git log -p filename
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -817,7 +819,7 @@ git log -p filename
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-number">2.</span> <span class="nav-text">设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git配置有三大块："><span class="nav-number">2.1.</span> <span class="nav-text">git配置有三大块：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">2.2.</span> <span class="nav-text">操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用配置"><span class="nav-number">2.3.</span> <span class="nav-text">常用配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建版本库"><span class="nav-number">3.</span> <span class="nav-text">新建版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制版本库"><span class="nav-number">4.</span> <span class="nav-text">复制版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支操作"><span class="nav-number">5.</span> <span class="nav-text">分支操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支使用场景实例"><span class="nav-number">5.1.</span> <span class="nav-text">分支使用场景实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推送本地更新到服务器"><span class="nav-number">6.</span> <span class="nav-text">推送本地更新到服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新远程主机的内容到本地"><span class="nav-number">7.</span> <span class="nav-text">更新远程主机的内容到本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销回滚"><span class="nav-number">8.</span> <span class="nav-text">撤销回滚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diff"><span class="nav-number">9.</span> <span class="nav-text">Diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储-保存当前工作内容到git栈，然后回复到最新commit状态"><span class="nav-number">10.</span> <span class="nav-text">存储: 保存当前工作内容到git栈，然后回复到最新commit状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他常用命令"><span class="nav-number">11.</span> <span class="nav-text">其他常用命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从缓存区中删除"><span class="nav-number"></span> <span class="nav-text">从缓存区中删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果要在工作目录中留着该文件，可以使用"><span class="nav-number"></span> <span class="nav-text">如果要在工作目录中留着该文件，可以使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#移动或者重命名缓存区中的文件"><span class="nav-number"></span> <span class="nav-text">移动或者重命名缓存区中的文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示一个分支中提交的更改记录"><span class="nav-number"></span> <span class="nav-text">显示一个分支中提交的更改记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展和参考"><span class="nav-number">1.</span> <span class="nav-text">扩展和参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-number">2.</span> <span class="nav-text">设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git配置有三大块："><span class="nav-number">2.1.</span> <span class="nav-text">git配置有三大块：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">2.2.</span> <span class="nav-text">操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用配置"><span class="nav-number">2.3.</span> <span class="nav-text">常用配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建版本库"><span class="nav-number">3.</span> <span class="nav-text">新建版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制版本库"><span class="nav-number">4.</span> <span class="nav-text">复制版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支操作"><span class="nav-number">5.</span> <span class="nav-text">分支操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支使用场景实例"><span class="nav-number">5.1.</span> <span class="nav-text">分支使用场景实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推送本地更新到服务器"><span class="nav-number">6.</span> <span class="nav-text">推送本地更新到服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新远程主机的内容到本地"><span class="nav-number">7.</span> <span class="nav-text">更新远程主机的内容到本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签操作"><span class="nav-number">8.</span> <span class="nav-text">标签操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销回滚"><span class="nav-number">9.</span> <span class="nav-text">撤销回滚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diff"><span class="nav-number">10.</span> <span class="nav-text">Diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储-保存当前工作内容到git栈，然后回复到最新commit状态"><span class="nav-number">11.</span> <span class="nav-text">存储: 保存当前工作内容到git栈，然后回复到最新commit状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他常用命令"><span class="nav-number">12.</span> <span class="nav-text">其他常用命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从缓存区中删除"><span class="nav-number"></span> <span class="nav-text">从缓存区中删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果要在工作目录中留着该文件，可以使用"><span class="nav-number"></span> <span class="nav-text">如果要在工作目录中留着该文件，可以使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#移动或者重命名缓存区中的文件"><span class="nav-number"></span> <span class="nav-text">移动或者重命名缓存区中的文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示一个分支中提交的更改记录"><span class="nav-number"></span> <span class="nav-text">显示一个分支中提交的更改记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展和参考"><span class="nav-number">1.</span> <span class="nav-text">扩展和参考</span></a></li></ol></div>
             
           </div>
         </section>
