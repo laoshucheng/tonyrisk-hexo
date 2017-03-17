@@ -126,6 +126,9 @@ $ git push -u origin master
 	# 删除远程分支
 	git push [远程主机名] :[分支名]
 
+    # 同步远程分支情况
+    git fetch -p origin
+
 	# 切换分支
 	git checkout branch-name
 
@@ -233,17 +236,17 @@ $ git push -u origin master
 	# 等价于add，加commit操作：
 	git commit -am "msg"
 
-  # 从缓存区中删除
-  git rm file_name
+    # 从缓存区中删除
+    git rm file_name
 
-  # 如果要在工作目录中留着该文件，可以使用
-  git rm --cached file_name
+    # 如果要在工作目录中留着该文件，可以使用
+    git rm --cached file_name
 
-  # 移动或者重命名缓存区中的文件
-  git mv old_file new_file
+    # 移动或者重命名缓存区中的文件
+    git mv old_file new_file
 
-  # 显示一个分支中提交的更改记录
-  git log
+    # 显示一个分支中提交的更改记录
+    git log
 
 	# 显示某个文件的更改记录
 	git log -p filename
